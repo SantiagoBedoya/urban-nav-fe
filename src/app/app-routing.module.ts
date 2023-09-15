@@ -13,6 +13,10 @@ const routes: Routes = [
     component: VisionComponent,
   },
   {
+    path: 'pqrs',
+    loadChildren: () => import('./pqrs/pqrs.module').then(m => m.PQRSModule)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

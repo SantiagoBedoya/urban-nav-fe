@@ -1,0 +1,33 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <form (ngSubmit)="onSubmit()" #form="ngForm" class="bg-white p-6 rounded shadow-md w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+      <div class="mb-4">
+        <label for="type" class="block text-gray-700 font-bold mb-2">Type:</label>
+        <select id="type" name="type" [(ngModel)]="formData.type" class="w-full px-4 py-2 border rounded-lg bg-gray-100"required>
+          <option value="">Select a type</option>
+          <option value="requests">Requests</option>
+          <option value="complaints">Complaints</option>
+          <option value="claims">Claims</option>
+          <option value="applications">Applications</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="firstName" class="block text-gray-700 font-bold mb-2">FirstName:</label>
+        <input type="text" id="firstName" [(ngModel)]="formData.firstName" name="firstName" class="w-full px-4 py-2 border rounded-lg bg-gray-100" required>
+      </div>
+      <div class="mb-4">
+        <label for="lastName" class="block text-gray-700 font-bold mb-2">LastName:</label>
+        <input type="text" id="lastName" [(ngModel)]="formData.lastName" name="lastName" class="w-full px-4 py-2 border rounded-lg bg-gray-100" required>
+      </div>
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 font-bold mb-2">Email:</label>
+        <input type="email" id="email" [(ngModel)]="formData.email" name="email" class="w-full px-4 py-2 border rounded-lg bg-gray-100" required email>
+      </div>
+      <div class="mb-4">
+        <label for="comment" class="block text-gray-700 font-bold mb-2">Description:</label>
+        <textarea id="comment" [(ngModel)]="formData.description" name="comment" class="w-full px-4 py-2 border rounded-lg bg-gray-100 resize-none" rows="4" required></textarea>
+      </div>
+      <button type="submit" [disabled]="form.invalid" class="w-full bg-[#141D2C] text-white font-bold py-2 px-4 rounded-lg"
+        [class.opacity-50]="form.invalid">Send</button>
+    </form>
+</div>
+  
