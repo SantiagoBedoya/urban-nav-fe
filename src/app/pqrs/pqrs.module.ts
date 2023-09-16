@@ -5,6 +5,7 @@ import { PQRSRoutingModule } from './pqrs-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { FormComponent } from './pages/form/form.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     PQRSRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ]
 })
 export class PQRSModule { }

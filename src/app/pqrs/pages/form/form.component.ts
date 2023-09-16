@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -6,6 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent {
+  constructor(private http: HttpClient){
+
+  }
   formData = {
     type: '',
     firstName: '',
@@ -14,8 +19,8 @@ export class FormComponent {
     description: ''
   };
 
-  onSubmit() {
-    // Aquí puedes manejar la lógica de envío del formulario
-    console.log('Formulario enviado con los siguientes datos:', this.formData);
+ async onSubmit() {
+    const response = await lastValueFrom(this.http.post('http://localhost:3000/pqrs', this.formData));
+    console.log(response);
   }
 }
