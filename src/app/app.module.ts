@@ -6,17 +6,22 @@ import { AppComponent } from './app.component';
 import { MissionComponent } from './mission/mission.component';
 import { SharedModule } from './shared/shared.module';
 import { VisionComponent } from './vision/vision.component';
+import { ReactiveFormsModule } from '@angular/forms'
+import { LoginComponent } from './login/login.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MissionComponent,
     VisionComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
