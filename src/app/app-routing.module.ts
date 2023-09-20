@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MissionComponent } from './mission/mission.component';
 import { VisionComponent } from './vision/vision.component';
-import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -17,10 +16,6 @@ const routes: Routes = [
   {
     path: 'vision',
     component: VisionComponent,
-  },
-  {
-    path: 'register',
-    component: RegisterComponent
   },
   {
     path: 'pqrs',
