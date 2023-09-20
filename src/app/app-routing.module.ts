@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MissionComponent } from './mission/mission.component';
 import { VisionComponent } from './vision/vision.component';
-import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
+    component: HomeComponent,
   },
   {
     path: 'mission',
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'vision',
     component: VisionComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'pqrs',
