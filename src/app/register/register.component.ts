@@ -9,10 +9,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class RegisterComponent {
   registerForm: FormGroup = new FormGroup({});
 
-  @Output() manageFormChange: EventEmitter<void>;
+  @Output() goToLogin: EventEmitter<void>;
 
   constructor(private fb: FormBuilder) {
-    this.manageFormChange = new EventEmitter();
+    this.goToLogin = new EventEmitter();
   }
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class RegisterComponent {
     }
   }
 
-  changeFormState() {
-    this.manageFormChange.emit();
+  showLogin() {
+    this.goToLogin.emit();
   }
 }

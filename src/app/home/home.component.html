@@ -35,14 +35,9 @@
 
     <div class="z-0 flex w-full items-center justify-center px-0 text-center md:px-16 lg:w-1/2">
         <div class="z-20 w-full py-6">
-            <h1 class="my-6 text-5xl text-[#2C3333] tracking-wide font-bold">
-                Urban Nav
-            </h1>
-            <app-login *ngIf="showLoginForm; else register" (manageFormChange)="changeFormState()"></app-login>
-
-            <ng-template #register>
-                <app-register (manageFormChange)="changeFormState()"></app-register>
-            </ng-template>
+            <app-login *ngIf="showLoginForm" (goToRegister)="showRegister()" (goToPasswordRecovery)="showPasswordRecovery()"></app-login>
+            <app-register *ngIf="showRegForm" (goToLogin)="showLogin()" ></app-register>
+            <app-password-recovery *ngIf="showPassRecoveryForm" (goToLogin)="showLogin()"></app-password-recovery>
         </div>
     </div>
 </section>

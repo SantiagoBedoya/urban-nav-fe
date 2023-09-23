@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    PasswordRecoveryComponent,
   ],
   imports: [
     BrowserModule,
