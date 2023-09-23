@@ -1,53 +1,116 @@
 <div>
-    <h1 class="my-6 text-5xl text-[#2C3333] tracking-wide font-bold">
-        Register
-    </h1>
-    <form [formGroup]="registerForm" (ngSubmit)="register()" class="mx-auto w-full px-4 sm:w-2/3 lg:px-0">
+  <h1 class="mb-5 text-2xl text-[#2C3333] tracking-wide font-bold">Register</h1>
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="register()"
+    class="mx-auto w-full px-4 sm:w-2/3 lg:px-0"
+  >
+    <label
+      class="my-1 inline-flex items-center relative w-max cursor-pointer select-none"
+    >
+      <span class="text-lg font-bold mr-3 text-[#141d2c]">Driver</span>
+      <input
+        type="checkbox"
+        formControlName="userType"
+        class="appearance-none transition-colors cursor-pointer w-14 h-4 rounded-full focus:outline-none bg-[#A5C9CA]"
+      />
 
-        <label class="inline-flex items-center relative w-max cursor-pointer select-none">
-            <span class="text-lg font-bold mr-3 text-[#141d2c]">Driver</span>
-            <input type="checkbox"
-                class="appearance-none transition-colors cursor-pointer w-14 h-7 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-[#A5C9CA] bg-[#A5C9CA]" />
+      <span
+        class="w-7 h-5 right-7 absolute rounded-full transform transition-transform bg-gray-200"
+      ></span>
+    </label>
+    <span class="text-lg font-bold mx-3 text-[#141d2c]">Traveler</span>
 
-            <span class="w-7 h-7 right-7 absolute rounded-full transform transition-transform bg-gray-200"></span>
+    <div class="grid gap-x-2 grid-cols-2">
+      <div class="pb-2 pt-4">
+        <input
+          type="text"
+          formControlName="firstName"
+          name="firstName"
+          placeholder="First name*"
+          class="block w-full rounded-sm text-black p-4 text-lg border border-solid border-slate-400"
+          autocomplete="off"
+        />
+      </div>
 
-        </label>
-        <span class="text-lg font-bold mx-2 text-[#141d2c]">Traveler</span>
+      <div class="pb-2 pt-4">
+        <input
+          type="text"
+          formControlName="lastName"
+          name="lastName"
+          placeholder="Last name*"
+          class="block w-full rounded-sm text-black p-4 text-lg border border-solid border-slate-400"
+          autocomplete="off"
+        />
+      </div>
+    </div>
 
-        <div class="pb-2 pt-4">
-            <input type="text" formControlName="firstName" name="firstName" placeholder="First name"
-                class="block w-full rounded-sm text-black p-4 text-lg border border-solid border-slate-400"
-                autocomplete="off" />
-        </div>
+    <div class="pb-2 pt-4">
+      <input
+        type="email"
+        formControlName="email"
+        name="email"
+        placeholder="Email*"
+        class="block w-full rounded-sm text-black p-4 text-lg border border-solid border-slate-400"
+        autocomplete="off"
+      />
+    </div>
+    <app-alert
+      *ngIf="
+        registerForm.controls['email'].getError('isValidEmail') &&
+        !registerForm.controls['email'].getError('required')
+      "
+      text="Not valid email"
+    ></app-alert>
+    <div class="pb-2 pt-4">
+      <input
+        class="block w-full rounded-sm bg-[#FFF] p-4 text-lg border text-black border-solid border-slate-400"
+        type="password"
+        formControlName="password"
+        name="password"
+        placeholder="Password*"
+        autocomplete="off"
+      />
+    </div>
+    <app-alert
+      *ngIf="
+        (registerForm.controls['password'].getError('atLeastOneUppercase') ||
+          registerForm.controls['password'].getError('toNumber')) &&
+        !registerForm.controls['password'].getError('required')
+      "
+      text="At least one uppercase and number"
+    ></app-alert>
 
-        <div class="pb-2 pt-4">
-            <input type="text" formControlName="lastName" name="lastName" placeholder="Last name"
-                class="block w-full rounded-sm text-black p-4 text-lg border border-solid border-slate-400"
-                autocomplete="off" />
-        </div>
+    <div class="pb-2 pt-4">
+      <input
+        class="block w-full rounded-sm bg-[#FFF] p-4 text-lg border text-black border-solid border-slate-400"
+        type="password"
+        formControlName="verifyPassword"
+        name="password"
+        placeholder="Verify password*"
+        autocomplete="off"
+      />
+    </div>
+    <app-alert
+      *ngIf="registerForm.getError('mustBeEqual')"
+      text="Passwords do not match"
+    ></app-alert>
 
-        <div class="pb-2 pt-4">
-            <input type="email" formControlName="email" name="email" placeholder="Email"
-                class="block w-full rounded-sm text-black p-4 text-lg border border-solid border-slate-400"
-                autocomplete="off" />
-        </div>
-        <div class="pb-2 pt-4">
-            <input class="block w-full rounded-sm bg-[#FFF] p-4 text-lg border text-black border-solid border-slate-400"
-                type="password" formControlName="password" name="password" placeholder="Password" autocomplete="off" />
-        </div>
+    <div class="my-2 text-center">
+      <a
+        class="inline-block text-sm cursor-pointer text-[#141d2c] align-baseline hover:font-semibold"
+        (click)="showLogin()"
+      >
+        <i>Already have an account? Login!</i>
+      </a>
+    </div>
 
-        <div class="my-2 text-center">
-            <a class="inline-block text-sm cursor-pointer text-[#141d2c] align-baseline hover:font-semibold"
-                (click)="showLogin()">
-                <i>Already have an account? Login!</i>
-            </a>
-        </div>
-
-        <div class="px-4 pb-2 pt-4">
-            <button class="block w-full rounded-full bg-[#141D2C] p-4 text-lg uppercase focus:outline-none">
-                sign in
-            </button>
-        </div>
-
-    </form>
+    <div class="px-4 pb-2 pt-2">
+      <button
+        class="block w-full rounded-full bg-[#141D2C] p-3 text-lg uppercase focus:outline-none"
+      >
+        sign in
+      </button>
+    </div>
+  </form>
 </div>
