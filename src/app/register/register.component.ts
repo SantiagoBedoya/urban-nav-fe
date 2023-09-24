@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CustomValidators } from '../shared/validators/custom-validators';
 
 @Component({
   selector: 'app-register',
@@ -16,19 +17,37 @@ export class RegisterComponent {
   }
 
   ngOnInit(): void {
-    this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-    });
+    this.registerForm = this.fb.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, CustomValidators.isValidEmail]],
+        password: [
+          '',
+          [
+            Validators.required,
+            CustomValidators.atLeastOneNumber,
+            CustomValidators.atLeastOneUppercase,
+          ],
+        ],
+        verifyPassword: ['', Validators.required],
+        userType: ['false', []],
+      },
+      {
+        validators: CustomValidators.mustBeEqual('password', 'verifyPassword'),
+      }
+    );
   }
 
   register() {
     if (this.registerForm.valid) {
-      const { firstName, lastName, email, password } = this.registerForm.value;
+      const { firstName, lastName, email, password, userType } =
+        this.registerForm.value;
 
       console.log(email, password, firstName, lastName);
+      console.log(userType ? 'TRAVELER' : 'DRIVER');
+
+      this.registerForm.reset();
     }
   }
 
