@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CustomValidators } from '../shared/validators/custom-validators';
 
 @Component({
   selector: 'app-change-password',
@@ -12,16 +13,28 @@ export class ChangePasswordComponent {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.CreatePasswordForm = this.fb.group({
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-    });
+    this.CreatePasswordForm = this.fb.group(
+      {
+        password: [
+          '',
+          [
+            Validators.required,
+            CustomValidators.atLeastOneNumber,
+            CustomValidators.atLeastOneUppercase,
+          ],
+        ],
+        confirmPassword: ['', Validators.required],
+      },
+      {
+        validators: CustomValidators.mustBeEqual('password', 'confirmPassword'),
+      }
+    );
   }
 
   submitCreateNewPassword() {
     if (this.CreatePasswordForm.valid) {
       const { password, confirmPassword } = this.CreatePasswordForm.value;
-
+      this.CreatePasswordForm.reset();
       console.log(password, confirmPassword);
     }
   }
