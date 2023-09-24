@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { PasswordRecoveryComponent } from './password-recovery/password-recovery
     RegisterComponent,
     HomeComponent,
     PasswordRecoveryComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
