@@ -8,6 +8,10 @@ import { SharedModule } from './shared/shared.module';
 import { VisionComponent } from './vision/vision.component';
 import { ReactiveFormsModule } from '@angular/forms'
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
+import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
+import { AlertComponent } from './alert/alert.component';
 
 
 @NgModule({
@@ -16,6 +20,10 @@ import { LoginComponent } from './login/login.component';
     MissionComponent,
     VisionComponent,
     LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    PasswordRecoveryComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
