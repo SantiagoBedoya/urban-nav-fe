@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { VisionComponent } from './vision/vision.component';
 import { ReactiveFormsModule } from '@angular/forms'
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { LoginComponent } from './login/login.component';
     MissionComponent,
     VisionComponent,
     LoginComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

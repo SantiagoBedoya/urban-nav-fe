@@ -3,11 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { MissionComponent } from './mission/mission.component';
 import { VisionComponent } from './vision/vision.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'signin',
     component: LoginComponent,
+  },
+  {
+    path: '',
+    component: HomeComponent,
   },
   {
     path: 'mission',
