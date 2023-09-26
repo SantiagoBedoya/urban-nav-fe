@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-qr',
@@ -8,13 +8,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class QrComponent {
   @Input() qrdata: string = '';
-  @Input() width!: number;
 
   constructor(
     private activatedRoute: ActivatedRoute
   ) {
     this.activatedRoute.params.subscribe(params => {
-      console.log(params)
+      this.qrdata = params['url']
     })
   }
 }

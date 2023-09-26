@@ -16,6 +16,7 @@ import { AlertComponent } from './alert/alert.component';
 import { HttpClientModule } from '@angular/common/http'
 import { QRCodeModule } from 'angularx-qrcode';
 import { QrComponent } from './qr-generator/qr/qr.component';
+import { AuthenticationOptWaysComponent } from './authentication-opt-ways/authentication-opt-ways.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { QrComponent } from './qr-generator/qr/qr.component';
     ChangePasswordComponent,
     AlertComponent,
     QrComponent,
+    AuthenticationOptWaysComponent,
   ],
   imports: [
     BrowserModule,

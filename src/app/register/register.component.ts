@@ -4,6 +4,7 @@ import { CustomValidators } from '../shared/validators/custom-validators';
 import { lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { registerResponse } from '../pqrs/interfaces/register.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterComponent {
 
   @Output() goToLogin: EventEmitter<void>;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router
+  ) {
     this.goToLogin = new EventEmitter();
   }
 
@@ -48,18 +50,14 @@ export class RegisterComponent {
       const { firstName, lastName, email, password, userType } =
         this.registerForm.value;
 
-      console.log(email, password, firstName, lastName);
-      console.log(userType ? 'TRAVELER' : 'DRIVER');
-      
       const response = await lastValueFrom
-      (this.http.post <registerResponse>('http://localhost:3000/auth/sign-up', {
-        email,
-        password,
-        firstName,
-        lastName,
-        userType: userType ? 'TRAVELER' : 'DRIVER',
-      }));
-      console.log(response);
+        (this.http.post<registerResponse>('http://localhost:3000/auth/sign-up', {
+          email,
+          password,
+          firstName,
+          lastName,
+          userType: userType ? 'TRAVELER' : 'DRIVER',
+        }));
 
       //the user is stored in local storage
       localStorage.setItem('user_id', response._id);
@@ -69,6 +67,8 @@ export class RegisterComponent {
       localStorage.setItem('new_user', 'true');
 
       this.registerForm.reset();
+
+      this.router.navigate([`/auth-opt`]);
     }
   }
 

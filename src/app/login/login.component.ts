@@ -1,6 +1,8 @@
 import { Component, Output, EventEmitter, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { loginResponse } from './interfaces/loginResponse';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,10 @@ export class LoginComponent {
   @Output() goToRegister: EventEmitter<void>;
   @Output() goToPasswordRecovery: EventEmitter<void>;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     this.goToRegister = new EventEmitter();
     this.goToPasswordRecovery = new EventEmitter();
   }
@@ -30,18 +35,20 @@ export class LoginComponent {
   login() {
     if (this.loginForm.valid) {
       this.http
-        .post<any>('http://localhost:3000/auth/sign-in', this.loginForm.value)
+        .post<loginResponse>('http://localhost:3000/auth/sign-in', this.loginForm.value)
         .subscribe({
           next: (data) => {
             const userId = data.userId;
 
-            localStorage.setItem('userId', JSON.stringify(userId))
+            localStorage.setItem('user_id', JSON.stringify(userId))
             this.wrongCredentials = false;
             this.loginForm.reset()
 
-            this.http.post('http://localhost:3000/auth/otp/send-email', userId)
-
-            // redirect to 2fa form
+            if (data.has2fa) { 
+              // redirect to 2fa form
+            } else {
+              this.router.navigate([`/auth-opt`]);
+            }
           },
           error: (error) => {
             console.error('There was an error!', error);

@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { LoginSectionComponent } from './loginSection/loginSection.component';
 import { QrComponent } from './qr-generator/qr/qr.component';
+import { AuthenticationOptWaysComponent } from './authentication-opt-ways/authentication-opt-ways.component';
 
 const routes: Routes = [
   {
@@ -29,8 +30,12 @@ const routes: Routes = [
     loadChildren: () => import('./pqrs/pqrs.module').then(m => m.PQRSModule)
   },
   {
-    path: 'qr-gen',
+    path: 'qr-gen/:url',
     component: QrComponent
+  },
+  {
+    path: 'auth-opt',
+    component: AuthenticationOptWaysComponent
   },
   {
     path: '**',
