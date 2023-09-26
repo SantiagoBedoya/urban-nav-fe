@@ -18,3 +18,11 @@
       @apply -rotate-45 -translate-y-1;
     }
   }
+
+  input:checked {
+    background-color: var(--primary-color); /* bg-green-500 */
+  }
+
+  input:checked ~ span:last-child {
+    --tw-translate-x: 1.75rem; /* translate-x-7 */
+  }
