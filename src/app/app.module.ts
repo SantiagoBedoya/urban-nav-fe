@@ -13,6 +13,7 @@ import { LoginSectionComponent } from './loginSection/loginSection.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AlertComponent } from './alert/alert.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AlertComponent } from './alert/alert.component';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule  
   ],
   providers: [],
   bootstrap: [AppComponent]
