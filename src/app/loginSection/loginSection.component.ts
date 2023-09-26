@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-login-section',
+  templateUrl: './loginSection.component.html',
 })
-export class HomeComponent {
+export class LoginSectionComponent {
 
   showLoginForm: boolean = true;
   showRegForm: boolean = false;

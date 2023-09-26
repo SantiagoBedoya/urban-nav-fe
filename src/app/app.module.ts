@@ -9,7 +9,7 @@ import { VisionComponent } from './vision/vision.component';
 import { ReactiveFormsModule } from '@angular/forms'
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
+import { LoginSectionComponent } from './loginSection/loginSection.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import { AlertComponent } from './alert/alert.component';
 
@@ -21,7 +21,7 @@ import { AlertComponent } from './alert/alert.component';
     VisionComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
+    LoginSectionComponent,
     PasswordRecoveryComponent,
     AlertComponent,
   ],
