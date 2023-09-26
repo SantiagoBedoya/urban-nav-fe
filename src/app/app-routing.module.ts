@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MissionComponent } from './mission/mission.component';
 import { VisionComponent } from './vision/vision.component';
 import { LoginSectionComponent } from './loginSection/loginSection.component';
+import { QrComponent } from './qr-generator/qr/qr.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'pqrs',
     loadChildren: () => import('./pqrs/pqrs.module').then(m => m.PQRSModule)
+  },
+  {
+    path: 'qr-gen',
+    component: QrComponent
   },
   {
     path: '**',

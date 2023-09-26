@@ -13,6 +13,12 @@
         type="password" formControlName="password" name="password" placeholder="Password" autocomplete="off" />
     </div>
 
+    <app-alert
+      *ngIf="wrongCredentials"
+      text="Invalid credentials"
+    ></app-alert>
+
+
     <div class="text-center flex justify-between items-center">
       <a class="inline-block my-2 pl-6 text-sm cursor-pointer text-[#141d2c] align-baseline hover:font-semibold"
         (click)="showRegister()">

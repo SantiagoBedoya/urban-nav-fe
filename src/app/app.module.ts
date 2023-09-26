@@ -12,6 +12,10 @@ import { LoginSectionComponent } from './loginSection/loginSection.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AlertComponent } from './alert/alert.component';
+import { HttpClientModule } from '@angular/common/http'
+import { QRCodeModule } from 'angularx-qrcode';
+import { QrComponent } from './qr-generator/qr/qr.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,12 +27,15 @@ import { AlertComponent } from './alert/alert.component';
     PasswordRecoveryComponent,
     ChangePasswordComponent,
     AlertComponent,
+    QrComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    QRCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

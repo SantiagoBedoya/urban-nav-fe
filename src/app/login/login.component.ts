@@ -1,5 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +9,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent {
   loginForm: FormGroup = new FormGroup({});
+  http = inject(HttpClient);
+  wrongCredentials: boolean = false;
 
   @Output() goToRegister: EventEmitter<void>;
-  @Output() goToPasswordRecovery: EventEmitter<void>
+  @Output() goToPasswordRecovery: EventEmitter<void>;
 
   constructor(private fb: FormBuilder) {
     this.goToRegister = new EventEmitter();
@@ -26,9 +29,25 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
+      this.http
+        .post<any>('http://localhost:3000/auth/sign-in', this.loginForm.value)
+        .subscribe({
+          next: (data) => {
+            const userId = data.userId;
 
-      console.log(email, password);
+            localStorage.setItem('userId', JSON.stringify(userId))
+            this.wrongCredentials = false;
+            this.loginForm.reset()
+
+            this.http.post('http://localhost:3000/auth/otp/send-email', userId)
+
+            // redirect to 2fa form
+          },
+          error: (error) => {
+            console.error('There was an error!', error);
+            this.wrongCredentials = true;
+          },
+        });
     }
   }
 
@@ -39,5 +58,4 @@ export class LoginComponent {
   showPasswordRecovery() {
     this.goToPasswordRecovery.emit();
   }
-
 }
