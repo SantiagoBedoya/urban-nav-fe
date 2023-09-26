@@ -24,7 +24,7 @@ export class AuthenticationOptWaysComponent {
         next: (data) => {
           const url = data.otpAuthURL
 
-          this.router.navigate(['/auth-opt']);
+          this.router.navigate([`/qr-gen/${url}`]);
         },
         error: (error) => {
           console.error('There was an error!', error);
