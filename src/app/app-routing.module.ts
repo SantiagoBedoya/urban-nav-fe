@@ -8,11 +8,7 @@ import { LoginSectionComponent } from './loginSection/loginSection.component';
 
 const routes: Routes = [
   {
-    path: 'signin',
-    component: LoginComponent,
-  },
-  {
-    path: '',
+    path: 'sigin',
     component: LoginSectionComponent,
   },
   {
