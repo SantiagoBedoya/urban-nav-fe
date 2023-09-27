@@ -13,10 +13,11 @@ import { LoginSectionComponent } from './loginSection/loginSection.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AlertComponent } from './alert/alert.component';
-import { HttpClientModule } from '@angular/common/http'
 import { QRCodeModule } from 'angularx-qrcode';
 import { QrComponent } from './qr-generator/qr/qr.component';
 import { AuthenticationOptWaysComponent } from './authentication-opt-ways/authentication-opt-ways.component';
+import { OptFormComponent } from './opt-form/opt-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AuthenticationOptWaysComponent } from './authentication-opt-ways/authen
     AlertComponent,
     QrComponent,
     AuthenticationOptWaysComponent,
+    OptFormComponent,
   ],
   imports: [
     BrowserModule,
