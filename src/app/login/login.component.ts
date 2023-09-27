@@ -40,12 +40,14 @@ export class LoginComponent {
           next: (data) => {
             const userId = data.userId;
 
-            localStorage.setItem('user_id', JSON.stringify(userId))
+            localStorage.setItem('user_id', userId)
             this.wrongCredentials = false;
             this.loginForm.reset()
-
+            
             if (data.has2fa) { 
-              // redirect to 2fa form
+              localStorage.setItem('is_new_user', 'false');
+
+              this.router.navigate([`/opt-view`]);
             } else {
               this.router.navigate([`/auth-opt`]);
             }
