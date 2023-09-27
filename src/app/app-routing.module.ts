@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginSectionComponent } from './loginSection/loginSection.component';
 import { QrComponent } from './qr-generator/qr/qr.component';
 import { AuthenticationOptWaysComponent } from './authentication-opt-ways/authentication-opt-ways.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -38,9 +39,13 @@ const routes: Routes = [
     component: AuthenticationOptWaysComponent
   },
   {
+    path: 'password-reset',
+    component: ChangePasswordComponent
+  },
+  {
     path: '**',
     redirectTo: ''
-  }
+  },
 ];
 
 @NgModule({
