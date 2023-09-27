@@ -24,14 +24,14 @@ export class FormComponent {
  async onSubmit() {
    console.log(this.formData);
    this.showAlert = true;
-    this.formData = {
+   const response = await lastValueFrom (this.http.post('http://localhost:3000/pqrs', this.formData));
+   this.formData = {
     type: '',
     firstName: '',
     lastName: '',
     email: '',
     description: ''
   };
-   const response = await lastValueFrom (this.http.post('http://localhost:3000/pqrs', this.formData));
    console.log(response);
   }
 }
