@@ -13,6 +13,7 @@ import { LoginSectionComponent } from './loginSection/loginSection.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AlertComponent } from './alert/alert.component';
+import { OptFormComponent } from './opt-form/opt-form.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     PasswordRecoveryComponent,
     ChangePasswordComponent,
     AlertComponent,
+    OptFormComponent,
   ],
   imports: [
     BrowserModule,
