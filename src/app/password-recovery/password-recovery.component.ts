@@ -1,6 +1,9 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from '../shared/validators/custom-validators';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { passwordrecoveryResponse } from './interface/PassRecoveryResponse';
 
 @Component({
   selector: 'app-password-recovery',
@@ -9,10 +12,11 @@ import { CustomValidators } from '../shared/validators/custom-validators';
 })
 export class PasswordRecoveryComponent {
   recoveryPassForm: FormGroup = new FormGroup({});
+  http = inject(HttpClient);
 
   @Output() goToLogin = new EventEmitter<void>();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.goToLogin = new EventEmitter();
   }
 
@@ -27,8 +31,17 @@ export class PasswordRecoveryComponent {
       const { email } = this.recoveryPassForm.value;
 
       console.log(email);
-
-      this.recoveryPassForm.reset();
+      this.http.post<passwordrecoveryResponse>('http://localhost:3000/auth/password-recovery', {email})
+      .subscribe({
+        next: (response) => {
+          console.log('Respuesta exitosa:', response);
+          this.router.navigate([`/`]);
+          this.recoveryPassForm.reset();
+        },
+        error: (error) => {
+          console.error('There was an error!', error);
+        }
+      })
     }
   }
 
