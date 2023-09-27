@@ -17,14 +17,16 @@ export class AuthenticationOptWaysComponent {
   }
 
   googleAuth() {
-    const userId = JSON.parse(localStorage.getItem('user_id')!)
+    const userId = localStorage.getItem('user_id')
     this.http
-      .post<any>('http://localhost:3000/auth/otp/generate', userId)
+      .post<any>('http://localhost:3000/auth/otp/generate', {userId})
       .subscribe({
         next: (data) => {
           const url = data.otpAuthURL
+          console.log(url)
+          localStorage.setItem('otp_url', url);
 
-          this.router.navigate([`/qr-gen/${url}`]);
+          this.router.navigate([`qr-gen`]);
         },
         error: (error) => {
           console.error('There was an error!', error);
@@ -34,7 +36,7 @@ export class AuthenticationOptWaysComponent {
 
   emailAuth() {
     const userId = JSON.parse(localStorage.getItem('user_id')!)
-    this.http.post('http://localhost:3000/auth/otp/send-email', userId)
+    this.http.post('http://localhost:3000/auth/otp/send-email', {userId})
 
     // redirect to form 
   }

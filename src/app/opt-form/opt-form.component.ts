@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class OptFormComponent {
   optForm: FormGroup = new FormGroup({});
+  showQr: boolean = true;
 
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {
@@ -17,6 +18,9 @@ export class OptFormComponent {
       threeNumber: ['', Validators.required],
       fourNumber: ['', Validators.required],
     });
+
+    
+
   }
 
   submitOpt() {

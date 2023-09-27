@@ -61,11 +61,7 @@ export class RegisterComponent {
 
       //the user is stored in local storage
       localStorage.setItem('user_id', response._id);
-      console.log(localStorage.getItem('user_id'));
-
-      //is stored if the user is a new user
-      localStorage.setItem('new_user', 'true');
-
+      
       this.registerForm.reset();
 
       this.router.navigate([`/auth-opt`]);
