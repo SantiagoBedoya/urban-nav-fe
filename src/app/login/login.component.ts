@@ -1,5 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { loginResponse } from './interfaces/loginResponse';
 
 @Component({
   selector: 'app-login',
@@ -8,11 +11,16 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent {
   loginForm: FormGroup = new FormGroup({});
+  http = inject(HttpClient);
+  wrongCredentials: boolean = false;
 
   @Output() goToRegister: EventEmitter<void>;
-  @Output() goToPasswordRecovery: EventEmitter<void>
+  @Output() goToPasswordRecovery: EventEmitter<void>;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     this.goToRegister = new EventEmitter();
     this.goToPasswordRecovery = new EventEmitter();
   }
@@ -26,9 +34,27 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
+      this.http
+        .post<loginResponse>('http://localhost:3000/auth/sign-in', this.loginForm.value)
+        .subscribe({
+          next: (data) => {
+            const userId = data.userId;
 
-      console.log(email, password);
+            localStorage.setItem('user_id', JSON.stringify(userId))
+            this.wrongCredentials = false;
+            this.loginForm.reset()
+
+            if (data.has2fa) { 
+              // redirect to 2fa form
+            } else {
+              this.router.navigate([`/auth-opt`]);
+            }
+          },
+          error: (error) => {
+            console.error('There was an error!', error);
+            this.wrongCredentials = true;
+          },
+        });
     }
   }
 
@@ -39,5 +65,4 @@ export class LoginComponent {
   showPasswordRecovery() {
     this.goToPasswordRecovery.emit();
   }
-
 }
