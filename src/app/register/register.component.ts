@@ -1,6 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from '../shared/validators/custom-validators';
+import { lastValueFrom } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { registerResponse } from '../pqrs/interfaces/register.interface';
 
 @Component({
   selector: 'app-register',
@@ -12,9 +15,10 @@ export class RegisterComponent {
 
   @Output() goToLogin: EventEmitter<void>;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private http: HttpClient) {
     this.goToLogin = new EventEmitter();
   }
+
 
   ngOnInit(): void {
     this.registerForm = this.fb.group(
@@ -39,13 +43,30 @@ export class RegisterComponent {
     );
   }
 
-  register() {
+  async register() {
     if (this.registerForm.valid) {
       const { firstName, lastName, email, password, userType } =
         this.registerForm.value;
 
       console.log(email, password, firstName, lastName);
       console.log(userType ? 'TRAVELER' : 'DRIVER');
+      
+      const response = await lastValueFrom
+      (this.http.post <registerResponse>('http://localhost:3000/auth/sign-up', {
+        email,
+        password,
+        firstName,
+        lastName,
+        userType: userType ? 'TRAVELER' : 'DRIVER',
+      }));
+      console.log(response);
+
+      //the user is stored in local storage
+      localStorage.setItem('user_id', response._id);
+      console.log(localStorage.getItem('user_id'));
+
+      //is stored if the user is a new user
+      localStorage.setItem('new_user', 'true');
 
       this.registerForm.reset();
     }

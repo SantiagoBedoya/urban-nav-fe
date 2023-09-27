@@ -7,17 +7,21 @@ import { SharedModule } from './shared/shared.module';
 import { VisionComponent } from './vision/vision.component';
 import { ReactiveFormsModule } from '@angular/forms'
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginSectionComponent } from './loginSection/loginSection.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AlertComponent } from './alert/alert.component';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
     MissionComponent,
     VisionComponent,
     LoginComponent,
+    HomeComponent,
     RegisterComponent,
     LoginSectionComponent,
     PasswordRecoveryComponent,
@@ -28,7 +32,8 @@ import { AlertComponent } from './alert/alert.component';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule  
   ],
   providers: [],
   bootstrap: [AppComponent]
