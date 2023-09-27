@@ -23,10 +23,11 @@ export class AuthenticationOptWaysComponent {
       .subscribe({
         next: (data) => {
           const url = data.otpAuthURL
-          console.log(url)
           localStorage.setItem('otp_url', url);
+          localStorage.setItem('is_new_user', 'true');
+          localStorage.setItem('second_auth_type', 'google')
 
-          this.router.navigate([`qr-gen`]);
+          this.router.navigate([`opt-view`]);
         },
         error: (error) => {
           console.error('There was an error!', error);
@@ -35,9 +36,20 @@ export class AuthenticationOptWaysComponent {
   }
 
   emailAuth() {
-    const userId = JSON.parse(localStorage.getItem('user_id')!)
-    this.http.post('http://localhost:3000/auth/otp/send-email', {userId})
+    const userId = localStorage.getItem('user_id')!
+    console.log(userId)
+    localStorage.setItem('is_new_user', 'false');
+    localStorage.setItem('second_auth_type', 'email')
+    
+    this.http.post<any>('http://localhost:3000/auth/otp/send-email', {userId}).subscribe({
+      next: (data) => {
+        console.log('Email sended')
+      },
+      error: (error) => {
+        console.error('There was an error sending email!', error);
+      },
+    })
 
-    // redirect to form 
+    this.router.navigate([`opt-view`]);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-qr',
@@ -6,10 +6,10 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./qr.component.css']
 })
 export class QrComponent implements OnInit {
-  @Input() qrdata: string = '';
+  qrdata: string = '';
 
   ngOnInit(): void {
     const otpURL = localStorage.getItem('otp_url')
-    this.qrdata = otpURL!
+    this.qrdata = otpURL ?? ''
   }
 }

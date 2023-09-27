@@ -45,7 +45,9 @@ export class LoginComponent {
             this.loginForm.reset()
             
             if (data.has2fa) { 
-              localStorage.setItem('showQr', 'false')
+              localStorage.setItem('is_new_user', 'false');
+
+              this.router.navigate([`/opt-view`]);
             } else {
               this.router.navigate([`/auth-opt`]);
             }

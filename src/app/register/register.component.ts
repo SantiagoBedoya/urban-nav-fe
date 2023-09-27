@@ -16,11 +16,13 @@ export class RegisterComponent {
 
   @Output() goToLogin: EventEmitter<void>;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router
   ) {
     this.goToLogin = new EventEmitter();
   }
-
 
   ngOnInit(): void {
     this.registerForm = this.fb.group(
@@ -50,18 +52,19 @@ export class RegisterComponent {
       const { firstName, lastName, email, password, userType } =
         this.registerForm.value;
 
-      const response = await lastValueFrom
-        (this.http.post<registerResponse>('http://localhost:3000/auth/sign-up', {
+      const response = await lastValueFrom(
+        this.http.post<registerResponse>('http://localhost:3000/auth/sign-up', {
           email,
           password,
           firstName,
           lastName,
           userType: userType ? 'TRAVELER' : 'DRIVER',
-        }));
+        })
+      );
 
       //the user is stored in local storage
       localStorage.setItem('user_id', response._id);
-      
+
       this.registerForm.reset();
 
       this.router.navigate([`/auth-opt`]);
