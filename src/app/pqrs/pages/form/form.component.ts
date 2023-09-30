@@ -1,37 +1,39 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { PQRSResponse } from '../../interfaces/pqrs.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.css'],
 })
 export class FormComponent {
-  constructor(private http: HttpClient){
-
-  }
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
   formData = {
     type: '',
     firstName: '',
     lastName: '',
     email: '',
-    description: ''
+    description: '',
   };
-  showAlert: boolean = false;
 
- async onSubmit() {
-   console.log(this.formData);
-   this.showAlert = true;
-   const response = await lastValueFrom (this.http.post('http://localhost:3000/pqrs', this.formData));
-   this.formData = {
-    type: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    description: ''
-  };
-   console.log(response);
+  async onSubmit() {
+    const response = await lastValueFrom(
+      this.http.post('http://localhost:3000/pqrs', this.formData)
+    );
+
+    this.toastr.success('Your PQRS has been sended!', '', {
+      positionClass: 'toast-bottom-center',
+      toastClass: 'ngx-toastr toast-custom',
+    });
+
+    this.formData = {
+      type: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      description: '',
+    };
   }
 }

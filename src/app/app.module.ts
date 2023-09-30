@@ -18,6 +18,8 @@ import { QrComponent } from './qr-generator/qr/qr.component';
 import { AuthenticationOptWaysComponent } from './authentication-opt-ways/authentication-opt-ways.component';
 import { OptFormComponent } from './opt-form/opt-form.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     ReactiveFormsModule,
     HttpClientModule,
-    QRCodeModule
+    QRCodeModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

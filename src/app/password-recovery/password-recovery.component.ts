@@ -4,6 +4,7 @@ import { CustomValidators } from '../shared/validators/custom-validators';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { passwordrecoveryResponse } from './interface/PassRecoveryResponse';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-password-recovery',
@@ -16,7 +17,11 @@ export class PasswordRecoveryComponent {
 
   @Output() goToLogin = new EventEmitter<void>();
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.goToLogin = new EventEmitter();
   }
 
@@ -30,18 +35,28 @@ export class PasswordRecoveryComponent {
     if (this.recoveryPassForm.valid) {
       const { email } = this.recoveryPassForm.value;
 
-      console.log(email);
-      this.http.post<passwordrecoveryResponse>('http://localhost:3000/auth/password-recovery', {email})
-      .subscribe({
-        next: (response) => {
-          console.log('Respuesta exitosa:', response);
-          this.router.navigate([`/`]);
-          this.recoveryPassForm.reset();
-        },
-        error: (error) => {
-          console.error('There was an error!', error);
-        }
-      })
+      this.http
+        .post<passwordrecoveryResponse>(
+          'http://localhost:3000/auth/password-recovery',
+          { email }
+        )
+        .subscribe({
+          next: (response) => {
+            console.log('Respuesta exitosa:', response);
+            this.router.navigate([`/`]);
+            this.recoveryPassForm.reset();
+          },
+          error: (error) => {
+            console.error('There was an error!', error);
+          },
+        });
+
+      this.recoveryPassForm.reset();
+
+      this.toastr.success("We've sent you an email", '', {
+        positionClass: 'toast-bottom-center',
+        toastClass: 'ngx-toastr toast-custom',
+      });
     }
   }
 
