@@ -18,6 +18,7 @@ import { QrComponent } from './qr-generator/qr/qr.component';
 import { AuthenticationOptWaysComponent } from './authentication-opt-ways/authentication-opt-ways.component';
 import { OptFormComponent } from './opt-form/opt-form.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     ReactiveFormsModule,
     HttpClientModule,
-    QRCodeModule
+    QRCodeModule,
+    NgOtpInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
