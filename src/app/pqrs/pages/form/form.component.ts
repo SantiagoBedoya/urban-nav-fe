@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { PQRSResponse } from '../../interfaces/pqrs.interface';
 
 @Component({
   selector: 'app-form',
@@ -22,7 +21,6 @@ export class FormComponent {
   showAlert: boolean = false;
 
  async onSubmit() {
-   console.log(this.formData);
    this.showAlert = true;
    const response = await lastValueFrom (this.http.post('http://localhost:3000/pqrs', this.formData));
    this.formData = {

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from '../shared/validators/custom-validators';
 import { lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { registerResponse } from '../pqrs/interfaces/register.interface';
+import { registerResponse } from './interfaces/register.interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -63,7 +63,8 @@ export class RegisterComponent {
       );
 
       //the user is stored in local storage
-      localStorage.setItem('user_id', response._id);
+      localStorage.setItem('user_id', response.id);
+      localStorage.setItem('user_hidden_email', response.hiddenEmail);
 
       this.registerForm.reset();
 

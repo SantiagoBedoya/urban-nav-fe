@@ -13,6 +13,7 @@ export class OptFormComponent {
   isNewUser: boolean = false;
   http = inject(HttpClient);
   second_auth_type: string = '';
+  email: string = '';
 
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {
@@ -24,6 +25,9 @@ export class OptFormComponent {
       fiveNumber: ['', Validators.required],
       sixNumber: ['', Validators.required],
     });
+
+    const email = localStorage.getItem('user_hidden_email')!;
+    this.email = email || '';
 
     const isNewUser = localStorage.getItem('is_new_user')!;
     this.isNewUser = isNewUser === 'true';
