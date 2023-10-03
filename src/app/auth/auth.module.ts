@@ -13,6 +13,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { TwoFaComponent } from './pages/two-fa/two-fa.component';
 import { ValidateOtpComponent } from './pages/validate-otp/validate-otp.component';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PasswordResetComponent } from './pages/password-reset/password-reset.co
     ReactiveFormsModule,
     SharedModule,
     QRCodeModule,
+    NgOtpInputModule
   ],
 })
 export class AuthModule {}
