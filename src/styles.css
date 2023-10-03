@@ -1,28 +1,34 @@
+@import "ngx-toastr/toastr";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --primary-color: #141D2C
+  --primary-color: #141d2c;
 }
 
-.bg-primary-color{
-    background: var(--primary-color)
+.bg-primary-color {
+  background: var(--primary-color);
 }
 
 @layer components {
-    .hamburger div:first-child {
-      @apply rotate-45 translate-y-1.5;
-    }
-    .hamburger div:last-child {
-      @apply -rotate-45 -translate-y-1;
-    }
+  .hamburger div:first-child {
+    @apply rotate-45 translate-y-1.5;
+  }
+  .hamburger div:last-child {
+    @apply -rotate-45 -translate-y-1;
   }
 
-  input:checked {
-    background-color: var(--primary-color); /* bg-green-500 */
+  .toast-custom {
+    @apply bottom-6
   }
+}
 
-  input:checked ~ span:last-child {
-    --tw-translate-x: 1.75rem; /* translate-x-7 */
-  }
+input:checked {
+  background-color: var(--primary-color); /* bg-green-500 */
+}
+
+input:checked ~ span:last-child {
+  --tw-translate-x: 1.75rem; /* translate-x-7 */
+}
