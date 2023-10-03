@@ -13,12 +13,16 @@ export class ValidateOtpComponent implements OnInit {
   inputDigitLeft: String = 'Verify Code';
   btnStatus: String = 'bg-custom-blue';
   isDisabled: boolean = true;
+  email: string = '';
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     const isNewUser = localStorage.getItem('is_new_user')!;
     this.isNewUser = isNewUser === 'true';
+
+    const email = localStorage.getItem('user_hidden_email')!;
+    this.email = email || '';
 
     const secondAuthType = localStorage.getItem('second_auth_type')!;
     this.second_auth_type = secondAuthType;

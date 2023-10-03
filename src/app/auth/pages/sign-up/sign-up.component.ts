@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -59,6 +58,10 @@ export class SignUpComponent implements OnInit {
             const userId = data._id;
 
             localStorage.setItem('user_id', userId);
+            const splitted = email.split('@')
+            const emailDomain = splitted[1]
+            const letters = splitted[0].slice(0,3)
+            localStorage.setItem('user_hidden_email', `${letters}**@${emailDomain}`)
             this.registerForm.reset();
 
             this.router.navigate(['/auth/two-fa']);

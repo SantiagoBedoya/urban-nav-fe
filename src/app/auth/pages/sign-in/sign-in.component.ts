@@ -34,7 +34,7 @@ export class SignInComponent implements OnInit {
           localStorage.setItem('user_id', userId);
           this.wrongCredentials = false;
           this.loginForm.reset();
-
+          
           if (data.has2fa) {
             localStorage.setItem('is_new_user', 'false');
 

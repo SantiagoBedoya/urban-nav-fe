@@ -1,34 +1,45 @@
-<div class="relative flex min-h-screen flex-col justify-center overflow-hidden  py-12">
+<div
+  class="relative flex min-h-screen flex-col justify-center overflow-hidden py-12"
+>
   <div class="flex items-center justify-center mb-3">
-      <app-qr *ngIf="isNewUser"></app-qr>
+    <app-qr *ngIf="isNewUser"></app-qr>
   </div>
-  <div class="relative bg-gray-50 px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
-      <div class="mx-auto flex w-full max-w-md flex-col space-y-16 ">
-          <div class="flex flex-col items-center justify-center text-center space-y-2">
-              <div class="font-semibold text-3xl text-[#141d2c]">
-                  <p>Code Verification</p>
-              </div>
-              <div class="flex 
-              flex-row text-sm font-medium text-gray-400">
-                  <p>We have sent a code to your email na***@gmail.com</p>
-              </div>
-          </div>
-
-          <form>
-              <div class="flex flex-col space-y-12">
-                <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="configOptions"></ng-otp-input> 
-                <div class="flex flex-col space-y-5">
-                      <div>
-                          <button [disabled]="isDisabled" (click)="submitOpt()" type="button"
-                              class="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 border-none text-white   text-lg shadow-sm"
-                              [ngClass]="btnStatus">
-                              {{this.inputDigitLeft}}
-                          </button>
-                      </div>
-                  </div>
-              </div>
-
-          </form>
+  <div
+    class="relative bg-gray-50 px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl"
+  >
+    <div class="mx-auto flex w-full max-w-md flex-col space-y-16">
+      <div
+        class="flex flex-col items-center justify-center text-center space-y-2"
+      >
+        <div class="font-semibold text-3xl text-[#141d2c]">
+          <p>Code Verification</p>
+        </div>
+        <div class="flex flex-row text-sm font-medium text-gray-400">
+          <p>We have sent a code to your email {{ email }}.</p>
+        </div>
       </div>
+
+      <form>
+        <div class="flex flex-col space-y-12">
+          <ng-otp-input
+            (onInputChange)="onOtpChange($event)"
+            [config]="configOptions"
+          ></ng-otp-input>
+          <div class="flex flex-col space-y-5">
+            <div>
+              <button
+                [disabled]="isDisabled"
+                (click)="submitOpt()"
+                type="button"
+                class="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 border-none text-white text-lg shadow-sm"
+                [ngClass]="btnStatus"
+              >
+                {{ this.inputDigitLeft }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
