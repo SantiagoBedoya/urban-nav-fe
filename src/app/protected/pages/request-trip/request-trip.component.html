@@ -1,0 +1,51 @@
+<div>
+  <h1 class="my-6 text-5xl text-[#2C3333] tracking-wide font-bold text-center">
+    Request a Trip
+  </h1>
+  <form
+    [formGroup]="requestTripForm"
+    (ngSubmit)="onSubmit()"
+    class="mx-auto w-full px-4 sm:w-2/3 lg:px-0"
+  >
+    <div class="pb-2 pt-4">
+      <label for="origin" class="block mb-2 text-sm font-medium text-gray-900"
+        >Origin</label
+      >
+      <select
+        id="origin"
+        class="bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-4"
+        formControlName="origin"
+      >
+        <option selected>Choose a point</option>
+        <option *ngFor="let point of points" [value]="point._id">
+          {{ point.name }}
+        </option>
+      </select>
+    </div>
+    <div class="pb-2 pt-4">
+      <label
+        for="destination"
+        class="block mb-2 text-sm font-medium text-gray-900"
+        >Destination</label
+      >
+      <select
+        formControlName="destination"
+        id="destination"
+        class="bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-4"
+      >
+        <option selected>Choose a point</option>
+        <option *ngFor="let point of points" [value]="point._id">
+          {{ point.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="px-4 pb-2 pt-4">
+      <button
+        class="block w-full rounded-full bg-[#141D2C] p-4 text-lg uppercase focus:outline-none text-white"
+      >
+        Request Trip
+      </button>
+    </div>
+  </form>
+</div>
