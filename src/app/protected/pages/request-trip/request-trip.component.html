@@ -48,4 +48,16 @@
       </button>
     </div>
   </form>
+
+  <div *ngIf="nearestDrivers.length != 0">
+    <h3
+      class="text-center my-10 text-3xl text-[#2C3333] tracking-wide font-bold text-center"
+    >
+      Nearest drivers
+    </h3>
+    <app-nearest-driver-card
+      *ngFor="let nearestDriver of nearestDrivers"
+      [nearestDriver]="nearestDriver"
+    ></app-nearest-driver-card>
+  </div>
 </div>
