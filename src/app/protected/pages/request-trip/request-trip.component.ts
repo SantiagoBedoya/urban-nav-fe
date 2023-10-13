@@ -3,6 +3,9 @@ import { PointService } from '../../services/point.service';
 import { Point } from '../../interfaces/point.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TripService } from '../../services/trip.service';
+import { RouteService } from '../../services/route.service';
+import { DriverUbicationService } from '../../services/driver-ubication.service';
+import { NearestDriver } from '../../interfaces/driver.interface';
 
 @Component({
   selector: 'app-request-trip',
@@ -11,12 +14,14 @@ import { TripService } from '../../services/trip.service';
 })
 export class RequestTripComponent implements OnInit {
   points: Point[] = [];
+  nearestDrivers: NearestDriver[] = [];
   requestTripForm: FormGroup = new FormGroup({});
 
   constructor(
     private readonly fb: FormBuilder,
     private pointService: PointService,
-    private tripService: TripService
+    private routeService: RouteService,
+    private driverUbicationService: DriverUbicationService
   ) {}
 
   ngOnInit(): void {
@@ -38,9 +43,17 @@ export class RequestTripComponent implements OnInit {
   onSubmit() {
     if (this.requestTripForm.valid) {
       const { origin, destination } = this.requestTripForm.value;
-      this.tripService.request(origin, destination).subscribe({
+      this.routeService.findBestRoute(origin, destination).subscribe({
         next: (response) => {
           console.log(response);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+      this.driverUbicationService.findNearestDriver(origin).subscribe({
+        next: (response) => {
+          this.nearestDrivers = response;
         },
         error: (err) => {
           console.error(err);
