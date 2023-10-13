@@ -8,9 +8,10 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { RoleDirective } from './directives/role.directive';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, RoleDirective],
   imports: [
     BrowserModule,
     AppRoutingModule,
