@@ -20,6 +20,7 @@ export class TwoFaComponent {
         localStorage.setItem('second_auth_type', 'google');
 
         this.router.navigate(['/auth/validate-otp']);
+        this.router.navigate([`/dashboard`])
       },
       error: (err) => {
         console.log(err);
