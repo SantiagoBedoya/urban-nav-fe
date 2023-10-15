@@ -6,6 +6,8 @@ import { MissionComponent } from './pages/mission/mission.component';
 import { VisionComponent } from './pages/vision/vision.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PublicRoutingModule } from './public-routing.module';
+import { IndexComponent } from './pages/index/index.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -13,12 +15,14 @@ import { PublicRoutingModule } from './public-routing.module';
     HomeComponent,
     MissionComponent,
     VisionComponent,
+    IndexComponent,
   ],
   imports: [
     CommonModule,
     PublicRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    SharedModule,
   ],
 })
 export class PublicModule {}

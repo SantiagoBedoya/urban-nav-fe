@@ -63,4 +63,12 @@ export class AuthService {
       newPassword,
     });
   }
+
+  validateToken(token: string) {
+    return this.httpClient.get(this.uri + '/validate-token', {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+  }
 }

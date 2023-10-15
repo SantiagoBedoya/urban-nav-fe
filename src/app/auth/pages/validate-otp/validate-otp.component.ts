@@ -23,6 +23,7 @@ export class ValidateOtpComponent implements OnInit {
     private router: Router,
     private store: Store
   ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     const isNewUser = localStorage.getItem('is_new_user')!;
@@ -67,9 +68,13 @@ export class ValidateOtpComponent implements OnInit {
         const accessToken = data.accessToken;
 
         localStorage.setItem('access_token', accessToken);
+
         localStorage.setItem('isLogged', 'true');
         this.store.dispatch(AuthActions.logIn({ isLogged: true }));
         this.router.navigate([`/dashboard`]);
+
+        this.router.navigate(['app']);
+
       },
       error: (err) => {
         console.error('There was an error!', err);
