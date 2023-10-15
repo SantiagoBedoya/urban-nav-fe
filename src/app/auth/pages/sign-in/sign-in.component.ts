@@ -30,11 +30,11 @@ export class SignInComponent implements OnInit {
       this.authService.signIn(email, password).subscribe({
         next: (data) => {
           const userId = data.userId;
-
           localStorage.setItem('user_id', userId);
+
           this.wrongCredentials = false;
           this.loginForm.reset();
-          
+
           if (data.has2fa) {
             localStorage.setItem('is_new_user', 'false');
 

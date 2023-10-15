@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthActions } from 'src/app/state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-validate-otp',
@@ -16,7 +18,11 @@ export class ValidateOtpComponent implements OnInit {
   isDisabled: boolean = true;
   email: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
     const isNewUser = localStorage.getItem('is_new_user')!;
@@ -61,8 +67,9 @@ export class ValidateOtpComponent implements OnInit {
         const accessToken = data.accessToken;
 
         localStorage.setItem('access_token', accessToken);
-        this.router.navigate([`/dashboard`])
-
+        localStorage.setItem('isLogged', 'true');
+        this.store.dispatch(AuthActions.logIn({ isLogged: true }));
+        this.router.navigate([`/dashboard`]);
       },
       error: (err) => {
         console.error('There was an error!', err);
