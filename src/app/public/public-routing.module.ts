@@ -4,23 +4,30 @@ import { PqrsComponent } from './pages/pqrs/pqrs.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MissionComponent } from './pages/mission/mission.component';
 import { VisionComponent } from './pages/vision/vision.component';
+import { IndexComponent } from './pages/index/index.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-  },
-  {
-    path: 'pqrs',
-    component: PqrsComponent,
-  },
-  {
-    path: 'mission',
-    component: MissionComponent,
-  },
-  {
-    path: 'vision',
-    component: VisionComponent,
+    component: IndexComponent,
+    children: [
+      {
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: 'pqrs',
+        component: PqrsComponent,
+      },
+      {
+        path: 'mission',
+        component: MissionComponent,
+      },
+      {
+        path: 'vision',
+        component: VisionComponent,
+      },
+    ],
   },
 ];
 
