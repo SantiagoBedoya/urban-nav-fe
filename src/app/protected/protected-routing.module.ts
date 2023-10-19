@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { RequestTripComponent } from './pages/request-trip/request-trip.component';
+import { RootComponent } from './pages/root/root.component';
 
 const routes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: RootComponent,
     children: [
       {
-        path: 'trips/request',
+        path: '',
         component: RequestTripComponent,
       },
     ],
