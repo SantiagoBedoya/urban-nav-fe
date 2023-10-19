@@ -6,12 +6,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NearestDriverCardComponent } from './components/nearest-driver-card/nearest-driver-card.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SideBarComponent } from './dashboard/side-bar/side-bar.component';
+import { ProfileComponent } from './dashboard/profile/profile.component';
 @NgModule({
   declarations: [
     RequestTripComponent,
     NearestDriverCardComponent,
     DashboardComponent,
     SideBarComponent,
+    ProfileComponent,
   ],
   imports: [CommonModule, ProtectedRoutingModule, ReactiveFormsModule],
 })
