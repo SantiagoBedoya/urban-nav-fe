@@ -2,20 +2,10 @@
   <h1 class="my-6 text-5xl text-[#2C3333] tracking-wide font-bold text-center">
     Request a Trip
   </h1>
-  <form
-    [formGroup]="requestTripForm"
-    (ngSubmit)="onSubmit()"
-    class="mx-auto w-full px-4 sm:w-2/3 lg:px-0"
-  >
+  <form [formGroup]="requestTripForm" (ngSubmit)="onSubmit()" class="mx-auto w-10/12  lg:w-6/12 px-4  lg:px-0">
     <div class="pb-2 pt-4">
-      <label for="origin" class="block mb-2 text-sm font-medium text-gray-900"
-        >Origin</label
-      >
-      <select
-        id="origin"
-        class="bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-4"
-        formControlName="origin"
-      >
+      <label for="origin" class="block mb-2 text-sm font-medium text-gray-900">Origin</label>
+      <select id="origin" class="bg-gray-50 text-gray-900 text-sm rounded-lg border border-[#395B64]  block w-full p-4" formControlName="origin">
         <option selected>Choose a point</option>
         <option *ngFor="let point of points" [value]="point._id">
           {{ point.name }}
@@ -23,16 +13,9 @@
       </select>
     </div>
     <div class="pb-2 pt-4">
-      <label
-        for="destination"
-        class="block mb-2 text-sm font-medium text-gray-900"
-        >Destination</label
-      >
-      <select
-        formControlName="destination"
-        id="destination"
-        class="bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-4"
-      >
+      <label for="destination" class="block mb-2 text-sm font-medium text-gray-900">Destination</label>
+      <select formControlName="destination" id="destination"
+        class="bg-gray-50 text-gray-900 text-sm rounded-lg border border-[#395B64]  block w-full p-4">
         <option selected>Choose a point</option>
         <option *ngFor="let point of points" [value]="point._id">
           {{ point.name }}
@@ -41,23 +24,17 @@
     </div>
 
     <div class="px-4 pb-2 pt-4">
-      <button
-        class="block w-full rounded-full bg-[#141D2C] p-4 text-lg uppercase focus:outline-none text-white"
-      >
+      <button class="block w-full rounded-full bg-[#141D2C] p-4 text-lg uppercase focus:outline-none text-white">
         Request Trip
       </button>
     </div>
   </form>
 
   <div *ngIf="nearestDrivers.length != 0">
-    <h3
-      class="text-center my-10 text-3xl text-[#2C3333] tracking-wide font-bold text-center"
-    >
+    <h3 class="text-center my-10 text-3xl text-[#2C3333] tracking-wide font-bold">
       Nearest drivers
     </h3>
-    <app-nearest-driver-card
-      *ngFor="let nearestDriver of nearestDrivers"
-      [nearestDriver]="nearestDriver"
-    ></app-nearest-driver-card>
+    <app-nearest-driver-card *ngFor="let nearestDriver of nearestDrivers"
+      [nearestDriver]="nearestDriver"></app-nearest-driver-card>
   </div>
 </div>
