@@ -74,7 +74,7 @@
                         class="w-full h-full object-cover">
                     </div>
                     <div class="font-semibold dark:text-white text-gray-900 text-lg">
-                      <div class="cursor-pointer">Name</div>
+                      <div class="cursor-pointer">{{ firstname$ | async }}</div>
                     </div>
                   </div>
                   <div [ngClass]="{'absolute': true, 'invisible': inVisible, 'w-60': true, 'px-5': true, 'py-3': true,

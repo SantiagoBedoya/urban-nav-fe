@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { AuthActions } from 'src/app/state';
+import { UserActions } from 'src/app/state';
 import { Store } from '@ngrx/store';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'app-validate-otp',
@@ -20,6 +22,7 @@ export class ValidateOtpComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private userService: UserService,
     private router: Router,
     private store: Store
   ) {}
@@ -67,8 +70,15 @@ export class ValidateOtpComponent implements OnInit {
         const accessToken = data.accessToken;
 
         localStorage.setItem('access_token', accessToken);
-        localStorage.setItem('isLogged', 'true');
+
+        this.userService.getUserProfile(accessToken).subscribe((res) => {
+          this.store.dispatch(UserActions.setUserData({...res}));
+          localStorage.setItem('user_data', JSON.stringify(res));
+        });
+
         this.store.dispatch(AuthActions.logIn({ isLogged: true }));
+        localStorage.setItem('isLogged', 'true');
+        
         this.router.navigate([`/dashboard`]);
       },
       error: (err) => {

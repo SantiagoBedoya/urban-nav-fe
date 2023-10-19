@@ -15,7 +15,7 @@ export class SignInComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
     private readonly router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -31,6 +31,11 @@ export class SignInComponent implements OnInit {
         next: (data) => {
           const userId = data.userId;
           localStorage.setItem('user_id', userId);
+          
+          const splitted = email.split('@')
+          const emailDomain = splitted[1]
+          const letters = splitted[0].slice(0, 3)
+          localStorage.setItem('user_hidden_email', `${letters}**@${emailDomain}`)
 
           this.wrongCredentials = false;
           this.loginForm.reset();
