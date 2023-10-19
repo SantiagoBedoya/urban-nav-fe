@@ -9,7 +9,7 @@ export class QrComponent implements OnInit {
   qrdata: string = '';
 
   ngOnInit(): void {
-    const otpURL = localStorage.getItem('otp_url')
+    const otpURL = sessionStorage.getItem('otp_url')
     this.qrdata = otpURL ?? ''
   }
 }

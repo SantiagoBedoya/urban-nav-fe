@@ -21,7 +21,7 @@ export class RoleDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const userId = localStorage.getItem('user_id')!;
+    const userId = sessionStorage.getItem('user_id')!;
     this.userService.getUserPermissions(userId).subscribe((res) => {
       this.userPermissions = res.permissions;
       this.updateView();

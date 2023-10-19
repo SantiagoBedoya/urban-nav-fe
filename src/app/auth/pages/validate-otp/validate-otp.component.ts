@@ -28,13 +28,13 @@ export class ValidateOtpComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const isNewUser = localStorage.getItem('is_new_user')!;
+    const isNewUser = sessionStorage.getItem('is_new_user')!;
     this.isNewUser = isNewUser === 'true';
 
-    const email = localStorage.getItem('user_hidden_email')!;
+    const email = sessionStorage.getItem('user_hidden_email')!;
     this.email = email || '';
 
-    const secondAuthType = localStorage.getItem('second_auth_type')!;
+    const secondAuthType = sessionStorage.getItem('second_auth_type')!;
     this.second_auth_type = secondAuthType;
   }
 
@@ -62,22 +62,22 @@ export class ValidateOtpComponent implements OnInit {
   submitOpt() {
     const auth_type_to =
       this.second_auth_type === 'email' ? 'verify-email' : 'validate';
-    const userId = localStorage.getItem('user_id');
+    const userId = sessionStorage.getItem('user_id');
     const fullCode = this.opt;
 
     this.authService.validateOTP(auth_type_to, userId!, fullCode).subscribe({
       next: (data) => {
         const accessToken = data.accessToken;
 
-        localStorage.setItem('access_token', accessToken);
+        sessionStorage.setItem('access_token', accessToken);
 
         this.userService.getUserProfile(accessToken).subscribe((res) => {
           this.store.dispatch(UserActions.setUserData({...res}));
-          localStorage.setItem('user_data', JSON.stringify(res));
+          sessionStorage.setItem('user_data', JSON.stringify(res));
         });
 
         this.store.dispatch(AuthActions.logIn({ isLogged: true }));
-        localStorage.setItem('isLogged', 'true');
+        sessionStorage.setItem('isLogged', 'true');
         
         this.router.navigate([`/dashboard`]);
       },

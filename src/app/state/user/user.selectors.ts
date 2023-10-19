@@ -23,3 +23,18 @@ export const email = createSelector(
   userState,
   (userState) => userState.email
 );
+
+export const contacts = createSelector(
+  userState,
+  (userState) => userState.contacts
+);
+
+export const id = createSelector(
+  userState,
+  (userState) => userState._id
+);
+
+export const roleId = createSelector(
+  userState,
+  (userState) => userState.roleId
+);

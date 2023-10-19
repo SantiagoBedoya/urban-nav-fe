@@ -21,7 +21,7 @@ export class NavbarComponent {
 
   logOut() {
     this.setVisible();
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate([`/sign-in`]);
     this.store.dispatch(AuthActions.logOut({ isLogged: false }));
   }
