@@ -1,0 +1,20 @@
+<div class="bg-white rounded-lg shadow-xl p-8">
+    <div class="flex items-center justify-between">
+        <h4 class="text-xl text-gray-900 font-bold">Contacts</h4>
+        <app-add-contacts></app-add-contacts>
+    </div>
+    <div
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-8 mt-8">
+        <a class="flex flex-col items-center justify-center text-gray-800 hover:text-custom-blue"
+            *ngFor="let contact of contacts$ | async">
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor"
+                class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                <path fill-rule="evenodd"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+            </svg>
+            <p class="text-center font-bold text-sm mt-1">{{ contact.name }}</p>
+            <p class="text-base text-custom-black text-center">{{ contact.phone }}</p>
+        </a>
+    </div>
+</div>

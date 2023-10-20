@@ -6,12 +6,10 @@ import { UserSelectors } from 'src/app/state';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
-  constructor(
-    private store: Store
-  ) {}
+  constructor(private store: Store) {}
 
   firstname$: Observable<string> = this.store.select(UserSelectors.firstName);
   lastname$: Observable<string> = this.store.select(UserSelectors.lastName);

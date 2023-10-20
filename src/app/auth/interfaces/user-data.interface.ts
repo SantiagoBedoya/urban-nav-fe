@@ -1,6 +1,8 @@
+import { contact } from "src/app/user/interface/contact.interface";
+
 export interface UserDataInterface {
     _id: string;
-    contacts: object[];
+    contacts: contact[];
     email: string;
     firstName: string;
     lastName: string;

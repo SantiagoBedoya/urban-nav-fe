@@ -4,9 +4,12 @@ import { ProtectedRoutingModule } from './protected-routing.module';
 import { RequestTripComponent } from './pages/request-trip/request-trip.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NearestDriverCardComponent } from './components/nearest-driver-card/nearest-driver-card.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { SideBarComponent } from './dashboard/side-bar/side-bar.component';
-import { ProfileComponent } from './dashboard/profile/profile.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SideBarComponent } from './components/dashboard/side-bar/side-bar.component';
+import { ProfileComponent } from './components/dashboard/profile/profile.component';
+import { AddContactsComponent } from './components/modals/add-contacts/add-contacts.component';
+import { ContactsComponent } from './components/dashboard/profile/contacts/contacts.component';
+import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [
     RequestTripComponent,
@@ -14,7 +17,14 @@ import { ProfileComponent } from './dashboard/profile/profile.component';
     DashboardComponent,
     SideBarComponent,
     ProfileComponent,
+    AddContactsComponent,
+    ContactsComponent,
   ],
-  imports: [CommonModule, ProtectedRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ProtectedRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
+  ],
 })
 export class ProtectedModule {}

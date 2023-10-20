@@ -1,12 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
 import { UserActions } from '..';
+import { contact } from 'src/app/user/interface/contact.interface';
 
 export const userStateFeatureKey = 'userState';
 const userProfile = JSON.parse(sessionStorage.getItem('user_data')!);
 
 export interface UserState {
   _id: string;
-  contacts: object[];
+  contacts: contact[];
   email: string;
   firstName: string;
   lastName: string;
@@ -19,7 +20,7 @@ const initialState: UserState = {
   email: userProfile?.email ?? '',
   firstName: userProfile?.firstName ?? '',
   lastName: userProfile?.lastName ?? '',
-  roleId: userProfile?.roleId ?? ''
+  roleId: userProfile?.roleId ?? '',
 };
 
 export const userReducer = createReducer(
@@ -34,6 +35,10 @@ export const userReducer = createReducer(
     lastName: action.lastName,
     email: action.email,
     contacts: action.contacts,
-    roleId: action.roleId
+    roleId: action.roleId,
+  })),
+  on(UserActions.addContact, (currentState, action) => ({
+    ...currentState,
+    contacts: [...currentState.contacts, action.contact],
   }))
 );

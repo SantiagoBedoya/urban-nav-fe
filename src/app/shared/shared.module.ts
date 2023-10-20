@@ -4,8 +4,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { AlertComponent } from './alert/alert.component';
 
-
-
 @NgModule({
   declarations: [
     NavbarComponent,
