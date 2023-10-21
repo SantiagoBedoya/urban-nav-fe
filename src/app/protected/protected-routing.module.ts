@@ -5,12 +5,16 @@ import { RootComponent } from './pages/root/root.component';
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: '',
     component: RootComponent,
     children: [
       {
-        path: '',
+        path: 'trips/request',
         component: RequestTripComponent,
+      },
+      {
+        path: '**',
+        redirectTo: 'trips/request',
       },
     ],
   },

@@ -3,9 +3,7 @@ import { PointService } from '../../services/point.service';
 import { Point } from '../../interfaces/point.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TripService } from '../../services/trip.service';
-import { RouteService } from '../../services/route.service';
-import { DriverUbicationService } from '../../services/driver-ubication.service';
-import { NearestDriver } from '../../interfaces/driver.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-request-trip',
@@ -14,14 +12,14 @@ import { NearestDriver } from '../../interfaces/driver.interface';
 })
 export class RequestTripComponent implements OnInit {
   points: Point[] = [];
-  nearestDrivers: NearestDriver[] = [];
+  message: string | null = null;
   requestTripForm: FormGroup = new FormGroup({});
 
   constructor(
     private readonly fb: FormBuilder,
-    private pointService: PointService,
-    private routeService: RouteService,
-    private driverUbicationService: DriverUbicationService
+    private readonly tripService: TripService,
+    private readonly pointService: PointService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -43,20 +41,12 @@ export class RequestTripComponent implements OnInit {
   onSubmit() {
     if (this.requestTripForm.valid) {
       const { origin, destination } = this.requestTripForm.value;
-      this.routeService.findBestRoute(origin, destination).subscribe({
+      this.tripService.requestTrip(origin, destination).subscribe({
         next: (response) => {
-          console.log(response);
+          this.router.navigate(['/dashboard/trips']);
         },
         error: (err) => {
-          console.error(err);
-        },
-      });
-      this.driverUbicationService.findNearestDriver(origin).subscribe({
-        next: (response) => {
-          this.nearestDrivers = response;
-        },
-        error: (err) => {
-          console.error(err);
+          alert(err.error.error.message);
         },
       });
     }
