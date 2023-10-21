@@ -33,6 +33,7 @@ export class UserService {
   setProfileData(token: string) {
     this.getUserProfile(token).subscribe((res) => {
       sessionStorage.setItem('user_data', JSON.stringify(res));
+      this.store.dispatch(UserActions.setUserData({ ...res }));
     });
   }
 
@@ -121,19 +122,30 @@ export class UserService {
   }
 
   getDriverVehicleInfo() {
-    const token = sessionStorage.getItem('access_token')
+    const token = sessionStorage.getItem('access_token');
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    const userId = sessionStorage.getItem('user_id')
-    return this.httpClient.get<Vehicle>(`${this.uri}/${userId}/vehicle`, {headers: headers}).subscribe({
-      next: (data) => {
-        this.store.dispatch(UserActions.setVehicle({vehicle: data}))
-        sessionStorage.setItem('driver_vehicle', JSON.stringify(data));
+    const userId = sessionStorage.getItem('user_id');
+    return this.httpClient
+      .get<Vehicle>(`${this.uri}/${userId}/vehicle`, { headers: headers })
+      .subscribe({
+        next: (data) => {
+          this.store.dispatch(UserActions.setVehicle({ vehicle: data }));
+          sessionStorage.setItem('driver_vehicle', JSON.stringify(data));
+        },
+        error: (error) => console.error('There was an error!', error),
+      });
+  }
 
+  uploadFile(form: any) {
+    const token = sessionStorage.getItem('access_token')!;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    this.httpClient.patch<any>(`${this.uri}/me`, form, { headers }).subscribe({
+      next: () => {
+        this.setProfileData(token);
       },
-      error: (error) => console.error('There was an error!', error),
-      
-    })
+    });
   }
 }

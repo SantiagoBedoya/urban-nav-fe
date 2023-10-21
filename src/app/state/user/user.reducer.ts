@@ -6,6 +6,8 @@ import { Vehicle } from 'src/app/protected/interfaces/vehicle.interface';
 export const userStateFeatureKey = 'userState';
 const userProfile = JSON.parse(sessionStorage.getItem('user_data')!);
 const driverVehicle = JSON.parse(sessionStorage.getItem('driver_vehicle')!);
+const testImgUrl =
+  'https://www.joseivanaguilar.com/wp-content/uploads/2021/03/mujer.jpg';
 
 export interface UserState {
   _id: string;
@@ -13,7 +15,7 @@ export interface UserState {
   email: string;
   firstName: string;
   lastName: string;
-  photo: string;
+  photoURL: string;
   roleId: string;
   vehicle?: Vehicle;
 }
@@ -24,9 +26,9 @@ const initialState: UserState = {
   email: userProfile?.email ?? '',
   firstName: userProfile?.firstName ?? '',
   lastName: userProfile?.lastName ?? '',
-  photo: userProfile?.lastName ?? '',
+  photoURL: userProfile?.photoURL ?? testImgUrl,
   roleId: userProfile?.roleId ?? '',
-  vehicle: driverVehicle ?? {}
+  vehicle: driverVehicle ?? {},
 };
 
 export const userReducer = createReducer(
@@ -42,6 +44,7 @@ export const userReducer = createReducer(
     email: action.email,
     contacts: action.contacts,
     roleId: action.roleId,
+    photoURL: action.photoURL ?? testImgUrl,
   })),
   on(UserActions.addContact, (currentState, action) => ({
     ...currentState,

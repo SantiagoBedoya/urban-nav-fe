@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { UserState, userStateFeatureKey } from './user.reducer';
-
 const userState = createFeatureSelector<UserState>(userStateFeatureKey);
 
 export const firstName = createSelector(
@@ -28,10 +27,10 @@ export const contacts = createSelector(
 
 export const id = createSelector(userState, (userState) => userState._id);
 
-// export const photo = createSelector(
-//   userState,
-//   (userState) => userState.photo
-// );
+export const photo = createSelector(
+  userState,
+  (userState) => userState.photoURL
+);
 
 export const roleId = createSelector(
   userState,
