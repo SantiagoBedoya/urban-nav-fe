@@ -47,6 +47,7 @@ export class EditProfileComponent implements OnInit {
   editProfile() {
     if (this.editProfileForm.valid) {
       this.userService.updateProfile(this.editProfileForm.value);
+      this.showModal = false
     } else {
       console.log('error');
     }

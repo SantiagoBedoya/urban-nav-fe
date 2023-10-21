@@ -99,7 +99,7 @@
             <h4 class="text-xl text-gray-900 font-bold">
               Vehicle Info
             </h4>
-            <app-edit-vehicle></app-edit-vehicle>
+            <app-edit-vehicle [actionType]="'update'"></app-edit-vehicle>
 
           </div>
           <ul class="mt-2 text-gray-700">
@@ -155,13 +155,12 @@
             <h4 class="text-xl text-gray-900 font-bold capitalize">
               Set your vehicle
             </h4>
-            <app-edit-vehicle [modalTitle]="'Added New Vehicle'" [icon]="addIcon"></app-edit-vehicle>
+            <app-edit-vehicle [modalTitle]="'Added New Vehicle'" [icon]="addIcon"
+              [actionType]="'create'"></app-edit-vehicle>
           </div>
 
         </div>
-
       </ng-template>
-
     </div>
   </div>
   <app-contacts *appRole="contactsPermission"></app-contacts>

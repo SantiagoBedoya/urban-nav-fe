@@ -14,8 +14,7 @@ import { UserSelectors } from 'src/app/state';
 export class EditVehicleComponent {
   @Input() modalTitle: string = 'Update Vehicle Info';
   @Input() icon: string = 'bi bi-pencil';
-  // @Output() closeModal = new EventEmitter<void>();
-  // @Output() onSubmit = new EventEmitter<any>();
+  @Input() actionType: 'create' | 'update' = 'create'; 
 
   editVehicleForm: FormGroup = new FormGroup({});
   showModal = false;
@@ -33,6 +32,7 @@ export class EditVehicleComponent {
   vehicle$: Observable<Vehicle | undefined> = this.store.select(
     UserSelectors.vehicle
   );
+
   ngOnInit(): void {
     this.vehicle$.subscribe((vehicle) => {
       this.editVehicleForm = this.fb.group({
@@ -50,11 +50,17 @@ export class EditVehicleComponent {
     });
   }
 
-  editVehicle() {
+  onSubmit() {
     if (this.editVehicleForm.valid) {
-      this.vehicleService.editVehicleInfo(this.editVehicleForm.value);
+      const formData = this.editVehicleForm.value;
+
+      if (this.actionType === 'create') {
+        this.vehicleService.createVehicle(formData); // Realiza la creación
+      } else if (this.actionType === 'update') {
+        this.vehicleService.editVehicleInfo(formData); // Realiza la actualización
+      }
       this.showModal = false;
-      //this.vehicleService.createVehicle(this.editVehicleForm.value)
     }
   }
+
 }
