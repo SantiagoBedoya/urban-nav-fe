@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { contact } from 'src/app/user/interface/contact.interface';
+import { contact } from 'src/app/protected/interfaces/contact.interface';
+import { Vehicle } from 'src/app/protected/interfaces/vehicle.interface';
 
 export const init = createAction('[validate-otp] Init');
 
@@ -11,7 +12,9 @@ export const setUserData = createAction(
     email: string;
     firstName: string;
     lastName: string;
+    //photo?: string ;
     roleId: string;
+    vehicle?: Vehicle
   }>()
 );
 
@@ -21,3 +24,19 @@ export const addContact = createAction(
     contact: contact;
   }>()
 );
+
+export const deleteContact = createAction(
+  '[user-service] deleteContact',
+  props<{
+    index: number;
+  }>()
+);
+
+export const updateProfileData = createAction(
+  '[user-service] Update Profile Data',
+  props<{ firstName: string; lastName: string }>()
+);
+
+export const setVehicle = createAction(
+  '[profile] setVehicle', props<{vehicle: Vehicle}>()
+)

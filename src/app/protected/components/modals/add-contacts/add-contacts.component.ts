@@ -1,8 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
-import { UserService } from 'src/app/user/services/user.service';
+import { UserService } from 'src/app/protected/services/user.service';
 
 @Component({
   selector: 'app-add-contacts',
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/user/services/user.service';
 })
 export class AddContactsComponent implements OnInit {
   addContactForm: FormGroup = new FormGroup({});
-  showAlert: boolean = false;
+  showModal = false;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -35,7 +35,6 @@ export class AddContactsComponent implements OnInit {
     });
   }
 
-  showModal = false;
   toggleModal() {
     this.showModal = !this.showModal;
   }

@@ -19,22 +19,26 @@ export const fullName = createSelector(
   (first, last) => `${first} ${last}`
 );
 
-export const email = createSelector(
-  userState,
-  (userState) => userState.email
-);
+export const email = createSelector(userState, (userState) => userState.email);
 
 export const contacts = createSelector(
   userState,
   (userState) => userState.contacts
 );
 
-export const id = createSelector(
-  userState,
-  (userState) => userState._id
-);
+export const id = createSelector(userState, (userState) => userState._id);
+
+// export const photo = createSelector(
+//   userState,
+//   (userState) => userState.photo
+// );
 
 export const roleId = createSelector(
   userState,
   (userState) => userState.roleId
+);
+
+export const vehicle = createSelector(
+  userState,
+  (userState) => userState.vehicle
 );

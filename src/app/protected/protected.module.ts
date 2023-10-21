@@ -10,6 +10,10 @@ import { ProfileComponent } from './components/dashboard/profile/profile.compone
 import { AddContactsComponent } from './components/modals/add-contacts/add-contacts.component';
 import { ContactsComponent } from './components/dashboard/profile/contacts/contacts.component';
 import { SharedModule } from '../shared/shared.module';
+import { EditProfileComponent } from './components/modals/edit-profile/edit-profile.component';
+import { RoleDirective } from '../directives/role.directive';
+import { EditVehicleComponent } from './components/modals/edit-vehicle/edit-vehicle.component';
+
 @NgModule({
   declarations: [
     RequestTripComponent,
@@ -19,12 +23,15 @@ import { SharedModule } from '../shared/shared.module';
     ProfileComponent,
     AddContactsComponent,
     ContactsComponent,
+    EditProfileComponent,
+    RoleDirective,
+    EditVehicleComponent,
   ],
   imports: [
     CommonModule,
     ProtectedRoutingModule,
     ReactiveFormsModule,
-    SharedModule,
+    SharedModule,  
   ],
 })
 export class ProtectedModule {}

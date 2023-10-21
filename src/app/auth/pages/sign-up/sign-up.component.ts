@@ -44,7 +44,7 @@ export class SignUpComponent implements OnInit {
     if (this.registerForm.valid) {
       const { firstName, lastName, email, password, userType } =
         this.registerForm.value;
-
+      console.log(userType)
       this.authService
         .signUp(
           firstName,
@@ -56,7 +56,7 @@ export class SignUpComponent implements OnInit {
         .subscribe({
           next: (data) => {
             this.registerForm.reset();
-
+            
             this.router.navigate(['/auth/two-fa']);
           },
           error: (error) => {

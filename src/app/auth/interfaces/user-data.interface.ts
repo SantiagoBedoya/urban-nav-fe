@@ -1,10 +1,10 @@
-import { contact } from "src/app/user/interface/contact.interface";
+import { contact } from 'src/app/protected/interfaces/contact.interface';
 
 export interface UserDataInterface {
-    _id: string;
-    contacts: contact[];
-    email: string;
-    firstName: string;
-    lastName: string;
-    roleId: string
+  _id: string;
+  contacts: contact[];
+  email: string;
+  firstName: string;
+  lastName: string;
+  roleId: string;
 }

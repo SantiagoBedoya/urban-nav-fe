@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthActions } from 'src/app/state';
 import { UserActions } from 'src/app/state';
 import { Store } from '@ngrx/store';
-import { UserService } from 'src/app/user/services/user.service';
+import { UserService } from 'src/app/protected/services/user.service';
 
 @Component({
   selector: 'app-validate-otp',
@@ -70,15 +70,15 @@ export class ValidateOtpComponent implements OnInit {
         const accessToken = data.accessToken;
 
         sessionStorage.setItem('access_token', accessToken);
-        
+
         this.userService.getUserProfile(accessToken).subscribe((res) => {
-          this.store.dispatch(UserActions.setUserData({...res}));
+          this.store.dispatch(UserActions.setUserData({ ...res }));
           sessionStorage.setItem('user_data', JSON.stringify(res));
         });
 
         this.store.dispatch(AuthActions.logIn({ isLogged: true }));
         sessionStorage.setItem('isLogged', 'true');
-        
+
         this.router.navigate([`/dashboard`]);
       },
       error: (err) => {

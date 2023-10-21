@@ -8,12 +8,11 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { RoleDirective } from './directives/role.directive';
 import { ProtectedModule } from './protected/protected.module';
 import { StoreModule } from '@ngrx/store';
 import { AuthModule } from './auth/auth.module';
 @NgModule({
-  declarations: [AppComponent, RoleDirective],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

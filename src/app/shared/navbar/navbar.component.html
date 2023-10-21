@@ -57,7 +57,6 @@
           </div>
 
           <ng-template #logged>
-
             <div class="flex justify-center items-center space-x-6">
               <button>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-bell-fill"
@@ -70,11 +69,11 @@
                 <div class="relative border-transparent">
                   <div class="flex justify-center items-center space-x-3 cursor-pointer" (click)="setVisible()">
                     <div class="w-12 h-12 rounded-full overflow-hidden border-2 dark:border-white border-gray-900">
-                      <img src="https://i.pinimg.com/564x/82/18/1f/82181f1d36fb0eaba87bf3ff8c1d54d0.jpg" alt=""
+                      <img src="https://www.joseivanaguilar.com/wp-content/uploads/2021/03/mujer.jpg" alt=""
                         class="w-full h-full object-cover">
                     </div>
                     <div class="font-semibold dark:text-white text-gray-900 text-lg">
-                      <div class="cursor-pointer">{{ firstname$ | async }}</div>
+                      <div class="cursor-pointer capitalize">{{ firstname$ | async }}</div>
                     </div>
                   </div>
                   <div [ngClass]="{'absolute': true, 'invisible': inVisible, 'w-60': true, 'px-5': true, 'py-3': true,
@@ -94,20 +93,6 @@
                           Account
                         </a>
                       </li>
-                      <li class="font-medium">
-                        <a href="#"
-                          class="cursor-pointer flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-indigo-700">
-                          <div class="mr-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                              class="bi bi-map-fill" viewBox="0 0 16 16">
-                              <path fill-rule="evenodd"
-                                d="M16 .5a.5.5 0 0 0-.598-.49L10.5.99 5.598.01a.5.5 0 0 0-.196 0l-5 1A.5.5 0 0 0 0 1.5v14a.5.5 0 0 0 .598.49l4.902-.98 4.902.98a.502.502 0 0 0 .196 0l5-1A.5.5 0 0 0 16 14.5V.5zM5 14.09V1.11l.5-.1.5.1v12.98l-.402-.08a.498.498 0 0 0-.196 0L5 14.09zm5 .8V1.91l.402.08a.5.5 0 0 0 .196 0L11 1.91v12.98l-.5.1-.5-.1z" />
-                            </svg>
-                          </div>
-                          History
-                        </a>
-                      </li>
-                      
                       <hr class="dark:border-gray-700">
                       <li class="font-medium">
                         <a (click)="logOut()"
