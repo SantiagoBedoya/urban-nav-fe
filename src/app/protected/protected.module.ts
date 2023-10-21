@@ -13,7 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { EditProfileComponent } from './components/modals/edit-profile/edit-profile.component';
 import { RoleDirective } from '../directives/role.directive';
 import { EditVehicleComponent } from './components/modals/edit-vehicle/edit-vehicle.component';
-
+import { UploadComponent } from './components/upload/upload.component';
 @NgModule({
   declarations: [
     RequestTripComponent,
@@ -26,6 +26,7 @@ import { EditVehicleComponent } from './components/modals/edit-vehicle/edit-vehi
     EditProfileComponent,
     RoleDirective,
     EditVehicleComponent,
+    UploadComponent,
   ],
   imports: [
     CommonModule,
