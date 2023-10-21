@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
   lastname$: Observable<string> = this.store.select(UserSelectors.lastName);
   fullName$: Observable<string> = this.store.select(UserSelectors.fullName);
   email$: Observable<string> = this.store.select(UserSelectors.email);
+  photo$: Observable<string> = this.store.select(UserSelectors.photo);
   vehicle$: Observable<Vehicle | undefined> = this.store.select(
     UserSelectors.vehicle
   );

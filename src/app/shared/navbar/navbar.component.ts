@@ -13,6 +13,7 @@ export class NavbarComponent {
 
   isLogged$: Observable<boolean> = this.store.select(AuthSelectors.isLogged);
   firstname$: Observable<string> = this.store.select(UserSelectors.firstName);
+  photo$: Observable<string> = this.store.select(UserSelectors.photo);
   inVisible: boolean = true;
 
   setVisible() {

@@ -71,10 +71,7 @@ export class ValidateOtpComponent implements OnInit {
 
         sessionStorage.setItem('access_token', accessToken);
 
-        this.userService.getUserProfile(accessToken).subscribe((res) => {
-          this.store.dispatch(UserActions.setUserData({ ...res }));
-          sessionStorage.setItem('user_data', JSON.stringify(res));
-        });
+        this.userService.setProfileData(accessToken);
 
         this.store.dispatch(AuthActions.logIn({ isLogged: true }));
         sessionStorage.setItem('isLogged', 'true');

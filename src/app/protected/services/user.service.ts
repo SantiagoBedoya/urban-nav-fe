@@ -33,6 +33,7 @@ export class UserService {
   setProfileData(token: string) {
     this.getUserProfile(token).subscribe((res) => {
       sessionStorage.setItem('user_data', JSON.stringify(res));
+      this.store.dispatch(UserActions.setUserData({ ...res }));
     });
   }
 
@@ -112,24 +113,18 @@ export class UserService {
 
   updateProfile(user: User) {
     const userId = sessionStorage.getItem('user_id')!;
-    const token = sessionStorage.getItem('access_token');
-    const headers = new HttpHeaders()
-      .set('content-type', 'application/json')
-      .set('Authorization', `Bearer ${token}`);
-    this.httpClient
-      .patch<any>(`${this.uri}/${userId}`, user, { headers: headers })
-      .subscribe({
-        next: () => {
-          const firstName = user.firstName;
-          const lastName = user.lastName;
-          this.store.dispatch(
-            UserActions.updateProfileData({ firstName, lastName })
-          );
-          const token = sessionStorage.getItem('access_token')!;
-          this.setProfileData(token);
-        },
-        error: (error) => console.error('There was an error!', error),
-      });
+    this.httpClient.patch<any>(`${this.uri}/${userId}`, user).subscribe({
+      next: () => {
+        const firstName = user.firstName;
+        const lastName = user.lastName;
+        this.store.dispatch(
+          UserActions.updateProfileData({ firstName, lastName })
+        );
+        const token = sessionStorage.getItem('access_token')!;
+        this.setProfileData(token);
+      },
+      error: (error) => console.error('There was an error!', error),
+    });
   }
 
   getDriverVehicleInfo() {
@@ -147,5 +142,16 @@ export class UserService {
         },
         error: (error) => console.error('There was an error!', error),
       });
+  }
+
+  uploadFile(form: any) {
+    const token = sessionStorage.getItem('access_token')!;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    this.httpClient.patch<any>(`${this.uri}/me`, form, { headers }).subscribe({
+      next: () => {
+        this.setProfileData(token);
+      },
+    });
   }
 }
