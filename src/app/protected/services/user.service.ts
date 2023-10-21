@@ -38,6 +38,10 @@ export class UserService {
 
   updateUserContacts(newContact: contact) {
     const userId = sessionStorage.getItem('user_id')!;
+    const token = sessionStorage.getItem('access_token');
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
     this.store
       .select(UserSelectors.contacts)
       .pipe(take(1))
@@ -57,7 +61,9 @@ export class UserService {
           items: items,
         };
         this.httpClient
-          .patch<any>(`${this.uri}/${userId}/contacts`, body)
+          .patch<contact>(`${this.uri}/${userId}/contacts`, body, {
+            headers: headers,
+          })
           .subscribe({
             next: (data) => {
               this.store.dispatch(
@@ -106,34 +112,40 @@ export class UserService {
 
   updateProfile(user: User) {
     const userId = sessionStorage.getItem('user_id')!;
-    this.httpClient.patch<any>(`${this.uri}/${userId}`, user).subscribe({
-      next: () => {
-        const firstName = user.firstName;
-        const lastName = user.lastName;
-        this.store.dispatch(
-          UserActions.updateProfileData({ firstName, lastName })
-        );
-        const token = sessionStorage.getItem('access_token')!;
-        this.setProfileData(token);
-      },
-      error: (error) => console.error('There was an error!', error),
-    });
-  }
-
-  getDriverVehicleInfo() {
-    const token = sessionStorage.getItem('access_token')
+    const token = sessionStorage.getItem('access_token');
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    const userId = sessionStorage.getItem('user_id')
-    return this.httpClient.get<Vehicle>(`${this.uri}/${userId}/vehicle`, {headers: headers}).subscribe({
-      next: (data) => {
-        this.store.dispatch(UserActions.setVehicle({vehicle: data}))
-        sessionStorage.setItem('driver_vehicle', JSON.stringify(data));
+    this.httpClient
+      .patch<any>(`${this.uri}/${userId}`, user, { headers: headers })
+      .subscribe({
+        next: () => {
+          const firstName = user.firstName;
+          const lastName = user.lastName;
+          this.store.dispatch(
+            UserActions.updateProfileData({ firstName, lastName })
+          );
+          const token = sessionStorage.getItem('access_token')!;
+          this.setProfileData(token);
+        },
+        error: (error) => console.error('There was an error!', error),
+      });
+  }
 
-      },
-      error: (error) => console.error('There was an error!', error),
-      
-    })
+  getDriverVehicleInfo() {
+    const token = sessionStorage.getItem('access_token');
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    const userId = sessionStorage.getItem('user_id');
+    return this.httpClient
+      .get<Vehicle>(`${this.uri}/${userId}/vehicle`, { headers: headers })
+      .subscribe({
+        next: (data) => {
+          this.store.dispatch(UserActions.setVehicle({ vehicle: data }));
+          sessionStorage.setItem('driver_vehicle', JSON.stringify(data));
+        },
+        error: (error) => console.error('There was an error!', error),
+      });
   }
 }
