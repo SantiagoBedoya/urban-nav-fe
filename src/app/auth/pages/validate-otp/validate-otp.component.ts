@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { AuthActions } from 'src/app/state';
+import { UserActions } from 'src/app/state';
 import { Store } from '@ngrx/store';
+import { UserService } from 'src/app/protected/services/user.service';
 
 @Component({
   selector: 'app-validate-otp',
@@ -20,18 +22,19 @@ export class ValidateOtpComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private userService: UserService,
     private router: Router,
     private store: Store
   ) {}
 
   ngOnInit(): void {
-    const isNewUser = localStorage.getItem('is_new_user')!;
+    const isNewUser = sessionStorage.getItem('is_new_user')!;
     this.isNewUser = isNewUser === 'true';
 
-    const email = localStorage.getItem('user_hidden_email')!;
+    const email = sessionStorage.getItem('user_hidden_email')!;
     this.email = email || '';
 
-    const secondAuthType = localStorage.getItem('second_auth_type')!;
+    const secondAuthType = sessionStorage.getItem('second_auth_type')!;
     this.second_auth_type = secondAuthType;
   }
 
@@ -59,16 +62,23 @@ export class ValidateOtpComponent implements OnInit {
   submitOpt() {
     const auth_type_to =
       this.second_auth_type === 'email' ? 'verify-email' : 'validate';
-    const userId = localStorage.getItem('user_id');
+    const userId = sessionStorage.getItem('user_id');
     const fullCode = this.opt;
 
     this.authService.validateOTP(auth_type_to, userId!, fullCode).subscribe({
       next: (data) => {
         const accessToken = data.accessToken;
 
-        localStorage.setItem('access_token', accessToken);
-        localStorage.setItem('isLogged', 'true');
+        sessionStorage.setItem('access_token', accessToken);
+
+        this.userService.getUserProfile(accessToken).subscribe((res) => {
+          this.store.dispatch(UserActions.setUserData({ ...res }));
+          sessionStorage.setItem('user_data', JSON.stringify(res));
+        });
+
         this.store.dispatch(AuthActions.logIn({ isLogged: true }));
+        sessionStorage.setItem('isLogged', 'true');
+
         this.router.navigate([`/dashboard`]);
       },
       error: (err) => {

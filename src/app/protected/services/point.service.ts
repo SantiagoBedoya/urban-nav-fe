@@ -14,7 +14,7 @@ export class PointService {
     console.log(this.uri);
     return this.httpClient.get<Point[]>(this.uri, {
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+        Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
       },
     });
   }

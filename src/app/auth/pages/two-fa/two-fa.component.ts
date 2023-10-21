@@ -11,13 +11,13 @@ export class TwoFaComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   googleAuth() {
-    const userId = localStorage.getItem('user_id');
+    const userId = sessionStorage.getItem('user_id');
     this.authService.googleOTPGenerate(userId!).subscribe({
       next: (data) => {
         const url = data.otpAuthURL;
-        localStorage.setItem('otp_url', url);
-        localStorage.setItem('is_new_user', 'true');
-        localStorage.setItem('second_auth_type', 'google');
+        sessionStorage.setItem('otp_url', url);
+        sessionStorage.setItem('is_new_user', 'true');
+        sessionStorage.setItem('second_auth_type', 'google');
 
         this.router.navigate(['/auth/validate-otp']);
       },
@@ -28,9 +28,9 @@ export class TwoFaComponent {
   }
 
   emailAuth() {
-    const userId = localStorage.getItem('user_id')!;
-    localStorage.setItem('is_new_user', 'false');
-    localStorage.setItem('second_auth_type', 'email');
+    const userId = sessionStorage.getItem('user_id')!;
+    sessionStorage.setItem('is_new_user', 'false');
+    sessionStorage.setItem('second_auth_type', 'email');
     this.authService.otpSendEmail(userId!).subscribe({
       next: () => {
         console.log('Email sent');

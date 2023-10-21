@@ -6,7 +6,7 @@ import { lastValueFrom } from 'rxjs';
 export const validateTokenGuard: CanActivateFn = async (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
-  const token = localStorage.getItem('access_token');
+  const token = sessionStorage.getItem('access_token');
   if (!token) {
     router.navigate(['']);
     return false;

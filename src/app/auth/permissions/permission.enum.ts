@@ -74,5 +74,8 @@ export enum Permissions {
     CreateDriverUbication,
     UpdateDriverUbication,
     DeleteDriverUbication,
+
+    // Contact
+    UseContacts
   }
   

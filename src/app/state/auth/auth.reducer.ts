@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { AuthActions } from '..';
 
 export const authStateFeatureKey = 'authState';
-const lgs = localStorage.getItem('isLogged');
+const lgs = sessionStorage.getItem('isLogged');
 const isLogged = lgs ? lgs === 'true' : false;
 
 export interface AuthState {
