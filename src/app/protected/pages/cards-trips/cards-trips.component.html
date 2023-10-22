@@ -1,35 +1,3 @@
-<div class="p-10 flex flex-col mb-3 bg-orange-100" *ngFor="let trip of trips">
-    <div class="max-w-full bg-white flex flex-col rounded overflow-hidden shadow-lg m-3">
-        <div class="flex flex-row justify-between items-baseline flex-nowrap bg-gray-100 p-2">
-            <div class="items-center flex flex-row">
-                <i class="bi bi-car-front"></i>
-                <h1 class="ml-2 uppercase font-bold text-gray-500">Start date</h1>
-                <p class="ml-2 font-normal text-gray-500">Wednesday 18 Aug</p>
-            </div>
-
-            <div class="flex">
-                <h1 class="ml-2 uppercase font-bold text-gray-500">End date</h1>
-                <p class="ml-2 font-normal text-gray-500">Wednesday 18 Aug</p>
-            </div>
-        </div>
-
-        <div class="mt-2 flex sm:flex-row mx-6 sm:justify-between flex-wrap">
-            <div class="flex flex-col p-2 text-center">
-                <p class="font-bold text-custom-black">Origin</p>
-                <p class="text-gray-500">Zimbabwe</p>
-            </div>
-            <div class="flex flex-col flex-wrap p-2 text-center">
-                <p class="font-bold text-custom-black">Destination</p>
-                <p class="text-gray-500">Zambia</p>
-            </div>
-            <div class="flex flex-col p-2 text-center">
-                <p class="font-bold text-custom-black">Me</p>
-                <p class="text-gray-500">Jorge Andres</p>
-            </div>
-            <div class="flex flex-col flex-wrap p-2 text-center">
-                <p class="font-bold text-custom-black">Driver</p>
-                <p class="text-gray-500">Carlos Jaramillo</p>
-            </div>
-        </div>
-    </div>
+<div *ngFor="let trip of trips">
+    <app-card-trip [trip]="trip"></app-card-trip>
 </div>

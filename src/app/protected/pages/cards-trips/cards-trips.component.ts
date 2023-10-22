@@ -18,7 +18,6 @@ export class CardsTripsComponent implements OnInit {
     this.tripsService.trips().subscribe({
       next: (data) => {
         this.trips = data;
-        console.log(data)
       }
     })
   }

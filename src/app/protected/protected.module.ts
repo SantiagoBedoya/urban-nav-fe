@@ -15,6 +15,8 @@ import { RoleDirective } from '../directives/role.directive';
 import { EditVehicleComponent } from './components/modals/edit-vehicle/edit-vehicle.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { CardTripComponent } from './components/card-trip/card-trip.component';
+import { VehicleComponent } from './components/vehicle/vehicle.component';
 @NgModule({
   declarations: [
     RequestTripComponent,
@@ -29,6 +31,8 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     EditVehicleComponent,
     UploadComponent,
     SideBarComponent,
+    CardTripComponent,
+    VehicleComponent,
   ],
   imports: [
     CommonModule,

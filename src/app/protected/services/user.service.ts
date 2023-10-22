@@ -154,4 +154,12 @@ export class UserService {
       },
     });
   }
+
+  getUser(id: string) {
+    const token = sessionStorage.getItem('access_token');
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient.get<User>(`${this.uri}/${id}`, { headers });
+  }
 }
