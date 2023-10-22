@@ -30,5 +30,5 @@ export class ProfileComponent implements OnInit {
   vehicle$: Observable<Vehicle | undefined> = this.store.select(
     UserSelectors.vehicle
   );
-  //photo$: Observable<string> = this.store.select(UserSelectors.photo);
+  
 }

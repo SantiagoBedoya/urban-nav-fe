@@ -5,8 +5,7 @@ import { RequestTripComponent } from './pages/request-trip/request-trip.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { NearestDriverCardComponent } from './components/nearest-driver-card/nearest-driver-card.component';
 import { RootComponent } from './pages/root/root.component';
-import { CardsTripsComponent } from './components/cards-trips/cards-trips.component';
-import { SideBarComponent } from './components/dashboard/side-bar/side-bar.component';
+import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { AddContactsComponent } from './components/modals/add-contacts/add-contacts.component';
 import { ContactsComponent } from './components/dashboard/profile/contacts/contacts.component';
@@ -15,11 +14,11 @@ import { EditProfileComponent } from './components/modals/edit-profile/edit-prof
 import { RoleDirective } from '../directives/role.directive';
 import { EditVehicleComponent } from './components/modals/edit-vehicle/edit-vehicle.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 @NgModule({
   declarations: [
     RequestTripComponent,
     NearestDriverCardComponent,
-    SideBarComponent,
     RootComponent,
     CardsTripsComponent,
     ProfileComponent,
@@ -29,12 +28,13 @@ import { UploadComponent } from './components/upload/upload.component';
     RoleDirective,
     EditVehicleComponent,
     UploadComponent,
+    SideBarComponent,
   ],
   imports: [
     CommonModule,
     ProtectedRoutingModule,
     ReactiveFormsModule,
-    SharedModule,  
+    SharedModule,
   ],
 })
 export class ProtectedModule {}
