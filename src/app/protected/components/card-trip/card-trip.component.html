@@ -1,0 +1,48 @@
+<div class=" flex flex-col mb-3">
+    <div class="max-w-full bg-white flex flex-col rounded overflow-hidden shadow-lg m-3">
+        <div class="flex flex-row justify-between items-baseline flex-nowrap bg-gray-100 p-2">
+            <div class="flex w-full flex-row justify-between items-baseline flex-nowrap"
+                *ngIf="trip?.startDate; else pending">
+
+                <div class="items-center flex flex-row mx-2">
+                    <i class="bi bi-car-front"></i>
+                    <h1 class="ml-2 uppercase font-bold text-gray-500">Start date</h1>
+                    <p class="ml-2 font-normal text-gray-500 capitalize">{{ getFormattedDates(trip?.startDate) }}</p>
+                </div>
+
+                <div class="flex mx-2">
+                    <h1 class="ml-2 uppercase font-bold text-gray-500">End date</h1>
+                    <p class="ml-2 font-normal text-gray-500 capitalize">{{ getFormattedDates(trip?.endDate) }}</p>
+                </div>
+            </div>
+            <ng-template #pending>
+                <div class="items-center flex flex-row">
+                    <i class="bi bi-car-front"></i>
+                    <h1 class="ml-2 uppercase tracking-wider font-bolder text-gray-500">Pending</h1>
+                </div>
+            </ng-template>
+        </div>
+
+        <div class="mt-2 flex sm:flex-row mx-6 sm:justify-between flex-wrap">
+            <div class="flex flex-col p-2 text-center">
+                <p class="font-bold text-custom-black">Origin</p>
+                <p class="text-gray-500">{{ getOrigin() }}</p>
+            </div>
+            <div class="flex flex-col flex-wrap p-2 text-center">
+                <p class="font-bold text-custom-black">Destination</p>
+                <p class="text-gray-500">{{ getDestination() }}</p>
+            </div>
+            <div class="flex flex-col p-2 text-center">
+                <p class="font-bold text-custom-black">Passenger</p>
+                <p class="text-gray-500">{{ client?.firstName }} {{ client?.lastName }}</p>
+            </div>
+            <div class="flex flex-col flex-wrap p-2 text-center">
+                <div class="flex justify-center items-center">
+                    <p class="font-bold text-custom-black">Driver</p>
+                    <app-popovers *ngIf="driver" [driverInfo]="driver"></app-popovers>
+                </div>
+                <p class="text-gray-500">{{ driver?.firstName }} {{ driver?.lastName }}</p>
+            </div>
+        </div>
+    </div>
+</div>

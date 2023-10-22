@@ -4,9 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
 import { Vehicle } from '../interfaces/vehicle.interface';
 import { UserActions, UserSelectors } from 'src/app/state';
-import { pipe, take } from 'rxjs';
-import { vehicle } from 'src/app/state/user/user.selectors';
-import { JsonPipe } from '@angular/common';
+import { take } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -51,11 +49,12 @@ export class vehicleService {
 
   createVehicle(newVehicle: Vehicle) {
     const token = sessionStorage.getItem('access_token');
-    const userId = sessionStorage.getItem('user_id')
+    const userId = sessionStorage.getItem('user_id');
 
     const fullVehicle = {
-      ...newVehicle, userId
-    }
+      ...newVehicle,
+      userId,
+    };
 
     const options = {
       headers: new HttpHeaders({
@@ -77,5 +76,17 @@ export class vehicleService {
           sessionStorage.setItem('driver_vehicle', JSON.stringify(data));
         },
       });
+  }
+
+  getVehicleInfo(vehicleId: string) {
+    const token = sessionStorage.getItem('access_token');
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${token}`),
+    };
+    return this.httpClient.get<Vehicle>(`${this.uri}/${vehicleId}`, headers);
   }
 }

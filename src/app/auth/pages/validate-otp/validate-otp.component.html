@@ -15,7 +15,8 @@
           <p>Code Verification</p>
         </div>
         <div class="flex flex-row text-sm font-medium text-gray-400">
-          <p>We have sent a code to your email {{ email }}.</p>
+          <p *ngIf="second_auth_type === 'email'; else google">We have sent a code to your email {{ email }}.</p>
+          <ng-template #google>Check google authenticator to get code.</ng-template>
         </div>
       </div>
 
