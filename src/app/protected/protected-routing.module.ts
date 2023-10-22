@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { RequestTripComponent } from './pages/request-trip/request-trip.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
+import { RequestTripComponent } from './pages/request-trip/request-trip.component';
+import { RootComponent } from './pages/root/root.component';
 
 const routes: Routes = [
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: '',
+    component: RootComponent,
     children: [
       {
         path: 'trips/request',
@@ -15,7 +15,11 @@ const routes: Routes = [
       },
       {
         path: 'me',
-        component: ProfileComponent,
+        component: ProfileComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'trips/request',
       },
     ],
   },

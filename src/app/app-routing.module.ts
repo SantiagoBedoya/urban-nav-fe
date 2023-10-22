@@ -11,16 +11,17 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./public/public.module').then((m) => m.PublicModule),
+    canActivate: [validateTokenGuard],
   },
   {
-    path: 'app',
+    path: 'dashboard',
     loadChildren: () =>
       import('./protected/protected.module').then((m) => m.ProtectedModule),
     canActivate: [validateTokenGuard],
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'auth',
   },
 ];
 
