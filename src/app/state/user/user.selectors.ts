@@ -32,11 +32,6 @@ export const photo = createSelector(
   (userState) => userState.photoURL
 );
 
-export const roleId = createSelector(
-  userState,
-  (userState) => userState.roleId
-);
-
 export const vehicle = createSelector(
   userState,
   (userState) => userState.vehicle

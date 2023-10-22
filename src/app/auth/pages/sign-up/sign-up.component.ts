@@ -44,7 +44,6 @@ export class SignUpComponent implements OnInit {
     if (this.registerForm.valid) {
       const { firstName, lastName, email, password, userType } =
         this.registerForm.value;
-      console.log(userType)
       this.authService
         .signUp(
           firstName,
