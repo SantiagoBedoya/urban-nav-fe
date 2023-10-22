@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { userRole } from '../interfaces/user-role.interface';
 import { environment } from 'src/environments/environment';
 import { HttpHeaders } from '@angular/common/http';
 import { UserDataInterface } from 'src/app/auth/interfaces/user-data.interface';
@@ -28,7 +27,6 @@ export class UserService {
 
   setProfileData(token: string) {
     this.getUserProfile(token).subscribe((res) => {
-      console.log(res);
       sessionStorage.setItem(
         'permissions',
         JSON.stringify(res.role.permissions)
@@ -204,5 +202,15 @@ export class UserService {
       .set('content-type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient.get<User>(`${this.uri}/${id}`, { headers });
+  }
+
+  getVehicleInfo(driverId: string) {
+    const token = sessionStorage.getItem('access_token');
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+
+    return this.httpClient.get<User>(`${this.uri}/${driverId}/vehicle`, { headers });
+
   }
 }

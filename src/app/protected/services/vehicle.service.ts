@@ -27,7 +27,7 @@ export class vehicleService {
       .select(UserSelectors.vehicle)
       .pipe(take(1))
       .subscribe((vehicle) => {
-        console.log(newVehicle);
+        (newVehicle);
         this.httpClient
           .patch<Vehicle>(`${this.uri}/${vehicle?._id}`, newVehicle, options)
           .subscribe({

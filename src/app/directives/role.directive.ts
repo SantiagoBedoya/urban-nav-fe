@@ -19,7 +19,6 @@ export class RoleDirective {
 
   @Input()
   set appRole(val: number) {
-    console.log(val);
     this.permission = val;
     this.updateView();
   }

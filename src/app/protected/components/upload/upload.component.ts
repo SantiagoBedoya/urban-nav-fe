@@ -21,15 +21,6 @@ export class UploadComponent {
   }
 
   uploadFile(): any {
-    // try {
-    //   const form = new FormData();
-    //   form.append('file', this.files[0]);
-    //   this.userService.uploadFile(form).subscribe(res => {
-    //     console.log(res)
-    //   });
-    // } catch (err) {
-    //   console.error(err);
-    // }
     if (this.file) {
       const form = new FormData();
       form.append('file', this.file);

@@ -1,6 +1,6 @@
 export interface User {
   firstName: string;
   lastName: string;
-  email: string;
-  vehicleId?: string;
+  email: string
+  photoURL: string;
 }

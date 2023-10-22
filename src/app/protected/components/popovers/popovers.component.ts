@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { vehicleService } from '../../services/vehicle.service';
+import { Component, Input} from '@angular/core';
+import { Vehicle } from '../../interfaces/vehicle.interface';
 import { User } from '../../interfaces/user.inferface';
 
 @Component({
@@ -7,30 +7,17 @@ import { User } from '../../interfaces/user.inferface';
   templateUrl: './popovers.component.html',
   styleUrls: ['./popovers.component.css'],
 })
-export class PopoversComponent implements OnInit {
+export class PopoversComponent {
+  @Input() driverInfo: User  | undefined = undefined;
+  @Input() vehicleId: Vehicle | undefined = undefined;
 
-  @Input() driverInfo: User | undefined = undefined;
-  vehicleId: any = {};
-  showInfo: boolean = false;
-  ngOnInit(): void {
-    this.getVehicleInfo();
-  }
+  showInfo: string = 'hidden';
+
   toggleButton() {
-    this.showInfo = !this.showInfo;
-  }
-
-  getVehicleInfo(): any {
-    console.log(this.driverInfo)
-    const vehicleId = this.driverInfo?.vehicleId;
-
-    console.log(vehicleId);
-    // if (vehicleId) {
-    //   this.vehicleService.getVehicleInfo(vehicleId).subscribe({
-    //     next: (data) => {
-    //       this.vehicle = data;
-    //     },
-    //     error: (error) => console.error('There was an error!', error),
-    //   });
-    // }
+    if (this.showInfo) {
+      this.showInfo = '';
+    } else {
+      this.showInfo = 'hidden';
+    }
   }
 }
