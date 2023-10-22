@@ -3,7 +3,7 @@ import { Vehicle } from '../../interfaces/vehicle.interface';
 import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { UserSelectors } from 'src/app/state';
+import { UserActions, UserSelectors } from 'src/app/state';
 
 @Component({
   selector: 'app-vehicle',
@@ -17,7 +17,13 @@ export class VehicleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getDriverVehicleInfo();
+    this.userService.getDriverVehicleInfo('').subscribe({
+      next: (data) => {
+        this.store.dispatch(UserActions.setVehicle({ vehicle: data }));
+        sessionStorage.setItem('driver_vehicle', JSON.stringify(data));
+      },
+      error: (error) => console.error('There was an error!', error),
+    });
   }
 
   vehicle$: Observable<Vehicle | undefined> = this.store.select(

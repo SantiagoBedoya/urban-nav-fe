@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
 import { RootComponent } from './pages/root/root.component';
 import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
-import { RequestTripComponent } from './pages/request-trip/request-trip.component';
 
 const routes: Routes = [
   {
@@ -11,12 +11,12 @@ const routes: Routes = [
     component: RootComponent,
     children: [
       {
-        path: 'trips/request',
-        component: RequestTripComponent,
+        path: 'home',
+        component: HomeComponent
       },
       {
         path: 'me',
-        component: ProfileComponent,
+        component: ProfileComponent
       },
       {
         path: 'trips',
@@ -24,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'trips/request',
+        redirectTo: 'home',
       },
     ],
   },
@@ -34,4 +34,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ProtectedRoutingModule {}
+export class ProtectedRoutingModule { }

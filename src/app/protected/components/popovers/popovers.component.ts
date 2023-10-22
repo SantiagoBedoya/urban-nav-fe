@@ -1,6 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { Vehicle } from '../../interfaces/vehicle.interface';
-import { NearestDriver } from '../../interfaces/driver.interface';
+import { User } from '../../interfaces/user.inferface';
 
 @Component({
   selector: 'app-popovers',
@@ -8,7 +8,7 @@ import { NearestDriver } from '../../interfaces/driver.interface';
   styleUrls: ['./popovers.component.css'],
 })
 export class PopoversComponent {
-  @Input() driverInfo:   | undefined = undefined;
+  @Input() driverInfo: User  | undefined = undefined;
   @Input() vehicleId: Vehicle | undefined = undefined;
 
   showInfo: string = 'hidden';

@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { userRole } from '../interfaces/user-role.interface';
 import { environment } from 'src/environments/environment';
 import { HttpHeaders } from '@angular/common/http';
 import { UserDataInterface } from 'src/app/auth/interfaces/user-data.interface';
@@ -17,10 +16,6 @@ export class UserService {
   private uri = environment.baseURL + '/users';
   constructor(private readonly httpClient: HttpClient, private store: Store) {}
 
-  getUserPermissions(userId: string) {
-    return this.httpClient.get<userRole>(`${this.uri}/${userId}/role`);
-  }
-
   getUserProfile(token: string) {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
@@ -32,6 +27,11 @@ export class UserService {
 
   setProfileData(token: string) {
     this.getUserProfile(token).subscribe((res) => {
+      sessionStorage.setItem(
+        'permissions',
+        JSON.stringify(res.role.permissions)
+      );
+      sessionStorage.setItem('role_name', res.role.name);
       sessionStorage.setItem('user_data', JSON.stringify(res));
       this.store.dispatch(UserActions.setUserData({ ...res }));
     });
@@ -174,21 +174,15 @@ export class UserService {
     });
   }
 
-  getDriverVehicleInfo() {
+  getDriverVehicleInfo(driver_id: string) {
     const token = sessionStorage.getItem('access_token');
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    const userId = sessionStorage.getItem('user_id');
-    return this.httpClient
-      .get<Vehicle>(`${this.uri}/${userId}/vehicle`, { headers: headers })
-      .subscribe({
-        next: (data) => {
-          this.store.dispatch(UserActions.setVehicle({ vehicle: data }));
-          sessionStorage.setItem('driver_vehicle', JSON.stringify(data));
-        },
-        error: (error) => console.error('There was an error!', error),
-      });
+    const userId = driver_id || sessionStorage.getItem('user_id');
+    return this.httpClient.get<Vehicle>(`${this.uri}/${userId}/vehicle`, {
+      headers: headers,
+    });
   }
 
   uploadFile(form: any) {
