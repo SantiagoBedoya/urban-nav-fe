@@ -15,7 +15,7 @@ import { Vehicle } from '../interfaces/vehicle.interface';
 })
 export class UserService {
   private uri = environment.baseURL + '/users';
-  constructor(private readonly httpClient: HttpClient, private store: Store) { }
+  constructor(private readonly httpClient: HttpClient, private store: Store) {}
 
   getUserPermissions(userId: string) {
     return this.httpClient.get<userRole>(`${this.uri}/${userId}/role`);
@@ -97,7 +97,7 @@ export class UserService {
           items: items,
         };
         this.httpClient
-          .patch<any>(`${this.uri}/${userId}/contacts`, body, {headers})
+          .patch<any>(`${this.uri}/${userId}/contacts`, body, { headers })
           .subscribe({
             next: (data) => {
               this.store.dispatch(
@@ -133,7 +133,7 @@ export class UserService {
           newUserContacts = [...contacts];
         }
 
-        newUserContacts[index] = updatedContact
+        newUserContacts[index] = updatedContact;
 
         const items = [...newUserContacts];
         const body = {
@@ -208,5 +208,15 @@ export class UserService {
       .set('content-type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient.get<User>(`${this.uri}/${id}`, { headers });
+  }
+
+  getVehicleInfo(driverId: string) {
+    const token = sessionStorage.getItem('access_token');
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+
+    return this.httpClient.get<User>(`${this.uri}/${driverId}/vehicle`, { headers });
+
   }
 }
