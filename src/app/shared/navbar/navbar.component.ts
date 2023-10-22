@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { AuthActions, AuthSelectors } from 'src/app/state';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { NotificationsModalComponent } from 'src/app/protected/components/notifications-modal/notifications-modal.component';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -10,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   constructor(private store: Store, private router: Router) {}
+
+  isModalOpen: boolean = false; 
 
   isLogged$: Observable<boolean> = this.store.select(AuthSelectors.isLogged);
   inVisible: boolean = true;
@@ -24,4 +27,11 @@ export class NavbarComponent {
     this.router.navigate([`/sign-in`]);
     this.store.dispatch(AuthActions.logOut({ isLogged: false }));
   }
+
+  toggleModal() {
+    this.isModalOpen = !this.isModalOpen;
+    console.log("si entro ")
+    console.log(this.isModalOpen)
+  }
+
 }

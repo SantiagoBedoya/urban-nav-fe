@@ -9,7 +9,7 @@ import { AlertComponent } from './alert/alert.component';
 @NgModule({
   declarations: [
     NavbarComponent,
-    AlertComponent
+    AlertComponent,
   ],
   imports: [
     CommonModule,
