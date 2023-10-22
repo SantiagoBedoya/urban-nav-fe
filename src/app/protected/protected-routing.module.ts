@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { RequestTripComponent } from './pages/request-trip/request-trip.component';
 import { RootComponent } from './pages/root/root.component';
-import { NotificationsModalComponent } from './components/notifications-modal/notifications-modal.component';
 import { SeeCommentsComponent } from './pages/see-comments/see-comments.component';
 
 const routes: Routes = [
@@ -19,8 +19,8 @@ const routes: Routes = [
         component: SeeCommentsComponent,
       },
       {
-        path: 'notifications-modal',
-        component: NotificationsModalComponent,
+        path: 'me',
+        component: ProfileComponent
       },
       {
         path: '**',
@@ -34,4 +34,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ProtectedRoutingModule {}
+export class ProtectedRoutingModule { }

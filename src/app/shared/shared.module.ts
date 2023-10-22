@@ -5,8 +5,6 @@ import { RouterModule } from '@angular/router';
 import { AlertComponent } from './alert/alert.component';
 import { ProtectedModule } from '../protected/protected.module';
 
-
-
 @NgModule({
   declarations: [
     NavbarComponent,

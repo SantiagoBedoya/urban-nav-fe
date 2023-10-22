@@ -44,7 +44,7 @@ export class SignUpComponent implements OnInit {
     if (this.registerForm.valid) {
       const { firstName, lastName, email, password, userType } =
         this.registerForm.value;
-
+      console.log(userType)
       this.authService
         .signUp(
           firstName,
@@ -55,15 +55,8 @@ export class SignUpComponent implements OnInit {
         )
         .subscribe({
           next: (data) => {
-            const userId = data._id;
-
-            localStorage.setItem('user_id', userId);
-            const splitted = email.split('@')
-            const emailDomain = splitted[1]
-            const letters = splitted[0].slice(0,3)
-            localStorage.setItem('user_hidden_email', `${letters}**@${emailDomain}`)
             this.registerForm.reset();
-
+            
             this.router.navigate(['/auth/two-fa']);
           },
           error: (error) => {

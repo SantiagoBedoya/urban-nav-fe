@@ -15,7 +15,7 @@ export class SignInComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
     private readonly router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -30,13 +30,18 @@ export class SignInComponent implements OnInit {
       this.authService.signIn(email, password).subscribe({
         next: (data) => {
           const userId = data.userId;
-          localStorage.setItem('user_id', userId);
+          sessionStorage.setItem('user_id', userId);
+          
+          const splitted = email.split('@')
+          const emailDomain = splitted[1]
+          const letters = splitted[0].slice(0, 3)
+          sessionStorage.setItem('user_hidden_email', `${letters}**@${emailDomain}`)
 
           this.wrongCredentials = false;
           this.loginForm.reset();
 
           if (data.has2fa) {
-            localStorage.setItem('is_new_user', 'false');
+            sessionStorage.setItem('is_new_user', 'false');
 
             this.router.navigate([`/auth/validate-otp`]);
           } else {

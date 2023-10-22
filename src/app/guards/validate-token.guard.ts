@@ -6,7 +6,7 @@ import { lastValueFrom } from 'rxjs';
 export const validateTokenGuard: CanActivateFn = async (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
-  const token = localStorage.getItem('access_token');
+  const token = sessionStorage.getItem('access_token');
   if (!token) {
     if (route.url.length == 0) {
       return true;
@@ -21,7 +21,7 @@ export const validateTokenGuard: CanActivateFn = async (route, state) => {
     }
     return true;
   } catch (err) {
-    localStorage.removeItem('access_token');
+    sessionStorage.removeItem('access_token');
     router.navigate(['']);
     return false;
   }

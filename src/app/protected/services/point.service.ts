@@ -13,7 +13,7 @@ export class PointService {
   getAll() {
     return this.httpClient.get<Point[]>(this.uri, {
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+        Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
       },
     });
   }
@@ -27,7 +27,7 @@ export class PointService {
       },
       {
         headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+          Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
         },
       }
     );

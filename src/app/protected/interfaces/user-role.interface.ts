@@ -1,4 +1,4 @@
-export interface userPermissions {
+export interface userRole {
     _id: string;
     name: string;
     description: string;

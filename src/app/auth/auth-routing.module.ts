@@ -19,6 +19,7 @@ const routes: Routes = [
       { path: 'two-fa', component: TwoFaComponent },
       { path: 'validate-otp', component: ValidateOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
+      { path: '**', redirectTo: 'sign-in' }
     ],
   },
 ];
