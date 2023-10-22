@@ -15,7 +15,7 @@ import { Vehicle } from '../interfaces/vehicle.interface';
 })
 export class UserService {
   private uri = environment.baseURL + '/users';
-  constructor(private readonly httpClient: HttpClient, private store: Store) {}
+  constructor(private readonly httpClient: HttpClient, private store: Store) { }
 
   getUserPermissions(userId: string) {
     return this.httpClient.get<userRole>(`${this.uri}/${userId}/role`);
@@ -82,6 +82,10 @@ export class UserService {
 
   deleteContact(contactIndex: number) {
     const userId = sessionStorage.getItem('user_id')!;
+    const token = sessionStorage.getItem('access_token')!;
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
     this.store
       .select(UserSelectors.contacts)
       .pipe(take(1))
@@ -93,7 +97,7 @@ export class UserService {
           items: items,
         };
         this.httpClient
-          .patch<any>(`${this.uri}/${userId}/contacts`, body)
+          .patch<any>(`${this.uri}/${userId}/contacts`, body, {headers})
           .subscribe({
             next: (data) => {
               this.store.dispatch(
@@ -109,7 +113,50 @@ export class UserService {
       });
   }
 
-  updateContact(updatedContact: contact) {}
+  updateContact(updatedContact: contact, index: number) {
+    const userId = sessionStorage.getItem('user_id')!;
+    const token = sessionStorage.getItem('access_token');
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    this.store
+      .select(UserSelectors.contacts)
+      .pipe(take(1))
+      .subscribe((contacts) => {
+        let newUserContacts: contact[] = [];
+        if (updatedContact.isPrimary) {
+          newUserContacts = contacts.map((ct) => ({
+            ...ct,
+            isPrimary: ct.isPrimary ? false : ct.isPrimary,
+          }));
+        } else {
+          newUserContacts = [...contacts];
+        }
+
+        newUserContacts[index] = updatedContact
+
+        const items = [...newUserContacts];
+        const body = {
+          items: items,
+        };
+        this.httpClient
+          .patch<contact>(`${this.uri}/${userId}/contacts`, body, {
+            headers: headers,
+          })
+          .subscribe({
+            next: (data) => {
+              this.store.dispatch(
+                UserActions.setContacts({ contacts: newUserContacts })
+              );
+              const token = sessionStorage.getItem('access_token')!;
+              this.setProfileData(token);
+            },
+            error: (error) => {
+              console.error('There was an error!', error);
+            },
+          });
+      });
+  }
 
   updateProfile(user: User) {
     const userId = sessionStorage.getItem('user_id')!;

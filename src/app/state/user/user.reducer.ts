@@ -66,5 +66,9 @@ export const userReducer = createReducer(
   on(UserActions.setVehicle, (currentState, action) => ({
     ...currentState,
     vehicle: action.vehicle,
+  })),
+  on(UserActions.setContacts, (currentState, action) => ({
+    ...currentState,
+    contacts: [...action.contacts]
   }))
 );
