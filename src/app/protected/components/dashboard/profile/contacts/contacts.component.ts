@@ -15,6 +15,7 @@ import { UserService } from 'src/app/protected/services/user.service';
 export class ContactsComponent implements OnInit {
   showModal = false;
   addContactForm: FormGroup = new FormGroup({});
+  index: number = 0;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -40,21 +41,22 @@ export class ContactsComponent implements OnInit {
 
   contacts$: Observable<contact[]> = this.store.select(UserSelectors.contacts);
 
-  editContact(contact: contact) {
+  editContact(contact: contact, i: number) {
     this.showModal = !this.showModal;
-    this.editContactsForms;
     this.addContactForm.patchValue({
       name: contact.name,
       email: contact.email,
       phone: contact.phone,
       isPrimary: contact.isPrimary,
     });
+
+    this.index = i;
   }
 
   editContactsForms() {
     if (this.addContactForm.valid) {
-      this.userService.updateContact(this.addContactForm.value);
-      this.addContactForm.reset();
+      this.userService.updateContact(this.addContactForm.value, this.index);
+      this.showModal = false;
     } else {
       console.log('error', this.addContactForm.valid);
     }

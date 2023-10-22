@@ -1,5 +1,5 @@
 
-<div class="p-10 flex flex-col mb-3">
+<div class=" flex flex-col mb-3">
     <div class="max-w-full bg-white flex flex-col rounded overflow-hidden shadow-lg m-3">
         <div class="flex flex-row justify-between items-baseline flex-nowrap bg-gray-100 p-2">
             <div class="flex w-full flex-row justify-between items-baseline flex-nowrap" *ngIf="trip?.startDate; else pending">
@@ -7,12 +7,12 @@
                 <div class="items-center flex flex-row mx-2">
                     <i class="bi bi-car-front"></i>
                     <h1 class="ml-2 uppercase font-bold text-gray-500">Start date</h1>
-                    <p class="ml-2 font-normal text-gray-500">{{ getFormattedDates(trip?.startDate) }}</p>
+                    <p class="ml-2 font-normal text-gray-500 capitalize">{{ getFormattedDates(trip?.startDate) }}</p>
                 </div>
     
                 <div class="flex mx-2">
                     <h1 class="ml-2 uppercase font-bold text-gray-500">End date</h1>
-                    <p class="ml-2 font-normal text-gray-500">{{ getFormattedDates(trip?.endDate) }}</p>
+                    <p class="ml-2 font-normal text-gray-500 capitalize">{{ getFormattedDates(trip?.endDate) }}</p>
                 </div>
             </div>
             <ng-template #pending>

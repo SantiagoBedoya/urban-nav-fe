@@ -11,11 +11,25 @@ export class PointService {
   constructor(private httpClient: HttpClient) {}
 
   getAll() {
-    console.log(this.uri);
     return this.httpClient.get<Point[]>(this.uri, {
       headers: {
         Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
       },
     });
+  }
+
+  findBestRoute(origin: string, destination: string) {
+    return this.httpClient.post(
+      this.uri + '/best-route',
+      {
+        origin,
+        destination,
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+        },
+      }
+    );
   }
 }

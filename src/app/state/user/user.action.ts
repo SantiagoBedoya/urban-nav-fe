@@ -25,6 +25,13 @@ export const addContact = createAction(
   }>()
 );
 
+export const setContacts = createAction(
+  '[user-service] setContact',
+  props<{
+    contacts: contact[];
+  }>()
+);
+
 export const deleteContact = createAction(
   '[user-service] deleteContact',
   props<{

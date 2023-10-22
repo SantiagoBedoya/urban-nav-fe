@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RootComponent } from './pages/root/root.component';
-import { RequestTripComponent } from './pages/request-trip/request-trip.component';
-import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
+import { ProfileComponent } from './components/dashboard/profile/profile.component';
+import { RequestTripComponent } from './pages/request-trip/request-trip.component';
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: '',
     component: RootComponent,
     children: [
       {
-        path: '',
+        path: 'trips/request',
         component: RequestTripComponent,
       },
       {
@@ -21,6 +21,10 @@ const routes: Routes = [
       {
         path: 'trips',
         component: CardsTripsComponent,
+      },
+      {
+        path: '**',
+        redirectTo: 'trips/request',
       },
     ],
   },
