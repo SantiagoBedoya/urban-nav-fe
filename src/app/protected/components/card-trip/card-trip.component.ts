@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Trip } from '../../interfaces/trip.interface';
 import { UserService } from '../../services/user.service';
-import { User } from '../../interfaces/user.inferface';
+import { vehicleService } from '../../services/vehicle.service';
 
 @Component({
   selector: 'app-card-trip',
@@ -13,7 +13,7 @@ export class CardTripComponent implements OnInit {
   client: any = {};
   driver: any = {};
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private vehicleService: vehicleService ) {}
 
   ngOnInit(): void {
     this.getDriver();
@@ -40,7 +40,7 @@ export class CardTripComponent implements OnInit {
     if (driverId) {
       this.userService.getUser(driverId).subscribe({
         next: (data) => {
-          this.driver = data;
+          return  this.driver = data;
         },
         error: (error) => console.error('There was an error!', error),
       });
@@ -52,9 +52,11 @@ export class CardTripComponent implements OnInit {
     console.log(clientId);
     this.userService.getUser(clientId).subscribe({
       next: (data) => {
-        this.client = data;
+        return this.client = data;
       },
       error: (error) => console.error('There was an error!', error),
     });
   }
+
+
 }

@@ -17,6 +17,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { CardTripComponent } from './components/card-trip/card-trip.component';
 import { VehicleComponent } from './components/vehicle/vehicle.component';
 import { RootComponent } from './pages/root/root.component';
+import { PopoversComponent } from './components/popovers/popovers.component';
 @NgModule({
   declarations: [
     RequestTripComponent,
@@ -34,7 +35,8 @@ import { RootComponent } from './pages/root/root.component';
     SideBarComponent,
     CardTripComponent,
     VehicleComponent,
-    RootComponent
+    RootComponent,
+    PopoversComponent
   ],
   imports: [
     CommonModule,
