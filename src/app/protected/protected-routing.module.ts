@@ -7,12 +7,16 @@ import { SeeCommentsComponent } from './pages/see-comments/see-comments.componen
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: '',
     component: RootComponent,
     children: [
       {
-        path: '',
+        path: 'trips/request',
         component: RequestTripComponent,
+      },
+      {
+        path: '**',
+        redirectTo: 'trips/request',
       },
     ],
   },

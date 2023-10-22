@@ -9,9 +9,9 @@ export class TripService {
   private uri = environment.baseURL + '/trips';
   constructor(private httpClient: HttpClient) {}
 
-  request(origin: string, destination: string) {
+  requestTrip(origin: string, destination: string) {
     return this.httpClient.post(
-      this.uri,
+      this.uri + '/request',
       { origin, destination },
       {
         headers: {
