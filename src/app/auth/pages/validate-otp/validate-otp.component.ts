@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { AuthActions } from 'src/app/state';
-import { UserActions } from 'src/app/state';
 import { Store } from '@ngrx/store';
 import { UserService } from 'src/app/protected/services/user.service';
 

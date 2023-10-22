@@ -19,6 +19,7 @@ import { VehicleComponent } from './components/vehicle/vehicle.component';
 import { RootComponent } from './pages/root/root.component';
 import { PopoversComponent } from './components/popovers/popovers.component';
 import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
+import { PanicComponent } from './components/panic/panic.component';
 @NgModule({
   declarations: [
     RequestTripComponent,
@@ -38,7 +39,8 @@ import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
     CardTripComponent,
     VehicleComponent,
     RootComponent,
-    PopoversComponent
+    PopoversComponent,
+    PanicComponent
   ],
   imports: [
     CommonModule,

@@ -16,7 +16,6 @@ export interface UserState {
   firstName: string;
   lastName: string;
   photoURL: string;
-  roleId: string;
   vehicle?: Vehicle;
 }
 
@@ -27,7 +26,6 @@ const initialState: UserState = {
   firstName: userProfile?.firstName ?? '',
   lastName: userProfile?.lastName ?? '',
   photoURL: userProfile?.photoURL ?? testImgUrl,
-  roleId: userProfile?.roleId ?? '',
   vehicle: driverVehicle ?? {},
 };
 
@@ -43,7 +41,6 @@ export const userReducer = createReducer(
     lastName: action.lastName,
     email: action.email,
     contacts: action.contacts,
-    roleId: action.roleId,
     photoURL: action.photoURL ?? testImgUrl,
   })),
   on(UserActions.addContact, (currentState, action) => ({

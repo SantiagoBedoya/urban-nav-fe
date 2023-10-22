@@ -49,7 +49,6 @@ export class CardTripComponent implements OnInit {
 
   getPassenger() {
     const clientId = this.trip?.clientId!;
-    console.log(clientId);
     this.userService.getUser(clientId).subscribe({
       next: (data) => {
         return this.client = data;

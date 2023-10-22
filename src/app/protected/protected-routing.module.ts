@@ -11,16 +11,12 @@ const routes: Routes = [
     component: RootComponent,
     children: [
       {
-        path: 'me',
-        component: ProfileComponent
-      },
-      {
         path: 'home',
         component: HomeComponent
       },
       {
-        path: '**',
-        redirectTo: 'home',
+        path: 'me',
+        component: ProfileComponent
       },
       {
         path: 'trips',
@@ -28,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'trips/request',
+        redirectTo: 'home',
       },
     ],
   },

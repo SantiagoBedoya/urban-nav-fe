@@ -15,11 +15,7 @@ import { Vehicle } from '../interfaces/vehicle.interface';
 })
 export class UserService {
   private uri = environment.baseURL + '/users';
-  constructor(private readonly httpClient: HttpClient, private store: Store) { }
-
-  getUserPermissions(userId: string) {
-    return this.httpClient.get<userRole>(`${this.uri}/${userId}/role`);
-  }
+  constructor(private readonly httpClient: HttpClient, private store: Store) {}
 
   getUserProfile(token: string) {
     const headers = new HttpHeaders()
@@ -32,6 +28,12 @@ export class UserService {
 
   setProfileData(token: string) {
     this.getUserProfile(token).subscribe((res) => {
+      console.log(res);
+      sessionStorage.setItem(
+        'permissions',
+        JSON.stringify(res.role.permissions)
+      );
+      sessionStorage.setItem('role_name', res.role.name);
       sessionStorage.setItem('user_data', JSON.stringify(res));
       this.store.dispatch(UserActions.setUserData({ ...res }));
     });
@@ -97,7 +99,7 @@ export class UserService {
           items: items,
         };
         this.httpClient
-          .patch<any>(`${this.uri}/${userId}/contacts`, body, {headers})
+          .patch<any>(`${this.uri}/${userId}/contacts`, body, { headers })
           .subscribe({
             next: (data) => {
               this.store.dispatch(
@@ -133,7 +135,7 @@ export class UserService {
           newUserContacts = [...contacts];
         }
 
-        newUserContacts[index] = updatedContact
+        newUserContacts[index] = updatedContact;
 
         const items = [...newUserContacts];
         const body = {
@@ -174,21 +176,15 @@ export class UserService {
     });
   }
 
-  getDriverVehicleInfo() {
+  getDriverVehicleInfo(driver_id: string) {
     const token = sessionStorage.getItem('access_token');
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    const userId = sessionStorage.getItem('user_id');
-    return this.httpClient
-      .get<Vehicle>(`${this.uri}/${userId}/vehicle`, { headers: headers })
-      .subscribe({
-        next: (data) => {
-          this.store.dispatch(UserActions.setVehicle({ vehicle: data }));
-          sessionStorage.setItem('driver_vehicle', JSON.stringify(data));
-        },
-        error: (error) => console.error('There was an error!', error),
-      });
+    const userId = driver_id || sessionStorage.getItem('user_id');
+    return this.httpClient.get<Vehicle>(`${this.uri}/${userId}/vehicle`, {
+      headers: headers,
+    });
   }
 
   uploadFile(form: any) {

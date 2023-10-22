@@ -1,1 +1,75 @@
-<app-request-trip *appRole="createTrip"></app-request-trip>
+<div *appRole="createTrip">
+  <app-request-trip *ngIf="!trip"></app-request-trip>
+  <app-panic *ngIf="tripStatus === 'ACTIVE'" [activeTripId]="activeTripId"> </app-panic>
+</div>
+
+<app-card-trip
+  *ngIf="trip; else wait"
+  [trip]="trip"
+></app-card-trip>
+<ng-template #wait>
+  <div
+    class="grid h-full w-full place-items-center"
+    *ngIf="roleName === 'Driver'"
+  >
+    <div
+      class="font-regular w-4/5 rounded-lg bg-[#D83F31] px-4 py-4 text-base text-white"
+      data-dismissible="alert"
+    >
+      <div class="absolute top-6 left-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-exclamation-circle"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+          />
+          <path
+            d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"
+          />
+        </svg>
+      </div>
+      <div class="ml-8 mr-12">
+        <h5
+          class="block font-sans text-xl font-semibold leading-snug tracking-normal text-white antialiased"
+        >
+          No current trips
+        </h5>
+        <p
+          class="mt-2 block font-sans text-base font-normal leading-relaxed text-white antialiased"
+        >
+          At this moment, there are no passengers available to request a
+          service. Don't worry, stay on line and you will be ready to serve
+          passengers as soon as there is a request, thank you!
+        </p>
+      </div>
+      <div
+        data-dismissible-target="alert"
+        data-ripple-dark="true"
+        class="absolute top-3 right-3 w-max rounded-lg transition-all hover:bg-white hover:bg-opacity-20"
+      >
+        <div role="button" class="w-max rounded-lg p-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
