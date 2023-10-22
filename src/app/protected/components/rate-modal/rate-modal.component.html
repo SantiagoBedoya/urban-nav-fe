@@ -1,10 +1,34 @@
-<head>
+<div class="fixed inset-0 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
+    <h3 class="text-xl font-semibold mb-4">Calificación del Usuario para el Conductor</h3>
+    <form>
+      <div class="mb-4">
+        <label for="user_rating" class="block text-gray-600 font-semibold mb-2">Calificación:</label>
+        <div class="flex items-center space-x-2">
+          <ng-container *ngFor="let star of [5, 4, 3, 2, 1]">
+            <input type="radio" id="user_rating_{{star}}" name="user_rating" [value]="star" class="hidden">
+            <label for="user_rating_{{star}}" class="cursor-pointer text-2xl">
+              <i class="fas fa-star text-yellow-500"></i>
+            </label>
+          </ng-container>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label for="user_comment" class="block text-gray-600 font-semibold mb-2">Comentario:</label>
+        <textarea id="user_comment" name="user_comment" class="w-full h-24 p-2 rounded bg-gray-200"></textarea>
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Enviar Calificación</button>
+    </form>
+  </div>
+</div>
+
+<!-- <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
 <div class="fixed inset-0 flex items-center justify-center z-50">
     <div class="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
-      <!-- Contenido de la ventana modal -->
+      
       
         <h3 class="text-xl font-semibold mb-4">Calificación del Usuario para el Conductor</h3>
         <form>
@@ -41,4 +65,4 @@
         </form>
       
     </div>
-</div>
+</div> -->

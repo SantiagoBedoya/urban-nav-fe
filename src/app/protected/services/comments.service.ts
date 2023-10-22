@@ -8,7 +8,7 @@ import { Comments } from '../interfaces/comments.interface';
 })
 export class CommentsService {
   private userId = localStorage.getItem('user_id');
-  private uri = environment.baseURL + '/users/' + this.userId + '/trip-comments';
+  private uri = environment.baseURL + '/trip-comments';
   constructor(private httpClient: HttpClient) {}
 
   getAll() {

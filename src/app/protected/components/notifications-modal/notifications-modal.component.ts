@@ -13,7 +13,7 @@ export class NotificationsModalComponent implements OnInit {
 
   constructor(
     private notificationService: NotificationService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const token = localStorage.getItem('access_token');

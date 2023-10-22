@@ -15,18 +15,16 @@ const routes: Routes = [
         component: RequestTripComponent,
       },
       {
+        path: 'see-comments',
+        component: SeeCommentsComponent,
+      },
+      {
+        path: 'notifications-modal',
+        component: NotificationsModalComponent,
+      },
+      {
         path: '**',
         redirectTo: 'trips/request',
-      },
-    ],
-  },
-  {
-    path: 'see-comments',
-    component: RootComponent,
-    children: [
-      {
-        path: '',
-        component: SeeCommentsComponent,
       },
     ],
   },

@@ -7,8 +7,7 @@ import { Notification } from '../interfaces/notification.interface';
   providedIn: 'root',
 })
 export class NotificationService {
-  private userId = localStorage.getItem('user_id');
-  private uri = environment.baseURL + '/notifications/' + this.userId;
+  private uri = environment.baseURL + '/notifications';
   constructor(private httpClient: HttpClient) {}
 
   getAll() {
