@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProtectedRoutingModule } from './protected-routing.module';
 import { RequestTripComponent } from './pages/request-trip/request-trip.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NearestDriverCardComponent } from './components/nearest-driver-card/nearest-driver-card.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { AddContactsComponent } from './components/modals/add-contacts/add-contacts.component';
@@ -14,7 +14,6 @@ import { EditVehicleComponent } from './components/modals/edit-vehicle/edit-vehi
 import { UploadComponent } from './components/upload/upload.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { RootComponent } from './pages/root/root.component';
-import { NotificationsModalComponent } from './components/notifications-modal/notifications-modal.component';
 import { SeeCommentsComponent } from './pages/see-comments/see-comments.component';
 import { RateModalComponent } from './components/rate-modal/rate-modal.component';
 @NgModule({
@@ -23,7 +22,6 @@ import { RateModalComponent } from './components/rate-modal/rate-modal.component
     NearestDriverCardComponent,
     SideBarComponent,
     RootComponent,
-    NotificationsModalComponent,
     SeeCommentsComponent,
     RateModalComponent,
     ProfileComponent,
@@ -35,9 +33,9 @@ import { RateModalComponent } from './components/rate-modal/rate-modal.component
     UploadComponent,
     RootComponent,
   ],
-  imports: [CommonModule, ProtectedRoutingModule, ReactiveFormsModule, SharedModule],
+  imports: [CommonModule, ProtectedRoutingModule, ReactiveFormsModule, SharedModule, FormsModule],
   exports: [
-    NotificationsModalComponent, 
   ],
+
 })
 export class ProtectedModule {}

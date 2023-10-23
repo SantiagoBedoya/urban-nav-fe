@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AuthActions, AuthSelectors, UserSelectors } from 'src/app/state';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { NotificationsModalComponent } from 'src/app/protected/components/notifications-modal/notifications-modal.component';
+import { NotificationsModalComponent } from '../notifications-modal/notifications-modal.component';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -32,8 +32,6 @@ export class NavbarComponent {
 
   toggleModal() {
     this.isModalOpen = !this.isModalOpen;
-    console.log("si entro ")
-    console.log(this.isModalOpen)
   }
 
 }

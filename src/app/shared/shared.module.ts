@@ -4,11 +4,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { AlertComponent } from './alert/alert.component';
 import { ProtectedModule } from '../protected/protected.module';
+import { NotificationsModalComponent } from './notifications-modal/notifications-modal.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     AlertComponent,
+    NotificationsModalComponent,
   ],
   imports: [
     CommonModule,

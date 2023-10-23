@@ -1,68 +1,40 @@
-<div class="fixed inset-0 flex items-center justify-center z-50">
-  <div class="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
-    <h3 class="text-xl font-semibold mb-4">Calificación del Usuario para el Conductor</h3>
-    <form>
-      <div class="mb-4">
-        <label for="user_rating" class="block text-gray-600 font-semibold mb-2">Calificación:</label>
-        <div class="flex items-center space-x-2">
-          <ng-container *ngFor="let star of [5, 4, 3, 2, 1]">
-            <input type="radio" id="user_rating_{{star}}" name="user_rating" [value]="star" class="hidden">
-            <label for="user_rating_{{star}}" class="cursor-pointer text-2xl">
+<head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+  <div class="fixed inset-0 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-md p-6 max-w-lg mx-auto">
+      <h3 class="text-2xl font-semibold mb-4">Rating of the service received</h3>
+      <form (ngSubmit)="submitForm()">
+        <div class="mb-4">
+          <label for="user_rating" class="block text-gray-600 font-semibold mb-2">Rating:</label>
+          <div class="flex items-center space-x-2">
+            <input type="radio" id="user_rating_5" name="user_rating" [(ngModel)]="userRating" [value]="5" class="hidden">
+            <label for="user_rating_5" class="cursor-pointer text-3xl">
               <i class="fas fa-star text-yellow-500"></i>
             </label>
-          </ng-container>
+            <input type="radio" id="user_rating_4" name="user_rating" [(ngModel)]="userRating" [value]="4" class="hidden">
+            <label for="user_rating_4" class="cursor-pointer text-3xl">
+              <i class="fas fa-star text-yellow-500"></i>
+            </label>
+            <input type="radio" id="user_rating_3" name="user_rating" [(ngModel)]="userRating" [value]="3" class="hidden">
+            <label for="user_rating_3" class="cursor-pointer text-3xl">
+              <i class="fas fa-star text-yellow-500"></i>
+            </label>
+            <input type="radio" id="user_rating_2" name="user_rating" [(ngModel)]="userRating" [value]="2" class="hidden">
+            <label for="user_rating_2" class="cursor-pointer text-3xl">
+              <i class="fas fa-star text-yellow-500"></i>
+            </label>
+            <input type="radio" id="user_rating_1" name="user_rating" [(ngModel)]="userRating" [value]="1" class="hidden">
+            <label for="user_rating_1" class="cursor-pointer text-3xl">
+              <i class="fas fa-star text-yellow-500"></i>
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="mb-4">
-        <label for="user_comment" class="block text-gray-600 font-semibold mb-2">Comentario:</label>
-        <textarea id="user_comment" name="user_comment" class="w-full h-24 p-2 rounded bg-gray-200"></textarea>
-      </div>
-      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Enviar Calificación</button>
-    </form>
-  </div>
-</div>
-
-<!-- <head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-</head>
-
-<div class="fixed inset-0 flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
-      
-      
-        <h3 class="text-xl font-semibold mb-4">Calificación del Usuario para el Conductor</h3>
-        <form>
-          <div class="mb-4">
-            <label for="user_rating" class="block text-gray-600 font-semibold mb-2">Calificación:</label>
-            <div class="flex items-center space-x-2">
-              <input type="radio" id="user_rating_5" name="user_rating" value="5" class="hidden">
-              <label for="user_rating_5" class="cursor-pointer text-2xl">
-                <i class="fas fa-star text-yellow-500"></i>
-              </label>
-              <input type="radio" id="user_rating_4" name="user_rating" value="4" class="hidden">
-              <label for="user_rating_4" class="cursor-pointer text-2xl">
-                <i class="fas fa-star text-yellow-500"></i>
-              </label>
-              <input type="radio" id="user_rating_3" name="user_rating" value="3" class="hidden">
-              <label for="user_rating_3" class="cursor-pointer text-2xl">
-                <i class="fas fa-star text-yellow-500"></i>
-              </label>
-              <input type="radio" id="user_rating_2" name="user_rating" value="2" class="hidden">
-              <label for="user_rating_2" class="cursor-pointer text-2xl">
-                <i class="fas fa-star text-yellow-500"></i>
-              </label>
-              <input type="radio" id="user_rating_1" name="user_rating" value="1" class="hidden">
-              <label for="user_rating_1" class="cursor-pointer text-2xl">
-                <i class="fas fa-star text-yellow-500"></i>
-              </label>
-            </div>
-          </div>
-          <div class="mb-4">
-            <label for="user_comment" class="block text-gray-600 font-semibold mb-2">Comentario:</label>
-            <textarea id="user_comment" name="user_comment" class="w-full h-24 p-2 rounded bg-gray-200"></textarea>
-          </div>
-          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Enviar Calificación</button>
-        </form>
-      
+        <div class="mb-4">
+          <label for="user_comment" class="block text-gray-600 font-semibold mb-2">Comment:</label>
+          <textarea id="user_comment" name="user_comment" [(ngModel)]="userComment" class="w-full h-40 p-2 rounded bg-gray-200"></textarea>
+        </div>
+        <button type="submit" class="bg-[#141D2C] text-white px-4 py-2 rounded hover-bg-blue-600">Enviar Calificación</button>
+      </form>
     </div>
-</div> -->
+  </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationService } from '../../services/notification.service';
-import { Notification } from '../../interfaces/notification.interface';
+import { NotificationService } from '../../protected/services/notification.service';
+import { Notification } from '../../protected/interfaces/notification.interface';
 
 @Component({
   selector: 'app-notifications-modal',
@@ -9,7 +9,7 @@ import { Notification } from '../../interfaces/notification.interface';
 })
 export class NotificationsModalComponent implements OnInit {
   notifications: Notification[] = [];
-  isModalOpen: boolean = false;
+  isModalOpen: boolean = true;
 
   constructor(
     private notificationService: NotificationService
