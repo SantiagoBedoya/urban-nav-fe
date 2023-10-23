@@ -20,6 +20,8 @@ import { RootComponent } from './pages/root/root.component';
 import { PopoversComponent } from './components/popovers/popovers.component';
 import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { PanicComponent } from './components/panic/panic.component';
+import { ViewsSectionComponent } from './components/views-section/views-section.component';
+import { CommentsUserComponent } from './pages/comments-user/comments-user.component';
 @NgModule({
   declarations: [
     RequestTripComponent,
@@ -40,7 +42,9 @@ import { PanicComponent } from './components/panic/panic.component';
     VehicleComponent,
     RootComponent,
     PopoversComponent,
-    PanicComponent
+    PanicComponent,
+    ViewsSectionComponent,
+    CommentsUserComponent
   ],
   imports: [
     CommonModule,
