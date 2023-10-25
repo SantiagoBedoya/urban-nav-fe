@@ -5,7 +5,7 @@ import { RootComponent } from './pages/root/root.component';
 import { SeeCommentsComponent } from './pages/see-comments/see-comments.component';
 import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
-import { RequestTripComponent } from './pages/request-trip/request-trip.component';
+
 
 const routes: Routes = [
   {
@@ -27,10 +27,6 @@ const routes: Routes = [
       {
         path: 'see-comments',
         component: SeeCommentsComponent,
-      },
-      {
-        path: 'trips/request',
-        component: RequestTripComponent,
       },
       {
         path: '**',
