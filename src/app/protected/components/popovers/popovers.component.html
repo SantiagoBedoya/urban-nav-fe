@@ -1,0 +1,62 @@
+<button type="button" (click)="toggleButton()" class="mx-3">
+  <i class="bi bi-info-circle text-blue-400"></i></button>
+<div
+  class=" {{showInfo}} absolute  right-[2px] lg:left-[70%] max-w-[24rem]  whitespace-normal break-words rounded-lg border border-blue-gray-50 bg-white p-4 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
+  <div class="mb-2 flex items-center justify-between gap-4">
+    <img
+      src={{driverInfo?.photoURL}}
+      class="relative inline-block h-12 w-12 rounded-full object-cover object-center" />
+  </div>
+  <div class="flex  flex-col">
+    <h6
+      class="mb-2 flex items-center  font-bold gap-2 font-sans text-base  leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+      <span>{{driverInfo?.firstName}} {{driverInfo?.lastName}} </span>
+    </h6>
+    <div class="flex">
+      <p class="block font-sans text-sm text-custom-black mr-2 leading-normal font-semibold antialiased">
+        Email:
+      </p>
+      <p>
+        {{driverInfo?.email}}
+      </p>
+    </div>
+    <div class="flex">
+      <p class="block font-sans text-sm text-custom-black mr-2 leading-normal font-semibold antialiased">
+        Brand:
+      </p>
+      <p class="text-custom-black">
+        {{vehicleId?.brand}}
+      </p>
+    </div>
+
+    <div class="flex">
+      <p class="block font-sans text-sm text-custom-black mr-2 leading-normal font-semibold antialiased">
+        Model:
+      </p>
+      <p class="text-custom-black">
+        {{vehicleId?.model}}
+      </p>
+    </div>
+    <div class="flex">
+      <p class="block font-sans text-sm text-custom-black mr-2 leading-normal font-semibold antialiased">
+        Year:
+      </p>
+      <p class="text-custom-black">
+        {{vehicleId?.year}}
+      </p>
+    </div>
+    <div class="flex">
+      <p class="block font-sans text-sm text-custom-black mr-2 leading-normal font-semibold antialiased">
+        License Plate:
+      </p>
+      <p class="text-custom-black">
+        {{vehicleId?.licensePlate}}
+      </p>
+    </div>
+  </div>
+  <div class="mt-6 flex items-center gap-8 border-t border-blue-gray-50 pt-4">
+    <a class="flex items-center gap-1 font-sans text-xs font-normal text-gray-700 antialiased">
+      <i class="bi bi-indent text-2xl"></i>
+      Comments </a>
+  </div>
+</div>

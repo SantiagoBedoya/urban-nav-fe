@@ -13,7 +13,6 @@ export const setUserData = createAction(
     firstName: string;
     lastName: string;
     photoURL?: string ;
-    roleId: string;
     vehicle?: Vehicle
   }>()
 );

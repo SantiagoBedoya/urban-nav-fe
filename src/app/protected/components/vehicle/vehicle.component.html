@@ -1,0 +1,70 @@
+<div class="w-full flex flex-col 2xl:w-3/5">
+    <div class="flex-1 bg-white rounded-lg shadow-xl p-8" *ngIf="vehicle$ | async as vh; else notVehicle">
+        <div>
+            <div class="flex flex-row justify-between">
+                <h4 class="text-xl text-gray-900 font-bold">
+                    Vehicle Info
+                </h4>
+                <app-edit-vehicle [actionType]="'update'"></app-edit-vehicle>
+
+            </div>
+            <ul class="mt-2 text-gray-700">
+                <li class="flex border-y py-2">
+                    <span class="font-bold w-30 mx-4 capitalize">Brand:</span>
+                    <span class="text-gray-700 capitalize">{{
+                        vh.brand || "your vehicle brand"
+                        }}</span>
+                </li>
+                <li class="flex border-b py-2">
+                    <span class="font-bold w-30 mx-4 capitalize">Model:</span>
+                    <span class="text-gray-700 capitalize">{{
+                        vh.model
+                        }}</span>
+                </li>
+                <li class="flex border-b py-2">
+                    <span class="font-bold w-30 mx-4 capitalize">Year:</span>
+                    <span class="text-gray-700 capitalize">{{
+                        vh.year
+                        }}</span>
+                </li>
+                <li class="flex border-b py-2">
+                    <span class="font-bold w-30 mx-4 capitalize">license Plate:</span>
+                    <span class="text-gray-700 capitalize">{{
+                        vh.licensePlate
+                        }}</span>
+                </li>
+                <li class="flex border-b py-2">
+                    <span class="font-bold w-30 mx-4 capitalize">soat:</span>
+                    <span class="text-gray-700 capitalize">{{
+                        vh.soatURL
+                        }}</span>
+                </li>
+                <li class="flex border-b py-2 capitalize">
+                    <span class="font-bold w-30 mx-4">Property Card:</span>
+                    <span class="text-gray-700 capitalize">{{
+                        vh.propertyCardURL
+                        }}</span>
+                </li>
+                <li class="flex border-b py-2 capitalize">
+                    <span class="font-bold w-30 mx-4">mechanic Certificate:</span>
+                    <span class="text-gray-700 capitalize">{{
+                        vh.mechanicCertificateURL
+                        }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <ng-template #notVehicle>
+        <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+            <div class="flex flex-row justify-between">
+                <h4 class="text-xl text-gray-900 font-bold capitalize">
+                    Set your vehicle
+                </h4>
+                <app-edit-vehicle [modalTitle]="'Added New Vehicle'" icon="bi bi-plus-lg"
+                    [actionType]="'create'"></app-edit-vehicle>
+            </div>
+
+        </div>
+    </ng-template>
+</div>
