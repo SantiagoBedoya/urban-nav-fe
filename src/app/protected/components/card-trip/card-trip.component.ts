@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Trip } from '../../interfaces/trip.interface';
 import { UserService } from '../../services/user.service';
-import { vehicleService } from '../../services/vehicle.service';
-import { User } from '../../interfaces/user.inferface';
+import { TripService } from '../../services/trip.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-card-trip',
@@ -15,12 +15,18 @@ export class CardTripComponent implements OnInit {
   driver: any = {};
   vehicle: any = {};
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private tripService: TripService, 
+    private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.getDriver();
     this.getPassenger();
     this.getvehicleInfo();
+    // this.userService.getUser(this.trip?.driverId ?? '').subscribe({
+    //   next: data => {
+    //     console.log(data)
+    //   }
+    // });
   }
 
   getFormattedDates(date: string | undefined): any {
@@ -28,6 +34,10 @@ export class CardTripComponent implements OnInit {
       const timestamp = new Date(date);
       return timestamp.toLocaleDateString();
     }
+  }
+
+  getTripStatus() {
+    return this.trip?.status || '';
   }
 
   getOrigin() {
@@ -70,6 +80,23 @@ export class CardTripComponent implements OnInit {
         },
         error: (error) => console.error('There was an error!', error),
       });
+    }
+  }
+
+  cancelTrip() {
+    if(this.trip?._id) {
+      const updatedTrip = {...this.trip, status: 'FINISHED'}
+      this.tripService.cancelTrip(this.trip?._id, updatedTrip).subscribe({
+        next: () => {
+          this.toastr.success("Trip was canceled", '', {
+            positionClass: 'toast-bottom-center',
+            toastClass: 'ngx-toastr toast-custom',
+          });
+        },
+        error: err => {
+          console.error(err)
+        }
+      },)
     }
   }
 }

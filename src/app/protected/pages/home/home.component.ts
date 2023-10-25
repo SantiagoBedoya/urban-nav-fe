@@ -28,6 +28,7 @@ export class HomeComponent {
           data.find(
             (trip) => trip.status === 'ACTIVE' || trip.status === 'PENDING'
           ) ?? null;
+        this.tripStatus = this.trip?.status;
         if (this.trip?.status === 'ACTIVE') {
           this.activeTripId = this.trip._id;
         }
