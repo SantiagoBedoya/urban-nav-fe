@@ -93,25 +93,6 @@
       </button>
     </div>
   </form>
-  <div
-    *ngIf="showAlert"
-    class="fixed inset-0 flex items-center justify-center z-50"
-  >
-    <div class="bg-white p-4 rounded-lg shadow-md">
-      <div class="text-center">
-        <h2 class="text-xl font-semibold mb-2">¡Success!</h2>
-        <p class="text-gray-600">Your form has been submitted successfully.</p>
-      </div>
-      <div class="text-center mt-4">
-        <button
-          (click)="showAlert = false"
-          class="bg-[#141D2C] text-white px-4 py-2 rounded-lg hover:bg-[#0E1624] focus:outline-none"
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <footer class="bg-[#141d2c] text-white p-4 mt-4">

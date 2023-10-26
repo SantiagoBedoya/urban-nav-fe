@@ -11,7 +11,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm: FormGroup = new FormGroup({});
-  constructor(private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.forgotPasswordForm = this.fb.group({
@@ -31,7 +35,10 @@ export class ForgotPasswordComponent implements OnInit {
           });
         },
         error: (err) => {
-          console.log(err);
+          this.toastr.error('Try it again', 'An error has occurred', {
+            positionClass: 'toast-bottom-center',
+            toastClass: 'ngx-toastr toast-custom',
+          });
         },
       });
     }

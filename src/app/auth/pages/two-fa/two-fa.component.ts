@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-two-fa',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./two-fa.component.css'],
 })
 export class TwoFaComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
   googleAuth() {
     const userId = sessionStorage.getItem('user_id');
@@ -20,9 +21,21 @@ export class TwoFaComponent {
         sessionStorage.setItem('second_auth_type', 'google');
 
         this.router.navigate(['/auth/validate-otp']);
+
+        this.toastr.success('Check google auth to proceed', '', {
+          positionClass: 'toast-bottom-center',
+          toastClass: 'ngx-toastr toast-custom',
+        });
       },
       error: (err) => {
-        console.log(err);
+        this.toastr.error(
+          'Try it again',
+          'An error has occurred',
+          {
+            positionClass: 'toast-bottom-center',
+            toastClass: 'ngx-toastr toast-custom',
+          }
+        );
       },
     });
   }
@@ -33,10 +46,20 @@ export class TwoFaComponent {
     sessionStorage.setItem('second_auth_type', 'email');
     this.authService.otpSendEmail(userId!).subscribe({
       next: () => {
-        console.log('Email sent');
+        this.toastr.success('Email has been sended', '', {
+          positionClass: 'toast-bottom-center',
+          toastClass: 'ngx-toastr toast-custom',
+        });
       },
       error: (err) => {
-        console.error('There was an error sending email!', err);
+        this.toastr.error(
+          'Error sending email',
+          'An error has occurred',
+          {
+            positionClass: 'toast-bottom-center',
+            toastClass: 'ngx-toastr toast-custom',
+          }
+        );
       },
     });
 
