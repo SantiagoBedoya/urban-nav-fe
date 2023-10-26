@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-password-reset',
@@ -16,7 +17,8 @@ export class PasswordResetComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -46,11 +48,21 @@ export class PasswordResetComponent implements OnInit {
       const { password, confirmPassword } = this.CreatePasswordForm.value;
       this.authService.resetPassword(this.token, confirmPassword).subscribe({
         next: (response) => {
-          alert('Password updated');
+          this.toastr.success('Password updated', '', {
+            positionClass: 'toast-bottom-center',
+            toastClass: 'ngx-toastr toast-custom',
+          });
           this.CreatePasswordForm.reset();
         },
         error: (err) => {
-          console.log('There was an error: ', err);
+          this.toastr.error(
+            'Error updating password',
+            'An error has occurred',
+            {
+              positionClass: 'toast-bottom-center',
+              toastClass: 'ngx-toastr toast-custom',
+            }
+          );
         },
       });
     }

@@ -5,17 +5,31 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { UserSelectors } from '../state';
 
 @Directive({
   selector: '[appRole]',
 })
-export class RoleDirective {
+export class RoleDirective implements OnInit {
   private permission!: number;
+  private permissions: number[] = [];
 
   constructor(
     private templateRef: TemplateRef<any>,
-    private viewContainer: ViewContainerRef
-  ) {}
+    private viewContainer: ViewContainerRef,
+    private store: Store
+  ) { }
+
+  ngOnInit(): void {
+    this.store
+      .select(UserSelectors.permissions)
+      .subscribe(userPermissions => {
+        this.permissions = userPermissions;
+      });
+
+    this.updateView();
+  }
 
   @Input()
   set appRole(val: number) {
@@ -31,7 +45,6 @@ export class RoleDirective {
   }
 
   private checkPermission(): boolean {
-    const permissions = JSON.parse(sessionStorage.getItem('permissions')!);
-    return permissions.includes(this.permission);
+    return this.permissions.includes(this.permission);
   }
 }
