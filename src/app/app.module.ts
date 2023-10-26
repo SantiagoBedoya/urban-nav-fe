@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProtectedModule } from './protected/protected.module';
 import { StoreModule } from '@ngrx/store';
 import { AuthModule } from './auth/auth.module';
+import { SocketIoModule } from 'ngx-socket-io';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -25,6 +26,7 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
     ProtectedModule,
     StoreModule.forRoot({}),
+    SocketIoModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
