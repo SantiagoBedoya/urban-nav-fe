@@ -44,7 +44,9 @@ export class RoleDirective implements OnInit {
     }
   }
 
-  private checkPermission(): boolean {
-    return this.permissions.includes(this.permission);
+  private checkPermission(): any {
+    if(this.permissions.length > 0) {
+      return this.permissions.includes(this.permission);
+    }
   }
 }

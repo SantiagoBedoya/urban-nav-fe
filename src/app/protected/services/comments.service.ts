@@ -7,7 +7,7 @@ import { Comments } from '../interfaces/comments.interface';
   providedIn: 'root',
 })
 export class CommentsService {
-  private userId = localStorage.getItem('user_id');
+  private userId = sessionStorage.getItem('user_id');
   private uri = environment.baseURL + '/trip-comments';
   constructor(private httpClient: HttpClient) {}
 
@@ -15,7 +15,7 @@ export class CommentsService {
     console.log(this.uri);
     return this.httpClient.get<Comments[]>(this.uri, {
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+        Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
       },
     });
   }

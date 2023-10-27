@@ -28,7 +28,7 @@ const initialState: UserState = {
   lastName: userProfile?.lastName ?? '',
   photoURL: userProfile?.photoURL ?? testImgUrl,
   vehicle: driverVehicle ?? {},
-  permissions: userProfile.role.permissions ?? []
+  permissions: userProfile?.role?.permissions ?? []
 };
 
 export const userReducer = createReducer(

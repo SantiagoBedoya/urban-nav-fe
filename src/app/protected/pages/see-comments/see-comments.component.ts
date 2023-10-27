@@ -15,7 +15,7 @@ export class SeeCommentsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const token = localStorage.getItem('access_token');
+    const token = sessionStorage.getItem('access_token');
     this.commentService.getAll().subscribe({
       next: (response) => {
         this.comments = response;
