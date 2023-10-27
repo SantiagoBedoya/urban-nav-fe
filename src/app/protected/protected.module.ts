@@ -22,6 +22,8 @@ import { RateModalComponent } from './components/rate-modal/rate-modal.component
 import { PopoversComponent } from './components/popovers/popovers.component';
 import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { PanicComponent } from './components/panic/panic.component';
+import { WebsocketService } from './services/websocket.service';
+
 @NgModule({
   declarations: [
     RequestTripComponent,
@@ -45,7 +47,7 @@ import { PanicComponent } from './components/panic/panic.component';
     VehicleComponent,
     RootComponent,
     PopoversComponent,
-    PanicComponent
+    PanicComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +56,6 @@ import { PanicComponent } from './components/panic/panic.component';
     SharedModule,
     FormsModule
   ],
-
+  providers: [WebsocketService],
 })
-export class ProtectedModule { }
+export class ProtectedModule {}
