@@ -15,18 +15,16 @@ export class CardTripComponent implements OnInit {
   driver: any = {};
   vehicle: any = {};
 
-  constructor(private userService: UserService, private tripService: TripService, 
-    private toastr: ToastrService) {}
+  constructor(
+    private userService: UserService,
+    private tripService: TripService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getDriver();
     this.getPassenger();
     this.getvehicleInfo();
-    // this.userService.getUser(this.trip?.driverId ?? '').subscribe({
-    //   next: data => {
-    //     console.log(data)
-    //   }
-    // });
   }
 
   getFormattedDates(date: string | undefined): any {
@@ -72,7 +70,7 @@ export class CardTripComponent implements OnInit {
 
   getvehicleInfo() {
     const driverId = this.trip?.driverId;
-    console.log(driverId)
+    console.log(driverId);
     if (driverId) {
       this.userService.getVehicleInfo(driverId).subscribe({
         next: (data) => {
@@ -84,19 +82,20 @@ export class CardTripComponent implements OnInit {
   }
 
   cancelTrip() {
-    if(this.trip?._id) {
-      const updatedTrip = {...this.trip, status: 'FINISHED'}
+    if (this.trip?._id) {
+      const newState = this.trip.status === 'ACTIVE' ? 'FINISHED' : 'CANCELLED';
+      const updatedTrip = { ...this.trip, status: newState };
       this.tripService.cancelTrip(this.trip?._id, updatedTrip).subscribe({
         next: () => {
-          this.toastr.success("Trip was canceled", '', {
+          this.toastr.success('Trip was canceled', '', {
             positionClass: 'toast-bottom-center',
             toastClass: 'ngx-toastr toast-custom',
           });
         },
-        error: err => {
-          console.error(err)
-        }
-      },)
+        error: (err) => {
+          console.error(err);
+        },
+      });
     }
   }
 }

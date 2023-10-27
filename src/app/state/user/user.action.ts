@@ -12,8 +12,9 @@ export const setUserData = createAction(
     email: string;
     firstName: string;
     lastName: string;
-    photoURL?: string ;
-    vehicle?: Vehicle
+    photoURL?: string;
+    vehicle?: Vehicle;
+    permissions: number[];
   }>()
 );
 

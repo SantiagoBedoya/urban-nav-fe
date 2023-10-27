@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthActions } from 'src/app/state';
 import { Store } from '@ngrx/store';
 import { UserService } from 'src/app/protected/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-validate-otp',
@@ -23,7 +24,8 @@ export class ValidateOtpComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -78,7 +80,10 @@ export class ValidateOtpComponent implements OnInit {
         this.router.navigate([`/dashboard`]);
       },
       error: (err) => {
-        console.error('There was an error!', err);
+        this.toastr.error('Error validating OPT', 'An error has occurred', {
+          positionClass: 'toast-bottom-center',
+          toastClass: 'ngx-toastr toast-custom',
+        });
       },
     });
   }

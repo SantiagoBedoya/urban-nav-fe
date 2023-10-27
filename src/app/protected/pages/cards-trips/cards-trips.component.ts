@@ -17,7 +17,7 @@ export class CardsTripsComponent implements OnInit {
   ngOnInit(): void {
     this.tripsService.trips().subscribe({
       next: (data) => {
-        this.trips = data;
+        this.trips = data.filter(trip => trip.status !== 'CANCELLED');
       }
     })
   }

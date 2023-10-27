@@ -36,3 +36,8 @@ export const vehicle = createSelector(
   userState,
   (userState) => userState.vehicle
 );
+
+export const permissions = createSelector(
+  userState,
+  (userState) => userState.permissions
+);

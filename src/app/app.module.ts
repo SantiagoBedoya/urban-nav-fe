@@ -12,6 +12,8 @@ import { ProtectedModule } from './protected/protected.module';
 import { StoreModule } from '@ngrx/store';
 import { AuthModule } from './auth/auth.module';
 import { SocketIoModule } from 'ngx-socket-io';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -27,6 +29,7 @@ import { SocketIoModule } from 'ngx-socket-io';
     ProtectedModule,
     StoreModule.forRoot({}),
     SocketIoModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +15,8 @@ export class SignUpComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -55,11 +57,23 @@ export class SignUpComponent implements OnInit {
         .subscribe({
           next: (data) => {
             this.registerForm.reset();
-            
+
             this.router.navigate(['/auth/two-fa']);
+
+            this.toastr.success('Account was created', '', {
+              positionClass: 'toast-bottom-center',
+              toastClass: 'ngx-toastr toast-custom',
+            });
           },
           error: (error) => {
-            console.error('There was an error!', error);
+            this.toastr.error(
+              'Error creating account',
+              'An error has occurred',
+              {
+                positionClass: 'toast-bottom-center',
+                toastClass: 'ngx-toastr toast-custom',
+              }
+            );
           },
         });
     }

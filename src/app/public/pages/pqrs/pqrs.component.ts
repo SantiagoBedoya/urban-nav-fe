@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PqrsService } from '../../services/pqrs.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -14,18 +15,22 @@ export class PqrsComponent {
     email: '',
     description: '',
   };
-  showAlert: boolean = false;
 
-  constructor(private pqrsService: PqrsService) {}
+  constructor(private pqrsService: PqrsService, private toastr: ToastrService) {}
 
   async onSubmit() {
     this.pqrsService.create(this.formData).subscribe({
       next: (data) => {
-        this.showAlert = true;
-        console.log(data);
+        this.toastr.success("We'll contact you soon", 'PQRS was sended', {
+          positionClass: 'toast-bottom-center',
+          toastClass: 'ngx-toastr toast-custom',
+        });
       },
       error: (err) => {
-        console.log('There was an error: ', err);
+        this.toastr.error('Error sending PQRS', 'An error has occurred', {
+          positionClass: 'toast-bottom-center',
+          toastClass: 'ngx-toastr toast-custom',
+        });
       },
     });
   }
