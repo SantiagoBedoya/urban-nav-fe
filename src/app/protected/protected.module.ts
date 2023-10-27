@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProtectedRoutingModule } from './protected-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RequestTripComponent } from './components/request-trip/request-trip.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { NearestDriverCardComponent } from './components/nearest-driver-card/nearest-driver-card.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { AddContactsComponent } from './components/modals/add-contacts/add-contacts.component';
@@ -17,6 +17,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { CardTripComponent } from './components/card-trip/card-trip.component';
 import { VehicleComponent } from './components/vehicle/vehicle.component';
 import { RootComponent } from './pages/root/root.component';
+import { SeeCommentsComponent } from './pages/see-comments/see-comments.component';
+import { RateModalComponent } from './components/rate-modal/rate-modal.component';
 import { PopoversComponent } from './components/popovers/popovers.component';
 import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { PanicComponent } from './components/panic/panic.component';
@@ -27,6 +29,9 @@ import { PanicComponent } from './components/panic/panic.component';
     RootComponent,
     CardsTripsComponent,
     SideBarComponent,
+    RootComponent,
+    SeeCommentsComponent,
+    RateModalComponent,
     ProfileComponent,
     AddContactsComponent,
     ContactsComponent,
@@ -47,6 +52,8 @@ import { PanicComponent } from './components/panic/panic.component';
     ProtectedRoutingModule,
     ReactiveFormsModule,
     SharedModule,
+    FormsModule
   ],
+
 })
 export class ProtectedModule { }
