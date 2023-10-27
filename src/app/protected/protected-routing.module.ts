@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { RootComponent } from './pages/root/root.component';
+import { SeeCommentsComponent } from './pages/see-comments/see-comments.component';
 import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
+
 
 const routes: Routes = [
   {
@@ -21,6 +23,10 @@ const routes: Routes = [
       {
         path: 'trips',
         component: CardsTripsComponent,
+      },
+      {
+        path: 'see-comments',
+        component: SeeCommentsComponent,
       },
       {
         path: '**',
