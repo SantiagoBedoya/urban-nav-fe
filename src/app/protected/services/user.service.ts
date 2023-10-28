@@ -159,18 +159,24 @@ export class UserService {
 
   updateProfile(user: User) {
     const userId = sessionStorage.getItem('user_id')!;
-    this.httpClient.patch<any>(`${this.uri}/${userId}`, user).subscribe({
-      next: () => {
-        const firstName = user.firstName;
-        const lastName = user.lastName;
-        this.store.dispatch(
-          UserActions.updateProfileData({ firstName, lastName })
-        );
-        const token = sessionStorage.getItem('access_token')!;
-        this.setProfileData(token);
-      },
-      error: (error) => console.error('There was an error!', error),
-    });
+    const token = sessionStorage.getItem('access_token')!;
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    this.httpClient
+      .patch<any>(`${this.uri}/${userId}`, user, { headers: headers })
+      .subscribe({
+        next: () => {
+          const firstName = user.firstName;
+          const lastName = user.lastName;
+          this.store.dispatch(
+            UserActions.updateProfileData({ firstName, lastName })
+          );
+          const token = sessionStorage.getItem('access_token')!;
+          this.setProfileData(token);
+        },
+        error: (error) => console.error('There was an error!', error),
+      });
   }
 
   getDriverVehicleInfo(driver_id: string) {
