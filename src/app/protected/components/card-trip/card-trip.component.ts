@@ -70,7 +70,6 @@ export class CardTripComponent implements OnInit {
 
   getvehicleInfo() {
     const driverId = this.trip?.driverId;
-    console.log(driverId);
     if (driverId) {
       this.userService.getVehicleInfo(driverId).subscribe({
         next: (data) => {

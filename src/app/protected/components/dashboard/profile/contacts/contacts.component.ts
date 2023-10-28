@@ -6,6 +6,7 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { UserSelectors } from 'src/app/state';
 import { contact } from 'src/app/protected/interfaces/contact.interface';
 import { UserService } from 'src/app/protected/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contacts',
@@ -56,7 +57,7 @@ export class ContactsComponent implements OnInit {
   editContactsForms() {
     if (this.addContactForm.valid) {
       this.userService.updateContact(this.addContactForm.value, this.index);
-      this.showModal = false;
+      this.toggleModal();
     } else {
       console.log('error', this.addContactForm.valid);
     }
@@ -67,6 +68,19 @@ export class ContactsComponent implements OnInit {
   }
 
   deleteContact(contact: number) {
-    this.userService.deleteContact(contact);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteContact(contact);
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+      }
+    });
   }
 }

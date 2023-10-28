@@ -47,6 +47,7 @@ export class AddContactsComponent implements OnInit {
         positionClass: 'toast-bottom-center',
         toastClass: 'ngx-toastr toast-custom',
       });
+      this.toggleModal();
     } else {
       this.toastr.success(
         'Some fields are not valid. Please correct them.',
