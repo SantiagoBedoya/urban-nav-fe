@@ -27,11 +27,12 @@ export class UserService {
 
   setProfileData(token: string) {
     this.getUserProfile(token).subscribe((res) => {
-      sessionStorage.setItem('role_name', res.role.name);
+      sessionStorage.setItem('role_name', res.role!.name);
       sessionStorage.setItem('user_data', JSON.stringify(res));
-      this.store.dispatch(
-        UserActions.setUserData({ ...res, permissions: res.role.permissions })
-      );
+      const newData = { ...res };
+      const permissions = res.role!.permissions;
+      delete newData.role;
+      this.store.dispatch(UserActions.setUserData({ ...newData, permissions }));
     });
   }
 
