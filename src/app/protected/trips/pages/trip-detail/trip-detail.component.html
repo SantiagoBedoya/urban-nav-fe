@@ -23,7 +23,7 @@
   </div>
 </div>
 <div *ngIf="trip != null">
-  <div class="grid grid-cols-2 gap-2">
+  <div class="grid grid-cols-1 gap-2">
     <div class="rounded overflow-hidden shadow-lg">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">Trip Details</div>
@@ -48,28 +48,27 @@
         <p class="text-gray-700 text-base">
           <b>Email: </b>{{ trip.driver?.email }}
         </p>
+        <button
+          (click)="viewDriverComments()"
+          class="text-blue-600 dark:text-blue-500 hover:underline"
+        >
+          View driver comments
+        </button>
       </div>
     </div>
   </div>
-  <div class="grid grid-cols-2 gap-2">
+  <div class="grid grid-cols-1 gap-2">
     <div class="rounded overflow-hidden shadow-lg">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">Comments</div>
         <p class="text-gray-700 text-base">
           Feel free to comment anything you want about the driver
         </p>
-        <div class="rounded overflow-hidden shadow-lg my-3 px-6 py-4">
-          <ul>
-            <li *ngFor="let comment of comments">
-              <span *ngIf="isCommentMine(comment); else notMine">
-                <b>You:</b> {{ comment.comment }}
-              </span>
-              <ng-template #notMine>
-                <b>{{ comment.publisher.firstName }}:</b> {{ comment.comment }}
-              </ng-template>
-            </li>
-          </ul>
-        </div>
+        <app-trip-comment-card
+          *ngFor="let comment of comments"
+          [comment]="comment"
+          [isInsideTrip]="true"
+        ></app-trip-comment-card>
         <form
           class="bg-white rounded mt-3"
           [formGroup]="tripCommentForm"
@@ -108,3 +107,4 @@
     </div>
   </div>
 </div>
+<swal #swalDriverComments title="Driver comments" html=""></swal>

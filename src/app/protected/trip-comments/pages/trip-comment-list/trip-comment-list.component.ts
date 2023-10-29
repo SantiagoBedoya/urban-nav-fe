@@ -21,11 +21,4 @@ export class TripCommentListComponent implements OnInit {
       },
     });
   }
-
-  getFormattedDates(date: string | undefined): any {
-    if (date) {
-      const timestamp = new Date(date);
-      return timestamp.toLocaleDateString();
-    }
-  }
 }

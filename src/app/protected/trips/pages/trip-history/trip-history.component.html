@@ -32,17 +32,73 @@
   >
 </p>
 <div class="grid grid-cols-1" *ngIf="trips != null">
-  <div class="rounded overflow-hidden shadow-lg" *ngFor="let trip of trips">
+  <div *ngFor="let trip of trips">
     <a [routerLink]="['../', trip._id, 'detail']">
-      <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">
-          {{ trip.status }} - ${{ trip.price }}
+      <div class="flex flex-col mb-3">
+        <div
+          class="max-w-full bg-white flex flex-col rounded overflow-hidden shadow-lg m-3"
+        >
+          <div
+            class="flex flex-row justify-between items-baseline flex-nowrap bg-gray-100 p-2"
+          >
+            <div
+              class="flex w-full flex-row justify-between items-baseline flex-nowrap"
+              *ngIf="trip?.startDate; else pending"
+            >
+              <div class="items-center flex flex-row mx-2">
+                <i class="bi bi-car-front"></i>
+                <h1 class="ml-2 uppercase font-bold text-gray-500">
+                  Start date
+                </h1>
+                <p class="ml-2 font-normal text-gray-500 capitalize">
+                  {{ getFormattedDates(trip?.startDate) }}
+                </p>
+              </div>
+
+              <div class="flex mx-2">
+                <h1 class="ml-2 uppercase font-bold text-gray-500">End date</h1>
+                <p class="ml-2 font-normal text-gray-500 capitalize">
+                  {{ getFormattedDates(trip?.endDate) }}
+                </p>
+              </div>
+            </div>
+            <ng-template #pending>
+              <div class="items-center flex flex-row">
+                <i class="bi bi-car-front"></i>
+                <h1
+                  class="ml-2 uppercase tracking-wider font-bolder text-gray-500"
+                >
+                  {{ trip.status }}
+                </h1>
+              </div>
+            </ng-template>
+          </div>
+
+          <div class="mt-2 flex sm:flex-row mx-6 sm:justify-between flex-wrap">
+            <div class="flex flex-col p-2 text-center">
+              <p class="font-bold text-custom-black">Origin</p>
+              <p class="text-gray-500">{{ getOrigin(trip) }}</p>
+            </div>
+            <div class="flex flex-col flex-wrap p-2 text-center">
+              <p class="font-bold text-custom-black">Destination</p>
+              <p class="text-gray-500">{{ getDestination(trip) }}</p>
+            </div>
+            <div class="flex flex-col p-2 text-center">
+              <p class="font-bold text-custom-black">Passenger</p>
+              <p class="text-gray-500">
+                {{ trip.client?.firstName }} {{ trip.client?.lastName }}
+              </p>
+            </div>
+            <div class="flex flex-col flex-wrap p-2 text-center">
+              <div class="flex justify-center items-center">
+                <p class="font-bold text-custom-black">Driver</p>
+              </div>
+              <p class="text-gray-500">
+                {{ trip.driver?.firstName }} {{ trip.driver?.lastName }}
+              </p>
+            </div>
+          </div>
         </div>
-        <p class="text-gray-700 text-base"><b>Route: </b>{{ trip.route }}</p>
-        <p class="text-gray-700 text-base">
-          <b>Driver: </b>{{ trip.driver?.firstName }}
-          {{ trip.driver?.lastName }}
-        </p>
       </div>
     </a>
   </div>

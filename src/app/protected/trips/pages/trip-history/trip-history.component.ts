@@ -21,4 +21,19 @@ export class TripHistoryComponent implements OnInit {
       },
     });
   }
+
+  getFormattedDates(date: string | undefined): any {
+    if (date) {
+      const timestamp = new Date(date);
+      return timestamp.toLocaleDateString();
+    }
+  }
+
+  getOrigin(trip: Trip) {
+    return trip.route?.split(',').at(0);
+  }
+
+  getDestination(trip: Trip) {
+    return trip.route?.split(',').at(-1);
+  }
 }

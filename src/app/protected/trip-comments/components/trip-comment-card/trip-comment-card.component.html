@@ -1,0 +1,35 @@
+<div class="flex mb-3">
+  <div class="flex-shrink-0 mr-3">
+    <img
+      class="mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10"
+      *ngIf="comment?.publisher?.photoURL; else photo"
+      src="{{ comment?.publisher?.photoURL }}"
+    />
+    <ng-template #photo>
+      <img
+        class="mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10"
+        src="https://pixlok.com/wp-content/uploads/2022/02/Profile-Icon-SVG-09856789-300x300.png"
+      />
+    </ng-template>
+  </div>
+  <div
+    class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed"
+  >
+    <strong>
+      {{ comment?.publisher?.firstName }}
+      {{ comment?.publisher?.lastName }}
+    </strong>
+    <span class="text-xs text-gray-400">
+      {{ getFormattedDates(comment?.date) }}</span
+    >
+    <p class="text-sm w-full">
+      {{ comment?.comment }}
+    </p>
+    <a
+      *ngIf="!isInsideTrip"
+      class="text-blue-600 dark:text-blue-500 hover:underline"
+      [routerLink]="['../trips/', comment?.tripId, 'detail']"
+      >View trip detail</a
+    >
+  </div>
+</div>

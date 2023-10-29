@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TripService } from '../../services/trip.service';
 import { Trip } from '../../interfaces/trip.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TripCommentService } from 'src/app/protected/trip-comments/services/trip-comment.service';
 import { TripComment } from 'src/app/protected/trip-comments/interfaces/trip-comment.interface';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-detail',
@@ -15,6 +16,9 @@ export class TripDetailComponent implements OnInit {
   trip: Trip | null = null;
   tripCommentForm: FormGroup = new FormGroup({});
   comments: TripComment[] = [];
+
+  @ViewChild('swalDriverComments')
+  public swalDriverComments!: SwalComponent;
 
   constructor(
     private tripService: TripService,
@@ -53,6 +57,51 @@ export class TripDetailComponent implements OnInit {
 
   isCommentMine(comment: TripComment) {
     return comment.publisherId === sessionStorage.getItem('user_id');
+  }
+
+  viewDriverComments() {
+    this.tripCommentService
+      .getCommentsByDriver(this.trip?.driverId!)
+      .subscribe({
+        next: (response) => {
+          const html = response
+            .map(
+              (comment) => `
+              <div class="flex mb-3">
+                <div
+                  class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed"
+                >
+                  <strong>
+                    ${comment.publisher.firstName} ${
+                comment.publisher.lastName
+              } 
+                  </strong>
+                  <span class="text-xs text-gray-400">${this.getFormattedDates(
+                    comment.date
+                  )}</span
+                  >
+                  <p class="text-sm w-full">
+                    ${comment.comment}
+                  </p>
+                </div>
+              </div>
+            `
+            )
+            .join('');
+          this.swalDriverComments.html = html;
+          this.swalDriverComments.fire();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
+  getFormattedDates(date: string | undefined): any {
+    if (date) {
+      const timestamp = new Date(date);
+      return timestamp.toLocaleDateString();
+    }
   }
 
   onSubmitComment() {

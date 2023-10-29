@@ -26,6 +26,17 @@ export class TripCommentService {
     });
   }
 
+  getCommentsByDriver(driverId: string) {
+    return this.httpClient.get<TripComment[]>(
+      this.uri + `/by-driver/${driverId}`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+        },
+      }
+    );
+  }
+
   create(comment: string, tripId: string, receiverId: string) {
     return this.httpClient.post(
       this.uri,

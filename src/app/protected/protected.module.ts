@@ -12,6 +12,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { TripDetailComponent } from './trips/pages/trip-detail/trip-detail.component';
 import { NotificationListComponent } from './notifications/pages/notification-list/notification-list.component';
 import { TripCommentListComponent } from './trip-comments/pages/trip-comment-list/trip-comment-list.component';
+import { TripCommentCardComponent } from './trip-comments/components/trip-comment-card/trip-comment-card.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TripCommentListComponent } from './trip-comments/pages/trip-comment-lis
     TripDetailComponent,
     NotificationListComponent,
     TripCommentListComponent,
+    TripCommentCardComponent,
   ],
   imports: [
     CommonModule,
