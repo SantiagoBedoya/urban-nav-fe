@@ -31,4 +31,7 @@ export class NotificationsModalComponent implements OnInit {
     this.isModalOpen = !this.isModalOpen;
   }
 
+  closeModal() {
+    this.isModalOpen = false;
+  }
 }

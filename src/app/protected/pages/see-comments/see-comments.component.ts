@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommentsService } from '../../services/comments.service';
 import { Comments } from '../../interfaces/comments.interface';
+import { RateModalComponent } from '../../components/rate-modal/rate-modal.component';
 
 @Component({
   selector: 'app-see-comments',
