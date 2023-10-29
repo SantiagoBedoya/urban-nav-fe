@@ -12,6 +12,10 @@ export class UserMeComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
+    this.getInfo();
+  }
+
+  getInfo() {
     this.userService.me().subscribe({
       next: (response) => {
         this.user = response;
@@ -20,5 +24,9 @@ export class UserMeComponent implements OnInit {
         console.error(err);
       },
     });
+  }
+
+  onNewPhoto() {
+    this.getInfo();
   }
 }

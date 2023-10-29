@@ -1,0 +1,107 @@
+<div class="bg-white rounded-lg shadow-xl p-8">
+  <div class="flex items-center justify-between">
+    <h4 class="text-xl text-gray-900 font-bold">Contacts</h4>
+    <app-add-contact-modal
+      [currentContacts]="contacts!"
+      (newContact)="getContacts()"
+    ></app-add-contact-modal>
+  </div>
+  <div
+    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-8 mt-8"
+  >
+    <a
+      *ngFor="let contact of contacts; let i = index"
+      [ngClass]="{
+        flex: true,
+        'flex-col': true,
+        'items-center': true,
+        'justify-center': true,
+        'hover:text-custom-blue': true,
+        'text-[#2E618B]': contact.isPrimary
+      }"
+    >
+      <div
+        class="flex items-baseline relative"
+        [title]="contact.isPrimary ? 'primary' : 'aditional'"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="70"
+          height="70"
+          fill="currentColor"
+          class="bi bi-person-circle"
+          viewBox="0 0 16 16"
+        >
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+          <path
+            fill-rule="evenodd"
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+          />
+        </svg>
+
+        <button
+          (click)="deleteContact(i)"
+          class="absolute bottom-0 right-0 text-red-500 cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            class="bi bi-x-circle-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"
+            />
+          </svg>
+        </button>
+      </div>
+      <p class="text-center font-bold text-sm mt-1">{{ contact.name }}</p>
+      <p class="text-base text-custom-black text-center">{{ contact.phone }}</p>
+    </a>
+  </div>
+</div>
+
+<div
+  *ngIf="showModal"
+  class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
+>
+  <div class="relative w-5/12 my-6 mx-auto max-w-6xl">
+    <div
+      class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
+    >
+      <div
+        class="flex items-center justify-between p-5 border-b border-solid border-blueGray-200 rounded-t"
+      >
+        <h3 class="text-3xl text-[#203B52] font-bold">Add Contacts</h3>
+        <button
+          class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button"
+          (click)="toggleModal()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            fill="currentColor"
+            class="bi bi-x-circle"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+            />
+            <path
+              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <i
+        class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b"
+      ></i>
+    </div>
+  </div>
+</div>
+<div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>

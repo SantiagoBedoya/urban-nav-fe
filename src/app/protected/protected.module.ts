@@ -13,6 +13,9 @@ import { TripDetailComponent } from './trips/pages/trip-detail/trip-detail.compo
 import { NotificationListComponent } from './notifications/pages/notification-list/notification-list.component';
 import { TripCommentListComponent } from './trip-comments/pages/trip-comment-list/trip-comment-list.component';
 import { TripCommentCardComponent } from './trip-comments/components/trip-comment-card/trip-comment-card.component';
+import { UploadComponent } from './users/components/upload/upload.component';
+import { ContactsComponent } from './users/components/contacts/contacts.component';
+import { AddContactModalComponent } from './users/components/add-contact-modal/add-contact-modal.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { TripCommentCardComponent } from './trip-comments/components/trip-commen
     NotificationListComponent,
     TripCommentListComponent,
     TripCommentCardComponent,
+    UploadComponent,
+    ContactsComponent,
+    AddContactModalComponent,
   ],
   imports: [
     CommonModule,
