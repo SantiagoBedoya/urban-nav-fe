@@ -12,6 +12,9 @@ import { Permissions } from 'src/app/auth/permissions/permission.enum';
 export class ProfileComponent {
   constructor(private store: Store) {}
 
+  rolName: boolean = sessionStorage.getItem('role_name') === 'Client'
+  
+
   contactsPermission: number = Permissions.UseContacts;
   vehiclePermission: number = Permissions.ListVehicle;
 

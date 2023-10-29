@@ -16,7 +16,7 @@ export class NotificationsModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const token = localStorage.getItem('access_token');
+    const token = sessionStorage.getItem('access_token');
     this.notificationService.getAll().subscribe({
       next: (response) => {
         this.notifications = response;

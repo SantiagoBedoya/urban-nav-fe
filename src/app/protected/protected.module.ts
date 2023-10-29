@@ -23,6 +23,7 @@ import { PopoversComponent } from './components/popovers/popovers.component';
 import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { PanicComponent } from './components/panic/panic.component';
 import { WebsocketService } from './services/websocket.service';
+import { CommentsDriverComponent } from './components/popovers/comments-driver/comments-driver.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { WebsocketService } from './services/websocket.service';
     RootComponent,
     PopoversComponent,
     PanicComponent,
+    CommentsDriverComponent,
   ],
   imports: [
     CommonModule,

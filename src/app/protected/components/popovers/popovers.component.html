@@ -3,9 +3,12 @@
 <div
   class=" {{showInfo}} absolute  right-[2px] lg:left-[70%] max-w-[24rem]  whitespace-normal break-words rounded-lg border border-blue-gray-50 bg-white p-4 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
   <div class="mb-2 flex items-center justify-between gap-4">
-    <img
-      src={{driverInfo?.photoURL}}
-      class="relative inline-block h-12 w-12 rounded-full object-cover object-center" />
+    <img src={{driverInfo?.photoURL}} class="relative inline-block h-12 w-12 rounded-full object-cover object-center"
+      *ngIf="driverInfo?.photoURL; else photo"/>
+    <ng-template #photo>
+      <img class="mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10"
+        src="https://pixlok.com/wp-content/uploads/2022/02/Profile-Icon-SVG-09856789-300x300.png">
+    </ng-template>
   </div>
   <div class="flex  flex-col">
     <h6
@@ -55,8 +58,33 @@
     </div>
   </div>
   <div class="mt-6 flex items-center gap-8 border-t border-blue-gray-50 pt-4">
-    <a class="flex items-center gap-1 font-sans text-xs font-normal text-gray-700 antialiased">
+    <button (click)="buttonComments()"
+      class="flex items-center gap-1 font-sans text-xs font-normal text-gray-700 antialiased">
       <i class="bi bi-indent text-2xl"></i>
-      Comments </a>
+      Comments </button>
   </div>
 </div>
+
+<div *ngIf="showModal"
+  class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+  <div class="relative my-6  mx-auto max-w-6xl 	">
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full outline-none bg-white focus:outline-none">
+      <div class="flex items-center justify-between p-2 border-b border-solid border-blueGray-200 rounded-t">
+        <p class="text-xl text-[#203B52] font-bold">Comment</p>
+        <button
+          class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button" (click)="close()">
+          <i class="bi bi-x-circle text-2xl"></i>
+        </button>
+      </div>
+      <div class="w-full  flex justify-center relative p-6 flex-auto">
+        <div class="antialiased mx-auto max-w-screen-sm max-h-96 overflow-auto  ">
+          <div class="space-y-4 m-2" *ngFor="let item of listComments">
+            <app-comments-driver [commentsDriver]="item"></app-comments-driver>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>

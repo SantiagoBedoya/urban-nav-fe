@@ -4,7 +4,7 @@ import { Role } from 'src/app/protected/interfaces/role.interface';
 export interface UserDataInterface {
   _id: string;
   contacts: contact[];
-  role: Role;
+  role?: Role;
   email: string;
   firstName: string;
   lastName: string;
