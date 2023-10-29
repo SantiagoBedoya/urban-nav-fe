@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-request',
-  templateUrl: './request.component.html',
-  styleUrls: ['./request.component.css'],
+  templateUrl: './trip-request.component.html',
+  styleUrls: ['./trip-request.component.css'],
 })
-export class RequestComponent implements OnInit {
+export class TripRequestComponent implements OnInit {
   points: Point[] | null = null;
   requestTripForm: FormGroup = new FormGroup({});
   requestTrip: RequestTrip | null = null;

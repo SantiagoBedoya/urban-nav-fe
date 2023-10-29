@@ -4,10 +4,10 @@ import { User } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-me',
-  templateUrl: './me.component.html',
-  styleUrls: ['./me.component.css'],
+  templateUrl: './user-me.component.html',
+  styleUrls: ['./user-me.component.css'],
 })
-export class MeComponent implements OnInit {
+export class UserMeComponent implements OnInit {
   user: User | null = null;
   constructor(private userService: UserService) {}
 

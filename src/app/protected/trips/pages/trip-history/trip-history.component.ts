@@ -4,10 +4,10 @@ import { Trip } from '../../interfaces/trip.interface';
 
 @Component({
   selector: 'app-history',
-  templateUrl: './history.component.html',
-  styleUrls: ['./history.component.css'],
+  templateUrl: './trip-history.component.html',
+  styleUrls: ['./trip-history.component.css'],
 })
-export class HistoryComponent implements OnInit {
+export class TripHistoryComponent implements OnInit {
   trips: Trip[] | null = null;
   constructor(private tripService: TripService) {}
 

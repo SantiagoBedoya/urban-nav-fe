@@ -8,10 +8,10 @@ import { TripComment } from 'src/app/protected/trip-comments/interfaces/trip-com
 
 @Component({
   selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.css'],
+  templateUrl: './trip-detail.component.html',
+  styleUrls: ['./trip-detail.component.css'],
 })
-export class DetailComponent implements OnInit {
+export class TripDetailComponent implements OnInit {
   trip: Trip | null = null;
   tripCommentForm: FormGroup = new FormGroup({});
   comments: TripComment[] = [];
@@ -27,7 +27,6 @@ export class DetailComponent implements OnInit {
     this.tripCommentForm = this.fb.group({
       comment: ['', [Validators.required]],
     });
-    this.getComments();
 
     const tripId = this.route.snapshot.paramMap.get('id')!;
     this.tripService.findById(tripId).subscribe({
@@ -38,10 +37,11 @@ export class DetailComponent implements OnInit {
         console.error(err);
       },
     });
+    this.getComments(tripId);
   }
 
-  getComments() {
-    this.tripCommentService.findAll().subscribe({
+  getComments(tripId: string) {
+    this.tripCommentService.getCommentsByTrip(tripId).subscribe({
       next: (response) => {
         this.comments = response;
       },
@@ -51,6 +51,10 @@ export class DetailComponent implements OnInit {
     });
   }
 
+  isCommentMine(comment: TripComment) {
+    return comment.publisherId === sessionStorage.getItem('user_id');
+  }
+
   onSubmitComment() {
     if (this.tripCommentForm.valid && this.trip?.driverId) {
       const { comment } = this.tripCommentForm.value;
@@ -58,7 +62,7 @@ export class DetailComponent implements OnInit {
         .create(comment, this.trip?._id!, this.trip?.driverId!)
         .subscribe({
           next: (response) => {
-            this.getComments();
+            this.getComments(this.trip?._id!);
             this.tripCommentForm.reset();
           },
           error: (err) => {

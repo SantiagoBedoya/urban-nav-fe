@@ -10,8 +10,16 @@ export class TripCommentService {
   private uri: string = environment.baseURL + '/trip-comments';
   constructor(private httpClient: HttpClient) {}
 
-  findAll() {
-    return this.httpClient.get<TripComment[]>(this.uri, {
+  getCommentsByTrip(tripId: string) {
+    return this.httpClient.get<TripComment[]>(this.uri + `/by-trip/${tripId}`, {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+      },
+    });
+  }
+
+  getCommentsToMe() {
+    return this.httpClient.get<TripComment[]>(this.uri + '/to-me', {
       headers: {
         Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
       },

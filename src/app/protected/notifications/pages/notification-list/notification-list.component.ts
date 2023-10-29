@@ -4,10 +4,10 @@ import { Notification } from '../../interfaces/notification.interface';
 
 @Component({
   selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css'],
+  templateUrl: './notification-list.component.html',
+  styleUrls: ['./notification-list.component.css'],
 })
-export class ListComponent implements OnInit {
+export class NotificationListComponent implements OnInit {
   notifications: Notification[] | null = null;
   constructor(private notificationService: NotificationService) {}
 

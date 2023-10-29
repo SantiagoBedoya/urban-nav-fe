@@ -61,9 +61,12 @@
         <div class="rounded overflow-hidden shadow-lg my-3 px-6 py-4">
           <ul>
             <li *ngFor="let comment of comments">
-              <span *ngIf="comment.tripId == trip._id">
+              <span *ngIf="isCommentMine(comment); else notMine">
                 <b>You:</b> {{ comment.comment }}
               </span>
+              <ng-template #notMine>
+                <b>{{ comment.publisher.firstName }}:</b> {{ comment.comment }}
+              </ng-template>
             </li>
           </ul>
         </div>

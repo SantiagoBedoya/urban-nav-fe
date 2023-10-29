@@ -5,22 +5,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { IndexComponent } from './pages/index/index.component';
-import { HistoryComponent } from './trips/pages/history/history.component';
-import { RequestComponent } from './trips/pages/request/request.component';
-import { MeComponent } from './users/pages/me/me.component';
+import { TripHistoryComponent } from './trips/pages/trip-history/trip-history.component';
+import { TripRequestComponent } from './trips/pages/trip-request/trip-request.component';
+import { UserMeComponent } from './users/pages/user-me/user-me.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { DetailComponent } from './trips/pages/detail/detail.component';
-import { ListComponent } from './notifications/pages/list/list.component';
+import { TripDetailComponent } from './trips/pages/trip-detail/trip-detail.component';
+import { NotificationListComponent } from './notifications/pages/notification-list/notification-list.component';
+import { TripCommentListComponent } from './trip-comments/pages/trip-comment-list/trip-comment-list.component';
 
 @NgModule({
   declarations: [
     SidebarComponent,
     IndexComponent,
-    HistoryComponent,
-    RequestComponent,
-    MeComponent,
-    DetailComponent,
-    ListComponent,
+    TripHistoryComponent,
+    TripRequestComponent,
+    UserMeComponent,
+    TripDetailComponent,
+    NotificationListComponent,
+    TripCommentListComponent,
   ],
   imports: [
     CommonModule,

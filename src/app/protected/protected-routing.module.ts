@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './pages/index/index.component';
-import { RequestComponent } from './trips/pages/request/request.component';
-import { HistoryComponent } from './trips/pages/history/history.component';
-import { MeComponent } from './users/pages/me/me.component';
-import { DetailComponent } from './trips/pages/detail/detail.component';
-import { ListComponent } from './notifications/pages/list/list.component';
+import { TripRequestComponent } from './trips/pages/trip-request/trip-request.component';
+import { TripHistoryComponent } from './trips/pages/trip-history/trip-history.component';
+import { UserMeComponent } from './users/pages/user-me/user-me.component';
+import { TripDetailComponent } from './trips/pages/trip-detail/trip-detail.component';
+import { NotificationListComponent } from './notifications/pages/notification-list/notification-list.component';
+import { TripCommentListComponent } from './trip-comments/pages/trip-comment-list/trip-comment-list.component';
 
 const routes: Routes = [
   {
@@ -17,15 +18,15 @@ const routes: Routes = [
         children: [
           {
             path: 'request',
-            component: RequestComponent,
+            component: TripRequestComponent,
           },
           {
             path: 'history',
-            component: HistoryComponent,
+            component: TripHistoryComponent,
           },
           {
             path: ':id/detail',
-            component: DetailComponent,
+            component: TripDetailComponent,
           },
           {
             path: '**',
@@ -38,7 +39,7 @@ const routes: Routes = [
         children: [
           {
             path: 'me',
-            component: MeComponent,
+            component: UserMeComponent,
           },
           {
             path: '**',
@@ -51,7 +52,16 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: ListComponent,
+            component: NotificationListComponent,
+          },
+        ],
+      },
+      {
+        path: 'trip-comments',
+        children: [
+          {
+            path: '',
+            component: TripCommentListComponent,
           },
         ],
       },
