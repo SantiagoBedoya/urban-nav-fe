@@ -6,15 +6,15 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class WebsocketService extends Socket {
-  notifications = this.fromEvent('notifications');
+  notifications = this.fromEvent<Record<string, string>>('notifications');
 
   constructor() {
     super({
       url: environment.socketURL,
       options: {
         extraHeaders: {
-          userid: 'abc1',
-          token: 'token123',
+          userid: sessionStorage.getItem('user_id') ?? '',
+          token: sessionStorage.getItem('access_token') ?? '',
         },
       },
     });

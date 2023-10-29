@@ -13,8 +13,7 @@ import { TwoFaComponent } from './pages/two-fa/two-fa.component';
 import { ValidateOtpComponent } from './pages/validate-otp/validate-otp.component';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 import { NgOtpInputModule } from 'ng-otp-input';
-import { authReducer, authStateFeatureKey, userReducer, userStateFeatureKey } from '../state';
-import { StoreModule } from '@ngrx/store';
+
 @NgModule({
   declarations: [
     SignInComponent,
@@ -34,8 +33,6 @@ import { StoreModule } from '@ngrx/store';
     SharedModule,
     QRCodeModule,
     NgOtpInputModule,
-    StoreModule.forFeature(authStateFeatureKey, authReducer),
-    StoreModule.forFeature(userStateFeatureKey, userReducer)
   ],
 })
 export class AuthModule {}

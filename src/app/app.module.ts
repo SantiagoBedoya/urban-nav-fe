@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ProtectedModule } from './protected/protected.module';
-import { StoreModule } from '@ngrx/store';
 import { AuthModule } from './auth/auth.module';
 import { SocketIoModule } from 'ngx-socket-io';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
@@ -23,13 +22,12 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     ReactiveFormsModule,
     HttpClientModule,
     QRCodeModule,
-    ToastrModule.forRoot(),
     BrowserAnimationsModule,
     AuthModule,
     ProtectedModule,
-    StoreModule.forRoot({}),
     SocketIoModule,
-    SweetAlert2Module.forRoot()
+    ToastrModule.forRoot(),
+    SweetAlert2Module.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

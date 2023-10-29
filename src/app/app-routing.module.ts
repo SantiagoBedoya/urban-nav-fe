@@ -4,14 +4,14 @@ import { validateTokenGuard } from './guards/validate-token.guard';
 
 const routes: Routes = [
   {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-  },
-  {
     path: '',
     loadChildren: () =>
       import('./public/public.module').then((m) => m.PublicModule),
     canActivate: [validateTokenGuard],
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'dashboard',

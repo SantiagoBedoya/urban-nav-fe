@@ -1,36 +1,63 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { RootComponent } from './pages/root/root.component';
-import { SeeCommentsComponent } from './pages/see-comments/see-comments.component';
-import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
-import { ProfileComponent } from './components/dashboard/profile/profile.component';
-
+import { IndexComponent } from './pages/index/index.component';
+import { RequestComponent } from './trips/pages/request/request.component';
+import { HistoryComponent } from './trips/pages/history/history.component';
+import { MeComponent } from './users/pages/me/me.component';
+import { DetailComponent } from './trips/pages/detail/detail.component';
+import { ListComponent } from './notifications/pages/list/list.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: RootComponent,
+    component: IndexComponent,
     children: [
       {
-        path: 'home',
-        component: HomeComponent
-      },
-      {
-        path: 'me',
-        component: ProfileComponent
-      },
-      {
         path: 'trips',
-        component: CardsTripsComponent,
+        children: [
+          {
+            path: 'request',
+            component: RequestComponent,
+          },
+          {
+            path: 'history',
+            component: HistoryComponent,
+          },
+          {
+            path: ':id/detail',
+            component: DetailComponent,
+          },
+          {
+            path: '**',
+            redirectTo: 'request',
+          },
+        ],
       },
       {
-        path: 'see-comments',
-        component: SeeCommentsComponent,
+        path: 'users',
+        children: [
+          {
+            path: 'me',
+            component: MeComponent,
+          },
+          {
+            path: '**',
+            redirectTo: 'me',
+          },
+        ],
+      },
+      {
+        path: 'notifications',
+        children: [
+          {
+            path: '',
+            component: ListComponent,
+          },
+        ],
       },
       {
         path: '**',
-        redirectTo: 'home',
+        redirectTo: 'trips',
       },
     ],
   },
@@ -40,4 +67,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ProtectedRoutingModule { }
+export class ProtectedRoutingModule {}

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { AuthActions } from 'src/app/state';
-import { Store } from '@ngrx/store';
-import { UserService } from 'src/app/protected/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -22,9 +19,7 @@ export class ValidateOtpComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService,
     private router: Router,
-    private store: Store,
     private toastr: ToastrService
   ) {}
 
@@ -72,9 +67,6 @@ export class ValidateOtpComponent implements OnInit {
 
         sessionStorage.setItem('access_token', accessToken);
 
-        this.userService.setProfileData(accessToken);
-
-        this.store.dispatch(AuthActions.logIn({ isLogged: true }));
         sessionStorage.setItem('isLogged', 'true');
 
         this.router.navigate([`/dashboard`]);

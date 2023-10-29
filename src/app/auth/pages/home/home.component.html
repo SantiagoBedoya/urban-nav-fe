@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <section class="flex h-[91vh] items-stretch text-white">
   <div
     class="relative hidden w-1/2 items-center bg-gray-500 bg-cover bg-no-repeat lg:flex"
@@ -64,9 +65,6 @@
   >
     <div class="z-20 w-full py-6">
       <router-outlet></router-outlet>
-      <!-- <app-sign-in-form *ngIf="showLoginForm" (goToRegister)="showRegister()" (goToPasswordRecovery)="showPasswordRecovery()"></app-sign-in-form>
-            <app-sign-up *ngIf="showRegForm" (goToLogin)="showLogin()" ></app-sign-up>
-            <app-password-recovery-form *ngIf="showPassRecoveryForm" (goToLogin)="showLogin()"></app-password-recovery-form> -->
     </div>
   </div>
 </section>
