@@ -16,4 +16,8 @@ export class TripCommentCardComponent {
       return timestamp.toLocaleDateString();
     }
   }
+
+  isCommentMine() {
+    return this.comment?.publisherId === sessionStorage.getItem('user_id');
+  }
 }

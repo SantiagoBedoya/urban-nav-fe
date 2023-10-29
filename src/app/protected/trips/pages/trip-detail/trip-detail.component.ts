@@ -55,10 +55,6 @@ export class TripDetailComponent implements OnInit {
     });
   }
 
-  isCommentMine(comment: TripComment) {
-    return comment.publisherId === sessionStorage.getItem('user_id');
-  }
-
   viewDriverComments() {
     this.tripCommentService
       .getCommentsByDriver(this.trip?.driverId!)

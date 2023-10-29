@@ -15,10 +15,15 @@
   <div
     class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed"
   >
-    <strong>
-      {{ comment?.publisher?.firstName }}
-      {{ comment?.publisher?.lastName }}
-    </strong>
+    <b *ngIf="isCommentMine(); else notMine">
+      <strong> You </strong>
+    </b>
+    <ng-template #notMine>
+      <strong>
+        {{ comment?.publisher?.firstName }}
+        {{ comment?.publisher?.lastName }}
+      </strong>
+    </ng-template>
     <span class="text-xs text-gray-400">
       {{ getFormattedDates(comment?.date) }}</span
     >
