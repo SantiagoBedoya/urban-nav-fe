@@ -24,6 +24,9 @@ import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { PanicComponent } from './components/panic/panic.component';
 import { WebsocketService } from './services/websocket.service';
 import { CommentsDriverComponent } from './components/popovers/comments-driver/comments-driver.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { TripDetailComponent } from './pages/trip-detail/trip-detail.component';
+import { TripCommentCardComponent } from './components/trip-comment-card/trip-comment-card.component';
 
 @NgModule({
   declarations: [
@@ -50,13 +53,16 @@ import { CommentsDriverComponent } from './components/popovers/comments-driver/c
     PopoversComponent,
     PanicComponent,
     CommentsDriverComponent,
+    TripDetailComponent,
+    TripCommentCardComponent,
   ],
   imports: [
     CommonModule,
     ProtectedRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    SweetAlert2Module,
   ],
   providers: [WebsocketService],
 })

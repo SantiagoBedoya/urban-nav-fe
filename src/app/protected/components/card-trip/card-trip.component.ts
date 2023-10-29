@@ -82,10 +82,8 @@ export class CardTripComponent implements OnInit {
 
   cancelTrip() {
     if (this.trip?._id) {
-      const newState = this.trip.status === 'ACTIVE' ? 'FINISHED' : 'CANCELLED';
-      const updatedTrip = { ...this.trip, status: newState };
-      this.tripService.cancelTrip(this.trip?._id, updatedTrip).subscribe({
-        next: () => {
+      this.tripService.cancelTrip(this.trip._id).subscribe({
+        next: (res) => {
           this.toastr.success('Trip was canceled', '', {
             positionClass: 'toast-bottom-center',
             toastClass: 'ngx-toastr toast-custom',
@@ -95,6 +93,19 @@ export class CardTripComponent implements OnInit {
           console.error(err);
         },
       });
+      // const newState = this.trip.status === 'ACTIVE' ? 'FINISHED' : 'CANCELLED';
+      // const updatedTrip = { ...this.trip, status: newState };
+      // this.tripService.cancelTrip(this.trip?._id, updatedTrip).subscribe({
+      //   next: () => {
+      //     this.toastr.success('Trip was canceled', '', {
+      //       positionClass: 'toast-bottom-center',
+      //       toastClass: 'ngx-toastr toast-custom',
+      //     });
+      //   },
+      //   error: (err) => {
+      //     console.error(err);
+      //   },
+      // });
     }
   }
 }
