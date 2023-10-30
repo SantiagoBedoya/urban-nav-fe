@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Permissions } from 'src/app/auth/permissions/permission.enum';
 import { TripService } from '../../services/trip.service';
 import { Trip } from '../../interfaces/trip.interface';
+import { RateModalComponent } from '../../components/rate-modal/rate-modal.component';
 
 @Component({
   selector: 'app-home',
