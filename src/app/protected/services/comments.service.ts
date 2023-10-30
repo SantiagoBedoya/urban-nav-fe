@@ -37,34 +37,4 @@ export class CommentsService {
     );
   }
 
-  // createComment(newComment: Comments) {
-  //   const token = sessionStorage.getItem('access_token');
-  //   const userId = sessionStorage.getItem('user_id');
-
-  //   const fullComment = {
-  //     ...newComment,
-  //     Date: new Date(),
-  //   };
-
-  //   const options = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/json',
-  //     })
-  //       .set('content-type', 'application/json')
-  //       .set('Authorization', `Bearer ${token}`),
-  //   };
-
-  //   return this.httpClient
-  //     .post<Comments>(`${this.uri}`, fullComment, options)
-  //     .subscribe({
-  //       next: (data) => {
-  //         this.store.dispatch(
-  //           UserActions.setVehicle({
-  //             vehicle: { ...data },
-  //           })
-  //         );
-  //         sessionStorage.setItem('driver_vehicle', JSON.stringify(data));
-  //       },
-  //     });
-  // }
 }
