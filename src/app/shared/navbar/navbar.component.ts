@@ -31,7 +31,7 @@ export class NavbarComponent {
   }
 
   toggleModal() {
-    this.isModalOpen = true;
+    this.isModalOpen = !this.isModalOpen;
   }
 
 }
