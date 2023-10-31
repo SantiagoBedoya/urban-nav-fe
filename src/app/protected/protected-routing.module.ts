@@ -5,7 +5,7 @@ import { RootComponent } from './pages/root/root.component';
 import { SeeCommentsComponent } from './pages/see-comments/see-comments.component';
 import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
-
+import { TripDetailComponent } from './pages/trip-detail/trip-detail.component';
 
 const routes: Routes = [
   {
@@ -14,15 +14,19 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
       },
       {
         path: 'me',
-        component: ProfileComponent
+        component: ProfileComponent,
       },
       {
         path: 'trips',
         component: CardsTripsComponent,
+      },
+      {
+        path: 'trips/:id/detail',
+        component: TripDetailComponent,
       },
       {
         path: 'see-comments',
@@ -40,4 +44,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ProtectedRoutingModule { }
+export class ProtectedRoutingModule {}

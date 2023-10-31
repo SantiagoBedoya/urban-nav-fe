@@ -22,8 +22,15 @@ export class TripService {
       }
     );
   }
+  findById(tripId: string) {
+    return this.httpClient.get<Trip>(`${this.uri}/${tripId}`, {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+      },
+    });
+  }
   acceptTrip(origin: string, destination: string) {
-    return this.httpClient.post<{ message: string }>(
+    return this.httpClient.post<Trip>(
       this.uri + '/client-accept',
       {
         origin,
@@ -53,16 +60,13 @@ export class TripService {
     return this.httpClient.get<any>(`${this.uri}/${tripId}/panic`, { headers });
   }
 
-  cancelTrip(tripId: string, trip: any) {
+  cancelTrip(tripId: string) {
     const token = sessionStorage.getItem('access_token');
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    return this.httpClient.patch<any>(
-      `${this.uri}/${tripId}
-    `,
-      trip,
-      { headers }
-    );
+    return this.httpClient.get(`${this.uri}/${tripId}/cancel`, {
+      headers,
+    });
   }
 }

@@ -13,8 +13,8 @@ export class WebsocketService extends Socket {
       url: environment.socketURL,
       options: {
         extraHeaders: {
-          userid: 'abc1',
-          token: 'token123',
+          userid: sessionStorage.getItem('user_id')!,
+          token: sessionStorage.getItem('access_token')!,
         },
       },
     });
