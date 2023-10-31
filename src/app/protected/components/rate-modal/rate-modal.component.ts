@@ -34,7 +34,7 @@ export class RateModalComponent {
     console.log(this.userRating);
     console.log(this.userComment);
     const token = localStorage.getItem('access_token');
-    this.RatingsService.sendRating(this.userRating).subscribe({
+    this.RatingsService.create(this.userRating, this.trip!._id, this.trip!.clientId).subscribe({
       next: (response) => {
         console.log(response);
       },

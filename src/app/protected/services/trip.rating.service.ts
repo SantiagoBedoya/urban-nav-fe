@@ -23,4 +23,19 @@ export class RatingsService {
     );
   }
 
+  create(rating: Number, tripId: string, receiverId: string) {
+    return this.httpClient.post(
+      this.uri,
+      {
+        rating,
+        tripId,
+        receiverId,
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+        },
+      }
+    );
+  }
 }

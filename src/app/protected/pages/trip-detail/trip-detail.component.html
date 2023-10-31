@@ -1,3 +1,6 @@
+<head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
 <h1 class="text-3xl mb-3">Trip Detail</h1>
 <div *ngIf="trip == null">
   <div class="text-center">
@@ -103,7 +106,31 @@
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">Rating</div>
         <p class="text-gray-700 text-base">Please rate this driver</p>
+        <div class="mb-4">
+          <div class="flex items-center space-x-2">
+            <input type="radio" id="user_rating_5" name="user_rating" [(ngModel)]="userRating" [value]="1" class="hidden">
+            <label for="user_rating_5" class="cursor-pointer text-3xl">
+              <i class="fas fa-star text-yellow-500"></i>1
+            </label>
+            <input type="radio" id="user_rating_4" name="user_rating" [(ngModel)]="userRating" [value]="2" class="hidden">
+            <label for="user_rating_4" class="cursor-pointer text-3xl">
+              <i class="fas fa-star text-yellow-500"></i>2
+            </label>
+            <input type="radio" id="user_rating_3" name="user_rating" [(ngModel)]="userRating" [value]="3" class="hidden">
+            <label for="user_rating_3" class="cursor-pointer text-3xl">
+              <i class="fas fa-star text-yellow-500"></i>3
+            </label>
+            <input type="radio" id="user_rating_2" name="user_rating" [(ngModel)]="userRating" [value]="4" class="hidden">
+            <label for="user_rating_2" class="cursor-pointer text-3xl">
+              <i class="fas fa-star text-yellow-500"></i>4
+            </label>
+            <input type="radio" id="user_rating_1" name="user_rating" [(ngModel)]="userRating" [value]="5" class="hidden">
+            <label for="user_rating_1" class="cursor-pointer text-3xl">
+              <i class="fas fa-star text-yellow-500"></i>5
+            </label>
+          </div>
       </div>
+      <p class="text-xs text-gray-400">Selected Rating: {{ userRating }}</p>
     </div>
   </div>
 </div>

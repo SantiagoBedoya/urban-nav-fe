@@ -6,6 +6,7 @@ import { Trip } from '../../interfaces/trip.interface';
 import { TripService } from '../../services/trip.service';
 import { TripComment } from '../../interfaces/trip-comment.interface';
 import { TripCommentService } from '../../services/trip-comment.service';
+import { RatingsService } from '../../services/trip.rating.service';
 
 @Component({
   selector: 'app-trip-detail',
@@ -16,6 +17,7 @@ export class TripDetailComponent implements OnInit {
   trip: Trip | null = null;
   tripCommentForm: FormGroup = new FormGroup({});
   comments: TripComment[] = [];
+  userRating: FormGroup = new FormGroup({});
 
   @ViewChild('swalDriverComments')
   public swalDriverComments!: SwalComponent;
@@ -24,12 +26,17 @@ export class TripDetailComponent implements OnInit {
     private tripService: TripService,
     private tripCommentService: TripCommentService,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private ratingsService: RatingsService
   ) {}
 
   ngOnInit(): void {
     this.tripCommentForm = this.fb.group({
       comment: ['', [Validators.required]],
+    });
+
+    this.userRating = this.fb.group({
+      rating: [1, [Validators.required, Validators.min(1), Validators.max(5)]],
     });
 
     const tripId = this.route.snapshot.paramMap.get('id')!;
@@ -103,6 +110,23 @@ export class TripDetailComponent implements OnInit {
       const { comment } = this.tripCommentForm.value;
       this.tripCommentService
         .create(comment, this.trip?._id!, this.trip?.driverId!)
+        .subscribe({
+          next: (response) => {
+            this.getComments(this.trip?._id!);
+            this.tripCommentForm.reset();
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
+    }
+  }
+
+  onSubmitRating() {
+    if (this.userRating.valid && this.trip?.driverId) {
+      const { rating } = this.userRating.value;
+      this.ratingsService
+        .create(rating, this.trip?._id!, this.trip?.driverId!)
         .subscribe({
           next: (response) => {
             this.getComments(this.trip?._id!);
