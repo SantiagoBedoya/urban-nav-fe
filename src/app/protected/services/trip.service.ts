@@ -9,7 +9,7 @@ import { RequestTrip } from '../interfaces/request-trip.interface';
 })
 export class TripService {
   private uri = environment.baseURL + '/trips';
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   requestTrip(origin: string, destination: string) {
     return this.httpClient.post<RequestTrip>(
@@ -66,6 +66,15 @@ export class TripService {
       .set('content-type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient.get(`${this.uri}/${tripId}/cancel`, {
+      headers,
+    });
+  }
+
+  updateTrip(tripId: string, data: any) {
+    const token = sessionStorage.getItem('access_token');
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient.patch(`${this.uri}/${tripId}`, data, {
       headers,
     });
   }
