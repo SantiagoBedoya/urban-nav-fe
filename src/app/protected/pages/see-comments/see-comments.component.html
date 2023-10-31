@@ -10,8 +10,8 @@
       <span class="mx-2">Texto del botón</span>
     </button> -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div *ngIf="comments.length != 0">
-        <div *ngFor="let comment of comments; let i = index">
+      <div *ngIf="tripcomment.length != 0">
+        <div *ngFor="let comment of tripcomment; let i = index">
           <div class="bg-white rounded-lg shadow-md p-6 mb-8">
             <div class="flex items-center mb-4">
               <div class="flex-shrink-0 mr-3">

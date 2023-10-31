@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommentsService } from '../../services/comments.service';
 import { Comments } from '../../interfaces/comments.interface';
 import { RatingsService } from '../../services/trip.rating.service';
 import { Ratings } from '../../interfaces/trip-rating.interface';
 import { ThisReceiver } from '@angular/compiler';
+import { TripCommentService } from '../../services/trip-comment.service';
+import { TripService } from '../../services/trip.service';
+import { Trip } from '../../interfaces/trip.interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-rate-modal',
@@ -15,10 +19,14 @@ export class RateModalComponent {
   userRating: number = 1;
   userComment: string = '';
   ratingOpen: boolean = true;
+  @Input() trip: Trip | undefined = undefined;
 
   constructor(
     private RatingsService: RatingsService,
-    private CommentsService: CommentsService
+    private CommentsService: CommentsService,
+    private TripCommentService: TripCommentService,
+    private tripService: TripService,
+    private route: ActivatedRoute,
   ) { }
 
 
@@ -35,7 +43,10 @@ export class RateModalComponent {
       },
     });
 
-    this.CommentsService.sendComment(this.userComment, this.userComment, this.userComment ).subscribe({
+    const tripId = this.route.snapshot.paramMap.get('id')!;
+
+    if (this.trip?._id) {
+    this.TripCommentService.create(this.userComment, this.trip?._id, this.trip.clientId).subscribe({
       next: (response) => {
         console.log(response);
       },
@@ -43,7 +54,7 @@ export class RateModalComponent {
         console.error(err);
       },
     });
-
+  }
   }
 
   closeModal() {

@@ -3,6 +3,8 @@ import { CommentsService } from '../../services/comments.service';
 import { Comments } from '../../interfaces/comments.interface';
 import { UserService } from '../../services/user.service';
 import { RateModalComponent } from '../../components/rate-modal/rate-modal.component';
+import { TripCommentService } from '../../services/trip-comment.service';
+import { TripComment } from '../../interfaces/trip-comment.interface';
 
 @Component({
   selector: 'app-see-comments',
@@ -10,20 +12,20 @@ import { RateModalComponent } from '../../components/rate-modal/rate-modal.compo
   styleUrls: ['./see-comments.component.css']
 })
 export class SeeCommentsComponent implements OnInit {
-  comments: Comments[] = [];
   date: any = {};
   publisher: any = {};
+  tripcomment: TripComment[] = [];
 
   constructor(
-    private commentService: CommentsService,
-    private userService: UserService
+    private userService: UserService,
+    private tripCommentService: TripCommentService
   ) { }
 
   ngOnInit(): void {
     const token = sessionStorage.getItem('access_token');
-    this.commentService.getAll().subscribe({
+    this.tripCommentService.getCommentsToMe().subscribe({
       next: (response) => {
-        this.comments = response;
+        this.tripcomment = response;
         this.getPublisher();
       },
       error: (err) => {
@@ -41,10 +43,9 @@ export class SeeCommentsComponent implements OnInit {
 
   getPublisher() {
     let publisherId = "";
-    for (let i = 0; i < this.comments.length; i++) {
-       publisherId = this.comments[i]?.publisherId!;
+    for (let i = 0; i < this.tripcomment.length; i++) {
+       publisherId = this.tripcomment[i]?.publisherId!;
     }
-    console.log(this.comments);
     this.userService.getUser(publisherId).subscribe({
       next: (data) => {
         this.publisher = data;
