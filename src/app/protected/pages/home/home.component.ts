@@ -17,6 +17,7 @@ export class HomeComponent {
   trip: Trip | null = null;
   tripStatus: string | undefined = '';
   roleName: string = '';
+  rolDriver: boolean =  false
 
   @ViewChild('newTrip')
   public newTrip!: SwalComponent;
@@ -27,6 +28,8 @@ export class HomeComponent {
   ) {}
 
   ngOnInit(): void {
+    this.rolDriver = sessionStorage.getItem('role_name') === 'Driver' 
+
     this.websocketService.notifications.subscribe((data: any) => {
       console.log(data);
       // this.acceptTrip.title = 'Trip - $' + response.price;
@@ -51,6 +54,7 @@ export class HomeComponent {
     });
 
     this.roleName = sessionStorage.getItem('role_name')!;
+
   }
 
   onAcceptTrip() {
