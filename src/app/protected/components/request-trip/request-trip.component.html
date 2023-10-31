@@ -49,5 +49,31 @@
     </div>
   </form>
 
-  <h3>{{ message }}</h3>
+  <swal
+    #acceptTrip
+    title=""
+    html=""
+    [showCancelButton]="true"
+    (confirm)="onAcceptTrip()"
+  ></swal>
+
+  <swal
+    #findDriver
+    title="Finding nearest driver..."
+    icon="info"
+    [showConfirmButton]="false"
+    [allowOutsideClick]="false"
+    [allowEscapeKey]="false"
+    [showCancelButton]="true"
+    (dismiss)="onCancelFind()"
+  ></swal>
+
+  <swal
+    #driverFound
+    title="We found your driver"
+    icon="success"
+    [showConfirmButton]="true"
+    [showCancelButton]="false"
+    (confirm)="redirectToTrip()"
+  ></swal>
 </div>
