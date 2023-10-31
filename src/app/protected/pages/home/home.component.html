@@ -73,3 +73,15 @@
   </div>
 </ng-template>
 
+<swal
+#newTrip
+title=""
+icon="info"
+[allowOutsideClick]="false"
+[allowEscapeKey]="false"
+[allowEnterKey]="true"
+[showCancelButton]="true"
+[confirmButtonText]=""
+html=""
+(confirm)="onAcceptTrip()"
+></swal>
