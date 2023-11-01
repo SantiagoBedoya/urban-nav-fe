@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild} from '@angular/core';
+import { FormGroup, FormBuilder, Validators, NgModel } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Trip } from '../../interfaces/trip.interface';
 import { TripService } from '../../services/trip.service';
 import { TripComment } from '../../interfaces/trip-comment.interface';
 import { TripCommentService } from '../../services/trip-comment.service';
+import { RatingsService } from '../../services/trip.rating.service';
 
 @Component({
   selector: 'app-trip-detail',
@@ -16,6 +17,7 @@ export class TripDetailComponent implements OnInit {
   trip: Trip | null = null;
   tripCommentForm: FormGroup = new FormGroup({});
   comments: TripComment[] = [];
+  userRating: number = 1;
 
   @ViewChild('swalDriverComments')
   public swalDriverComments!: SwalComponent;
@@ -24,7 +26,8 @@ export class TripDetailComponent implements OnInit {
     private tripService: TripService,
     private tripCommentService: TripCommentService,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private ratingsService: RatingsService
   ) {}
 
   ngOnInit(): void {
@@ -113,5 +116,20 @@ export class TripDetailComponent implements OnInit {
           },
         });
     }
+  }
+
+  onSubmitRating() {
+      const value = this.userRating;
+      console.log(value);
+      this.ratingsService
+        .create(value, this.trip?._id!, this.trip?.driverId!)
+        .subscribe({
+          next: (response) => {
+            console.log(response);
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
   }
 }
