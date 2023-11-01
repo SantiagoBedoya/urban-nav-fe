@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { NearestDriver } from '../interfaces/driver.interface';
+import { DriverUbication } from '../interfaces/driverUbication.interface';
+import { filter, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +22,49 @@ export class DriverUbicationService {
         },
       }
     );
+  }
+
+  addUbication(point: string) {
+    console.log(point);
+    console.log({ point: [point] });
+    return this.httpClient
+      .post<any>(
+        this.uri,
+        { points: [point] },
+        {
+          headers: {
+            Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+          },
+        }
+      )
+      .subscribe({
+        next: (data) => {},
+        error: (error) => {
+          console.error('There was an error!', error);
+        },
+      });
+  }
+
+  getUbicationsByDriver() {
+    return this.httpClient.get<DriverUbication[]>(this.uri, {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+      },
+    });
+  }
+
+  deleteUbication(id: string) {
+    return this.httpClient
+      .delete<DriverUbication>(`${this.uri}/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+        },
+      })
+      .subscribe({
+        next: (data) => {},
+        error: (error) => {
+          console.error('There was an error!', error);
+        },
+      });
   }
 }

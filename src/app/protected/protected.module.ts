@@ -27,6 +27,7 @@ import { CommentsDriverComponent } from './components/popovers/comments-driver/c
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { TripDetailComponent } from './pages/trip-detail/trip-detail.component';
 import { TripCommentCardComponent } from './components/trip-comment-card/trip-comment-card.component';
+import { DriverUbicationComponent } from './components/driver-ubication/driver-ubication.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { TripCommentCardComponent } from './components/trip-comment-card/trip-co
     CommentsDriverComponent,
     TripDetailComponent,
     TripCommentCardComponent,
+    DriverUbicationComponent,
   ],
   imports: [
     CommonModule,
