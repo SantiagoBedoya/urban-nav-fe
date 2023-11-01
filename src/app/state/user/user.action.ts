@@ -14,6 +14,7 @@ export const setUserData = createAction(
     lastName: string;
     photoURL?: string;
     vehicle?: Vehicle;
+    roleName: string;
     permissions: number[];
   }>()
 );

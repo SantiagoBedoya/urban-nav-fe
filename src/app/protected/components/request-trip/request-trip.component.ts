@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TripService } from '../../services/trip.service';
 import { Router } from '@angular/router';
 import { WebsocketService } from '../../services/websocket.service';
-import { tap } from 'rxjs';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Trip } from '../../interfaces/trip.interface';
 
