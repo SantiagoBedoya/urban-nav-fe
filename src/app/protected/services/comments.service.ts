@@ -24,4 +24,17 @@ export class CommentsService {
       headers: this.headers,
     });
   }
+
+  sendComment(comment: string, tripId: string, receiverId: string) {
+    return this.httpClient.post<Comments>(
+      this.uri,
+      { comment, tripId, receiverId },
+      {
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+        },
+      }
+    );
+  }
+
 }

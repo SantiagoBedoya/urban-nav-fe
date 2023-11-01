@@ -10,9 +10,9 @@ import { NotificationsModalComponent } from '../notifications-modal/notification
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store, private router: Router) { }
 
-  isModalOpen: boolean = false; 
+  isModalOpen: boolean = false;
 
   isLogged$: Observable<boolean> = this.store.select(AuthSelectors.isLogged);
   firstname$: Observable<string> = this.store.select(UserSelectors.firstName);

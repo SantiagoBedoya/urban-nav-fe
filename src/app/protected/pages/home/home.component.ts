@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Permissions } from 'src/app/auth/permissions/permission.enum';
 import { TripService } from '../../services/trip.service';
 import { Trip } from '../../interfaces/trip.interface';
+import { RateModalComponent } from '../../components/rate-modal/rate-modal.component';
 import { WebsocketService } from '../../services/websocket.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { UserService } from '../../services/user.service';

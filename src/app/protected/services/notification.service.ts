@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Notification } from '../interfaces/notification.interface';
@@ -12,10 +12,15 @@ export class NotificationService {
 
   getAll() {
     console.log(this.uri);
-    return this.httpClient.get<Notification[]>(this.uri, {
-      headers: {
-        Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
-      },
-    });
+    const token = sessionStorage.getItem('access_token');
+
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${token}`),
+    };
+    return this.httpClient.get<Notification[]>(this.uri, options);
   }
 }

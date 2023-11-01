@@ -20,6 +20,7 @@ export class NotificationsModalComponent implements OnInit {
     this.notificationService.getAll().subscribe({
       next: (response) => {
         this.notifications = response;
+        console.log(this.notifications);
       },
       error: (err) => {
         console.error(err);
@@ -31,4 +32,7 @@ export class NotificationsModalComponent implements OnInit {
     this.isModalOpen = !this.isModalOpen;
   }
 
+  closeModal() {
+    this.isModalOpen = !this.isModalOpen;
+  }
 }
