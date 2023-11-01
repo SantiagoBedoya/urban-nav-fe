@@ -5,6 +5,8 @@ import { TripService } from '../../services/trip.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Permissions } from 'src/app/auth/permissions/permission.enum';
+import Swal from 'sweetalert2';
+import { TripCommentService } from '../../services/trip-comment.service';
 
 @Component({
   selector: 'app-card-trip',
@@ -22,7 +24,8 @@ export class CardTripComponent implements OnInit {
     private userService: UserService,
     private tripService: TripService,
     private toastr: ToastrService,
-    private readonly router: Router
+    private readonly router: Router,
+    private tripCommentService: TripCommentService
   ) {}
 
   ngOnInit(): void {
@@ -88,9 +91,30 @@ export class CardTripComponent implements OnInit {
     if (this.trip?._id) {
       this.tripService.cancelTrip(this.trip._id).subscribe({
         next: (res) => {
-          this.toastr.success('Trip was canceled', '', {
-            positionClass: 'toast-bottom-center',
-            toastClass: 'ngx-toastr toast-custom',
+          Swal.fire({
+            title: '¿Wan to leave a comment?',
+            input: 'text',
+            inputAttributes: {
+              autocapitalize: 'off',
+            },
+            allowOutsideClick: false,
+            showCancelButton: true,
+            confirmButtonText: 'Comment',
+            cancelButtonText: "I don't want",
+            showLoaderOnConfirm: true,
+            preConfirm: (comment) => {
+              return this.tripCommentService.create(
+                comment,
+                this.trip!._id,
+                this.trip!.driverId!
+              );
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: `Thanks!`,
+              });
+            }
           });
         },
         error: (err) => {
@@ -101,10 +125,6 @@ export class CardTripComponent implements OnInit {
   }
 
   redirectToTrip() {
-    this.router.navigate([
-      '/dashboard/trips/',
-      this.trip?._id,
-      'detail',
-    ]);
+    this.router.navigate(['/dashboard/trips/', this.trip?._id, 'detail']);
   }
 }
