@@ -106,6 +106,7 @@
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">Rating</div>
         <p class="text-gray-700 text-base">Please rate this driver</p>
+      <form (ngSubmit)="onSubmitRating()">
         <div class="mb-4">
           <div class="flex items-center space-x-2">
             <input type="radio" id="user_rating_5" name="user_rating" [(ngModel)]="userRating" [value]="1" class="hidden">
@@ -129,9 +130,11 @@
               <i class="fas fa-star text-yellow-500"></i>5
             </label>
           </div>
+        </div>
+        <p class="text-xs text-gray-400">Selected Rating: {{ userRating }}</p>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
+      </form>
       </div>
-      <p class="text-xs text-gray-400">Selected Rating: {{ userRating }}</p>
-    </div>
-  </div>
+    </div>    
 </div>
 <swal #swalDriverComments title="Driver comments" html=""></swal>

@@ -23,13 +23,15 @@ export class RatingsService {
     );
   }
 
-  create(rating: Number, tripId: string, receiverId: string) {
-    return this.httpClient.post(
+  create(value: Number, tripId: string, receiverId: string) {
+    console.log(value);
+    console.log(receiverId);
+    return this.httpClient.post<Ratings>(
       this.uri,
       {
-        rating,
-        tripId,
+        value,
         receiverId,
+        tripId,
       },
       {
         headers: {
