@@ -1,0 +1,25 @@
+<div>
+    <h1 class="my-6 text-5xl text-[#2C3333] tracking-wide font-bold text-center">
+        Add Ubications
+    </h1>
+    <form [formGroup]="ubicationForm" (ngSubmit)="onSubmit()" class="mx-auto w-10/12 lg:w-6/12 px-4 lg:px-0">
+        <div class="pb-2 pt-4">
+            <label class="block mb-2 text-sm font-medium text-gray-900">Ubications</label>
+            <select id="point"
+                class="bg-gray-50 text-gray-900 text-sm rounded-lg border border-[#395B64] block w-full p-4"
+                formControlName="point">
+                <option selected>Choose a point</option>
+                <option *ngFor="let point of points" [value]="point._id">
+                    {{ point.name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="px-4 pb-2 pt-4">
+            <button class="block w-full rounded-full bg-[#141D2C] p-4 text-lg uppercase focus:outline-none text-white">
+                Add ubication
+            </button>
+        </div>
+    </form>
+
+</div>

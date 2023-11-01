@@ -41,3 +41,8 @@ export const permissions = createSelector(
   userState,
   (userState) => userState.permissions
 );
+
+export const roleName = createSelector(
+  userState,
+  (userState) => userState.roleName
+);

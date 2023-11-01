@@ -6,6 +6,7 @@ import { SeeCommentsComponent } from './pages/see-comments/see-comments.componen
 import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { TripDetailComponent } from './pages/trip-detail/trip-detail.component';
+import { DriverUbicationComponent } from './components/driver-ubication/driver-ubication.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'see-comments',
         component: SeeCommentsComponent,
+      },
+      {
+        path: 'driver-ubications',
+        component: DriverUbicationComponent
       },
       {
         path: '**',

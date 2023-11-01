@@ -3,6 +3,8 @@ import { Trip } from '../../interfaces/trip.interface';
 import { UserService } from '../../services/user.service';
 import { TripService } from '../../services/trip.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { Permissions } from 'src/app/auth/permissions/permission.enum';
 
 @Component({
   selector: 'app-card-trip',
@@ -14,11 +16,13 @@ export class CardTripComponent implements OnInit {
   client: any = {};
   driver: any = {};
   vehicle: any = {};
+  deleteTrip: number = Permissions.DeleteTrip;
 
   constructor(
     private userService: UserService,
     private tripService: TripService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -93,19 +97,14 @@ export class CardTripComponent implements OnInit {
           console.error(err);
         },
       });
-      // const newState = this.trip.status === 'ACTIVE' ? 'FINISHED' : 'CANCELLED';
-      // const updatedTrip = { ...this.trip, status: newState };
-      // this.tripService.cancelTrip(this.trip?._id, updatedTrip).subscribe({
-      //   next: () => {
-      //     this.toastr.success('Trip was canceled', '', {
-      //       positionClass: 'toast-bottom-center',
-      //       toastClass: 'ngx-toastr toast-custom',
-      //     });
-      //   },
-      //   error: (err) => {
-      //     console.error(err);
-      //   },
-      // });
     }
+  }
+
+  redirectToTrip() {
+    this.router.navigate([
+      '/dashboard/trips/',
+      this.trip?._id,
+      'detail',
+    ]);
   }
 }
