@@ -103,7 +103,7 @@ export class CardTripComponent implements OnInit {
             cancelButtonText: "I don't want",
             showLoaderOnConfirm: true,
             preConfirm: (comment) => {
-              this.tripCommentService.create(
+              return this.tripCommentService.create(
                 comment,
                 this.trip!._id,
                 this.trip!.driverId!
