@@ -7,6 +7,9 @@ import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { TripDetailComponent } from './pages/trip-detail/trip-detail.component';
 import { DriverUbicationComponent } from './components/driver-ubication/driver-ubication.component';
+import { PointsComponent } from './pages/points/points.component';
+import { CreatePointComponent } from './pages/create-point/create-point.component';
+import { EditPointComponent } from './pages/edit-point/edit-point.component';
 
 const routes: Routes = [
   {
@@ -35,7 +38,19 @@ const routes: Routes = [
       },
       {
         path: 'driver-ubications',
-        component: DriverUbicationComponent
+        component: DriverUbicationComponent,
+      },
+      {
+        path: 'points',
+        component: PointsComponent,
+      },
+      {
+        path: 'points/create',
+        component: CreatePointComponent,
+      },
+      {
+        path: 'points/:pointId/edit',
+        component: EditPointComponent,
       },
       {
         path: '**',
