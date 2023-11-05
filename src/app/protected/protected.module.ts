@@ -31,6 +31,9 @@ import { DriverUbicationComponent } from './components/driver-ubication/driver-u
 import { PointsComponent } from './pages/points/points.component';
 import { CreatePointComponent } from './pages/create-point/create-point.component';
 import { EditPointComponent } from './pages/edit-point/edit-point.component';
+import { UsersComponent } from './pages/users/users.component';
+import { UserDetailComponent } from './pages/user-detail/user-detail.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +66,9 @@ import { EditPointComponent } from './pages/edit-point/edit-point.component';
     PointsComponent,
     CreatePointComponent,
     EditPointComponent,
+    UsersComponent,
+    UserDetailComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,

@@ -10,6 +10,8 @@ import { DriverUbicationComponent } from './components/driver-ubication/driver-u
 import { PointsComponent } from './pages/points/points.component';
 import { CreatePointComponent } from './pages/create-point/create-point.component';
 import { EditPointComponent } from './pages/edit-point/edit-point.component';
+import { UsersComponent } from './pages/users/users.component';
+import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 
 const routes: Routes = [
   {
@@ -51,6 +53,14 @@ const routes: Routes = [
       {
         path: 'points/:pointId/edit',
         component: EditPointComponent,
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
+      },
+      {
+        path: 'users/:userId/detail',
+        component: UserDetailComponent,
       },
       {
         path: '**',
