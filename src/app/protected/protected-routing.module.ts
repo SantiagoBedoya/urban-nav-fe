@@ -7,6 +7,8 @@ import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { TripDetailComponent } from './pages/trip-detail/trip-detail.component';
 import { DriverUbicationComponent } from './components/driver-ubication/driver-ubication.component';
+import { UsersComponent } from './pages/users/users.component';
+import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 
 const routes: Routes = [
   {
@@ -35,7 +37,15 @@ const routes: Routes = [
       },
       {
         path: 'driver-ubications',
-        component: DriverUbicationComponent
+        component: DriverUbicationComponent,
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
+      },
+      {
+        path: 'users/:userId/detail',
+        component: UserDetailComponent,
       },
       {
         path: '**',
