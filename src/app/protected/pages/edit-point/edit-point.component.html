@@ -1,0 +1,66 @@
+<h1 class="text-3xl">Edit Point</h1>
+<div *ngIf="point == null">Loading...</div>
+<form
+  *ngIf="point != null"
+  class="w-full lg:px-0 mt-3"
+  [formGroup]="pointForm"
+  (ngSubmit)="updatePoint()"
+>
+  <div class="pb-2">
+    <label for="">Name</label>
+    <input
+      type="text"
+      placeholder="Name"
+      formControlName="name"
+      class="block w-full rounded-sm text-black p-2 text-lg border border-solid border-slate-400"
+      autocomplete="off"
+    />
+  </div>
+  <div class="pb-2">
+    <ng-container formArrayName="edges">
+      <label for="">Edges</label>
+      <ng-container *ngFor="let edgeForm of edges.controls; let i = index">
+        <div class="ml-4 border p-2 mb-3" [formGroupName]="i">
+          <label for="">Weight</label>
+          <input
+            class="block w-full rounded-sm bg-[#FFF] p-2 text-lg border text-black border-solid border-slate-400"
+            type="number"
+            formControlName="weight"
+            autocomplete="off"
+          />
+          <label for="">To</label>
+          <select
+            formControlName="pointId"
+            id="pointId"
+            class="block w-full rounded-sm bg-[#FFF] p-2 text-lg border text-black border-solid border-slate-400"
+            *ngIf="points !== null; else loading"
+          >
+            <option value="">Choose a point</option>
+            <option *ngFor="let point of points" [value]="point._id">
+              {{ point.name }}
+            </option>
+          </select>
+          <ng-template #loading> Loading... </ng-template>
+          <button
+            (click)="deleteEdge(i)"
+            class="block mt-2 items-center px-4 py-1 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800"
+          >
+            Delete Edge
+          </button>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <button
+    (click)="addEdge()"
+    class="block w-full items-center px-4 py-1 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800"
+  >
+    Add Edge
+  </button>
+  <button
+    type="submit"
+    class="inline-flex mt-3 items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800"
+  >
+    Update point
+  </button>
+</form>

@@ -32,7 +32,15 @@
     <a
       *ngIf="roleName === 'Administrator'"
       class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
-      routerLink="/dashboard/users"
+      routerLink="./points"
+    >
+      <i class="bi bi-geo-alt-fill text-lg"></i>
+      <span class="mx-2">Points</span>
+    </a>
+    <a
+      *ngIf="roleName === 'Administrator'"
+      class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
+      routerLink="./points"
     >
       <i class="bi bi-people-fill text-lg"></i>
       <span class="mx-2">Users</span>
