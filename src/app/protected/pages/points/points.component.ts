@@ -37,4 +37,19 @@ export class PointsComponent implements OnInit {
       },
     });
   }
+
+  search(e: any) {
+    const data = e.target.value;
+    if (data.length > 0) {
+      const foundPoints = this.points?.filter((point) => {
+        if (point.name.includes(data)) {
+          return point;
+        }
+        return undefined;
+      });
+      this.points = foundPoints!;
+    } else {
+      this.getPoints();
+    }
+  }
 }
