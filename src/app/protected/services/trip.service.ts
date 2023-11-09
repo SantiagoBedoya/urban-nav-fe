@@ -61,21 +61,18 @@ export class TripService {
   }
 
   cancelTrip(tripId: string) {
-    const token = sessionStorage.getItem('access_token');
-    const headers = new HttpHeaders()
-      .set('content-type', 'application/json')
-      .set('Authorization', `Bearer ${token}`);
     return this.httpClient.get(`${this.uri}/${tripId}/cancel`, {
-      headers,
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+      },
     });
   }
 
-  updateTrip(tripId: string, data: any) {
-    const token = sessionStorage.getItem('access_token');
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${token}`);
-    return this.httpClient.patch(`${this.uri}/${tripId}`, data, {
-      headers,
-    });
+  modifyTripStatus(tripId: string, status: string) {
+    return this.httpClient.patch(`${this.uri}/${tripId}`, { status }, {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+      },
+    })
   }
 }

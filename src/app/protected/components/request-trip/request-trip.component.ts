@@ -3,8 +3,6 @@ import { PointService } from '../../services/point.service';
 import { Point } from '../../interfaces/point.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TripService } from '../../services/trip.service';
-import { Router } from '@angular/router';
-import { WebsocketService } from '../../services/websocket.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Trip } from '../../interfaces/trip.interface';
 
@@ -25,21 +23,14 @@ export class RequestTripComponent implements OnInit {
   @ViewChild('findDriver')
   public findDriver!: SwalComponent;
 
-  @ViewChild('driverFound')
-  public driverFound!: SwalComponent;
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly tripService: TripService,
     private readonly pointService: PointService,
-    private readonly websocketService: WebsocketService,
-    private readonly router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.websocketService.notifications.subscribe((data) => {
-      this.driverFound.fire();
-    });
     this.requestTripForm = this.fb.group({
       origin: ['', Validators.required],
       destination: ['', Validators.required],
@@ -85,14 +76,6 @@ export class RequestTripComponent implements OnInit {
         console.error(err);
       },
     });
-  }
-
-  redirectToTrip() {
-    this.router.navigate([
-      '/dashboard/trips/',
-      this.currentTrip?._id,
-      'detail',
-    ]);
   }
 
   onCancelFind() {
