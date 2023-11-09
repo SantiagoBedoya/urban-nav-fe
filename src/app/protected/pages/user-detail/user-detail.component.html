@@ -1,0 +1,104 @@
+<div *ngIf="user == null">
+  <app-loader></app-loader>
+</div>
+<div
+  *ngIf="user !== null"
+  class="w-full bg-white border border-gray-200 rounded-lg shadow p-3"
+>
+  <div class="flex flex-col items-center pb-10">
+    <img
+      class="w-24 h-24 mb-3 rounded-full shadow-lg"
+      *ngIf="user.photoURL; else photo"
+      [src]="user.photoURL"
+      alt="Bonnie image"
+    />
+    <ng-template #photo>
+      <img
+        class="w-24 h-24 mb-3 rounded-full shadow-lg"
+        src="https://pixlok.com/wp-content/uploads/2022/02/Profile-Icon-SVG-09856789-300x300.png"
+      />
+    </ng-template>
+    <h5 class="mb-1 text-xl font-medium text-gray-900">
+      {{ user.firstName | titlecase }} {{ user.lastName | titlecase }}
+    </h5>
+    <span class="text-sm text-gray-500 dark:text-gray-400">{{
+      user.role.name
+    }}</span>
+    <div class="flex mt-4 space-x-3 md:mt-6">
+      <button
+        (click)="blockUser()"
+        *ngIf="!user.isBlocked"
+        class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800"
+      >
+        Block
+      </button>
+      <button
+        (click)="blockUser()"
+        *ngIf="user.isBlocked"
+        class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800"
+      >
+        Unblock
+      </button>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 gap-4">
+    <div class="w-full flex flex-col">
+      <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+        <div class="flex flex-row justify-between">
+          <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
+        </div>
+        <ul class="mt-2 text-gray-700">
+          <li class="flex border-y py-2">
+            <span class="font-bold w-24">First Name:</span>
+            <span class="text-gray-700 capitalize">{{ user.firstName }}</span>
+          </li>
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">Last Name:</span>
+            <span class="text-gray-700 capitalize">{{ user.lastName }}</span>
+          </li>
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">Email:</span>
+            <span class="text-gray-700">{{ user.email }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="max-w p-6 bg-white border border-gray-200 rounded-lg shadow dark:border-gray-100"
+    >
+      <h5 class="mb-2 text-2xl font-bold tracking-tight">Comments</h5>
+      <div
+        class="bg-white rounded-lg shadow-md p-6 mb-8"
+        *ngFor="let tripComment of tripComments"
+      >
+        <div class="flex items-center mb-4">
+          <div class="flex-shrink-0 mr-3">
+            <img
+              class="mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10"
+              *ngIf="tripComment.publisher?.photoURL; else photo"
+              src="{{ tripComment.publisher?.photoURL }}"
+            />
+            <ng-template #photo>
+              <img
+                class="mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10"
+                src="https://pixlok.com/wp-content/uploads/2022/02/Profile-Icon-SVG-09856789-300x300.png"
+              />
+            </ng-template>
+          </div>
+          <i class="fas fa-user fa-3x w-12 h-12 rounded-full mr-4"></i>
+          <div>
+            <p class="font-semibold text-lg">
+              {{ tripComment.publisher.firstName }}
+              {{ tripComment.publisher.lastName }}
+            </p>
+            <p class="text-gray-600">
+              {{ getFormattedDates(tripComment?.date) }}
+            </p>
+          </div>
+        </div>
+        <p class="text-gray-800">{{ tripComment.comment }}</p>
+      </div>
+    </div>
+  </div>
+</div>

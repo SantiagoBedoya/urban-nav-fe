@@ -1,0 +1,56 @@
+<h1 class="text-3xl">Points</h1>
+<a
+  routerLink="./create"
+  class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800"
+>
+  Create
+</a>
+
+<div *ngIf="points == null">
+  Loading...
+  <!-- <app-loader></app-loader> -->
+</div>
+
+<div
+  *ngIf="points != null"
+  class="relative overflow-x-auto shadow-md sm:rounded-lg mt-3"
+>
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-700"
+    >
+      <tr>
+        <th scope="col" class="px-6 py-3">Name</th>
+        <th scope="col" class="px-6 py-3">
+          <span class="sr-only">Actions</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-50"
+        *ngFor="let point of points"
+      >
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+        >
+          {{ point.name }}
+        </th>
+        <td class="px-6 py-4 text-right">
+          <a
+            [routerLink]="['./', point._id, 'edit']"
+            class="font-medium text-blue-600 dark:text-blue-500 hover:underline m-2"
+            >Edit</a
+          >
+          <button
+            (click)="deletePoint(point._id)"
+            class="font-medium text-red-600 dark:text-red-500 hover:underline"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

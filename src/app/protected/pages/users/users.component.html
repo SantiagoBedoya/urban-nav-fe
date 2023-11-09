@@ -1,0 +1,49 @@
+<h1 class="text-3xl">Users</h1>
+
+<div *ngIf="users == null">
+  <app-loader></app-loader>
+</div>
+
+<div
+  *ngIf="users != null"
+  class="relative overflow-x-auto shadow-md sm:rounded-lg mt-3"
+>
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-700"
+    >
+      <tr>
+        <th scope="col" class="px-6 py-3">First Name</th>
+        <th scope="col" class="px-6 py-3">Last Name</th>
+        <th scope="col" class="px-6 py-3">Email</th>
+        <th scope="col" class="px-6 py-3">Role</th>
+        <th scope="col" class="px-6 py-3">
+          <span class="sr-only">Edit</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-50"
+        *ngFor="let user of users"
+      >
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+        >
+          {{ user.firstName }}
+        </th>
+        <td class="px-6 py-4">{{ user.lastName }}</td>
+        <td class="px-6 py-4">{{ user.email }}</td>
+        <td class="px-6 py-4">{{ user.role.name }}</td>
+        <td class="px-6 py-4 text-right">
+          <a
+            [routerLink]="['./', user._id, 'detail']"
+            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            >Details</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
