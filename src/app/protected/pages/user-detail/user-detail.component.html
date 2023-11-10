@@ -77,7 +77,7 @@
             <img
               class="mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10"
               *ngIf="tripComment.publisher?.photoURL; else photo"
-              src="{{ tripComment.publisher?.photoURL }}"
+              src="{{ tripComment.publisher.photoURL }}"
             />
             <ng-template #photo>
               <img

@@ -12,6 +12,7 @@ import { CreatePointComponent } from './pages/create-point/create-point.componen
 import { EditPointComponent } from './pages/edit-point/edit-point.component';
 import { UsersComponent } from './pages/users/users.component';
 import { UserDetailComponent } from './pages/user-detail/user-detail.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
       {
         path: 'users/:userId/detail',
         component: UserDetailComponent,
+      },
+      {
+        path: 'reports',
+        component: ReportsComponent,
       },
       {
         path: '**',
