@@ -28,6 +28,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { TripDetailComponent } from './pages/trip-detail/trip-detail.component';
 import { TripCommentCardComponent } from './components/trip-comment-card/trip-comment-card.component';
 import { DriverUbicationComponent } from './components/driver-ubication/driver-ubication.component';
+import { PaymentsComponent } from './components/payments/payments.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { DriverUbicationComponent } from './components/driver-ubication/driver-u
     TripDetailComponent,
     TripCommentCardComponent,
     DriverUbicationComponent,
+    PaymentsComponent,
   ],
   imports: [
     CommonModule,

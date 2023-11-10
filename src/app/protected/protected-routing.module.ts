@@ -7,6 +7,7 @@ import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { TripDetailComponent } from './pages/trip-detail/trip-detail.component';
 import { DriverUbicationComponent } from './components/driver-ubication/driver-ubication.component';
+import { PaymentsComponent } from './components/payments/payments.component';
 
 const routes: Routes = [
   {
@@ -35,7 +36,11 @@ const routes: Routes = [
       },
       {
         path: 'driver-ubications',
-        component: DriverUbicationComponent
+        component: DriverUbicationComponent,
+      },
+      {
+        path: 'payment',
+        component: PaymentsComponent,
       },
       {
         path: '**',
