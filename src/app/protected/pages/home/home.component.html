@@ -1,5 +1,5 @@
 <div *ngIf="trip; else noTrip">
-  <app-card-trip [trip]="trip"></app-card-trip>
+  <app-card-trip [trip]="trip" (onRemoveTrip)="removeTrip()"></app-card-trip>
 
   <div *ngIf="roleName === 'Driver'; else traveler">
     <div
@@ -29,7 +29,7 @@
     ´
   </div>
   <ng-template #traveler>
-    <app-panic *ngIf="trip.status=== 'ACTIVE'" [activeTripId]="trip._id">
+    <app-panic *ngIf="trip.status === 'ACTIVE'" [activeTripId]="trip._id">
     </app-panic>
   </ng-template>
 </div>
@@ -64,7 +64,7 @@
   </ng-template>
 </ng-template>
 <div>
-  <app-rate-modal *ngIf="trip?.status === 'FINISHED'"></app-rate-modal>  
+  <app-rate-modal *ngIf="trip?.status === 'FINISHED'"></app-rate-modal>
 </div>
 <swal
   #newTrip
@@ -77,4 +77,30 @@
   [confirmButtonText]=""
   html=""
   (confirm)="onAcceptTrip()"
+></swal>
+<swal
+  #newStatusTrip
+  title=""
+  icon="info"
+  [allowEnterKey]="true"
+  [showCancelButton]="false"
+  [confirmButtonText]=""
+>
+</swal>
+<swal
+  #finishedTrip
+  title=""
+  icon="info"
+  [allowEnterKey]="true"
+  [showCancelButton]="false"
+  (confirm)="redirectToPayment()"
+>
+</swal>
+<swal
+  #driverFound
+  title="We found your driver"
+  icon="success"
+  [showConfirmButton]="true"
+  [showCancelButton]="false"
+  (confirm)="redirectToTrip()"
 ></swal>

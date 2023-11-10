@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Trip } from '../../interfaces/trip.interface';
 import { UserService } from '../../services/user.service';
 import { TripService } from '../../services/trip.service';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Permissions } from 'src/app/auth/permissions/permission.enum';
 import Swal from 'sweetalert2';
@@ -14,7 +13,10 @@ import { TripCommentService } from '../../services/trip-comment.service';
   styleUrls: ['./card-trip.component.css'],
 })
 export class CardTripComponent implements OnInit {
-  @Input() trip: Trip | undefined = undefined;
+  @Input() trip: Trip | null = null;
+  
+  @Output() onRemoveTrip = new EventEmitter<void>();
+
   client: any = {};
   driver: any = {};
   vehicle: any = {};
@@ -23,9 +25,8 @@ export class CardTripComponent implements OnInit {
   constructor(
     private userService: UserService,
     private tripService: TripService,
-    private toastr: ToastrService,
     private readonly router: Router,
-    private tripCommentService: TripCommentService
+    private tripCommentService: TripCommentService,
   ) {}
 
   ngOnInit(): void {
@@ -88,39 +89,48 @@ export class CardTripComponent implements OnInit {
   }
 
   cancelTrip() {
-    if (this.trip?._id) {
-      this.tripService.cancelTrip(this.trip._id).subscribe({
-        next: (res) => {
+    if (this.trip?.status === 'ASSIGNED') {
+      Swal.fire({
+        title: '¿Want to leave a comment?',
+        input: 'text',
+        inputAttributes: {
+          autocapitalize: 'off',
+        },
+        allowOutsideClick: false,
+        showCancelButton: true,
+        confirmButtonText: 'Comment',
+        cancelButtonText: "I don't want",
+        showLoaderOnConfirm: true,
+        preConfirm: (comment) => {
+          return this.tripCommentService.create(
+            comment,
+            this.trip!._id,
+            this.trip!.driverId!
+          );
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
           Swal.fire({
-            title: '¿Wan to leave a comment?',
-            input: 'text',
-            inputAttributes: {
-              autocapitalize: 'off',
-            },
-            allowOutsideClick: false,
-            showCancelButton: true,
-            confirmButtonText: 'Comment',
-            cancelButtonText: "I don't want",
-            showLoaderOnConfirm: true,
-            preConfirm: (comment) => {
-              return this.tripCommentService.create(
-                comment,
-                this.trip!._id,
-                this.trip!.driverId!
-              );
-            },
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire({
-                title: `Thanks!`,
-              });
-            }
+            title: `Thanks!`,
           });
-        },
-        error: (err) => {
-          console.error(err);
-        },
+        }
+
+        this.tripService.modifyTripStatus(this.trip!._id, 'CANCELLED' ).subscribe({
+          error: err => {
+            console.error(err)
+          }
+        });
+
+        this.onRemoveTrip.emit()
       });
+    } else {
+      this.tripService.cancelTrip(this.trip!._id).subscribe({
+        next: () => {
+          console.log("trip was cancelled")
+        }
+      });
+
+      this.onRemoveTrip.emit()
     }
   }
 

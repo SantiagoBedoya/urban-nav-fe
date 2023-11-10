@@ -6,7 +6,11 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class WebsocketService extends Socket {
-  notifications = this.fromEvent('notifications');
+  startedTrip = this.fromEvent('activeTrip')
+  canceledTrip = this.fromEvent('cancelledTrip')
+  newTrip = this.fromEvent('newTrip')
+  finishedTrip = this.fromEvent('finishedTrip')
+  driverFounded = this.fromEvent('driverFounded')
 
   constructor() {
     super({
