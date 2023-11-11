@@ -34,6 +34,7 @@ import { EditPointComponent } from './pages/edit-point/edit-point.component';
 import { UsersComponent } from './pages/users/users.component';
 import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     UsersComponent,
     UserDetailComponent,
     LoaderComponent,
+    ReportsComponent,
   ],
   imports: [
     CommonModule,
