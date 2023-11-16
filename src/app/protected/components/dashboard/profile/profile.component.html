@@ -91,8 +91,30 @@
       </div>
     </div>
 
+    <div class="flex-1 bg-white rounded-lg shadow-xl p-8" *appRole="listPaymentMethod">
+      <div class="flex flex-row justify-between">
+        <h4 class="text-xl text-gray-900 font-bold">Payment methods</h4>
+        <app-payments></app-payments>
+      </div>
+      <ul class="mt-2 text-gray-700">
+        <li class="flex border-y py-2" *ngIf="hasVisa">
+          <span class="font-bold w-24">visa:</span>
+          <span class="text-gray-700 capitalize">{{
+            fullName$ | async
+            }}</span>
+        </li>
+        <li class="flex border-b py-2"  *ngIf="this.hasMasterCard">
+          <span class="font-bold w-24">Master Card</span>
+          <span class="text-gray-700">{{ email$ | async }}</span>
+        </li>
+        <li class="flex border-b py-2"  *ngIf="this.hasPaypal">
+          <span class="font-bold w-24">Paypal:</span>
+          <span class="text-gray-700">Colombia 🇨🇴</span>
+        </li>
+      </ul>
+    </div>
+
     <app-vehicle *appRole="vehiclePermission"></app-vehicle>
-    <app-payments></app-payments>
   </div>
   <app-contacts *appRole="contactsPermission"></app-contacts>
 </div>
