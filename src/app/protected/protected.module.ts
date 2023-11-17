@@ -28,6 +28,13 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { TripDetailComponent } from './pages/trip-detail/trip-detail.component';
 import { TripCommentCardComponent } from './components/trip-comment-card/trip-comment-card.component';
 import { DriverUbicationComponent } from './components/driver-ubication/driver-ubication.component';
+import { PointsComponent } from './pages/points/points.component';
+import { CreatePointComponent } from './pages/create-point/create-point.component';
+import { EditPointComponent } from './pages/edit-point/edit-point.component';
+import { UsersComponent } from './pages/users/users.component';
+import { UserDetailComponent } from './pages/user-detail/user-detail.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 import { PaymentsComponent } from './components/payments/payments.component';
 
 @NgModule({
@@ -59,6 +66,13 @@ import { PaymentsComponent } from './components/payments/payments.component';
     TripCommentCardComponent,
     DriverUbicationComponent,
     PaymentsComponent,
+    PointsComponent,
+    CreatePointComponent,
+    EditPointComponent,
+    UsersComponent,
+    UserDetailComponent,
+    LoaderComponent,
+    ReportsComponent,
   ],
   imports: [
     CommonModule,

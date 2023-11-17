@@ -7,7 +7,12 @@ import { CardsTripsComponent } from './pages/cards-trips/cards-trips.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { TripDetailComponent } from './pages/trip-detail/trip-detail.component';
 import { DriverUbicationComponent } from './components/driver-ubication/driver-ubication.component';
-import { PaymentsComponent } from './components/payments/payments.component';
+import { PointsComponent } from './pages/points/points.component';
+import { CreatePointComponent } from './pages/create-point/create-point.component';
+import { EditPointComponent } from './pages/edit-point/edit-point.component';
+import { UsersComponent } from './pages/users/users.component';
+import { UserDetailComponent } from './pages/user-detail/user-detail.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 const routes: Routes = [
   {
@@ -39,8 +44,28 @@ const routes: Routes = [
         component: DriverUbicationComponent,
       },
       {
-        path: 'payment',
-        component: PaymentsComponent,
+        path: 'points',
+        component: PointsComponent,
+      },
+      {
+        path: 'points/create',
+        component: CreatePointComponent,
+      },
+      {
+        path: 'points/:pointId/edit',
+        component: EditPointComponent,
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
+      },
+      {
+        path: 'users/:userId/detail',
+        component: UserDetailComponent,
+      },
+      {
+        path: 'reports',
+        component: ReportsComponent,
       },
       {
         path: '**',

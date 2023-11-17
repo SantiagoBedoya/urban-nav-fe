@@ -25,6 +25,14 @@ export class UserService {
     });
   }
 
+  toggleBlock(userId: string) {
+    return this.httpClient.get(`${this.uri}/${userId}/toggle-block`, {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+      },
+    });
+  }
+
   setProfileData(token: string) {
     this.getUserProfile(token).subscribe((res) => {
       sessionStorage.setItem('user_data', JSON.stringify(res));
@@ -32,7 +40,9 @@ export class UserService {
       const permissions = res.role!.permissions;
       const roleName = res.role!.name;
       delete newData.role;
-      this.store.dispatch(UserActions.setUserData({ ...newData, permissions, roleName: roleName }));
+      this.store.dispatch(
+        UserActions.setUserData({ ...newData, permissions, roleName: roleName })
+      );
     });
   }
 
@@ -217,6 +227,14 @@ export class UserService {
 
     return this.httpClient.get<User>(`${this.uri}/${driverId}/vehicle`, {
       headers,
+    });
+  }
+
+  getUsers() {
+    return this.httpClient.get<User[]>(this.uri, {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+      },
     });
   }
 }

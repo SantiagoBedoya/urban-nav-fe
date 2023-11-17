@@ -3,8 +3,6 @@ import { PointService } from '../../services/point.service';
 import { Point } from '../../interfaces/point.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TripService } from '../../services/trip.service';
-import { Router } from '@angular/router';
-import { WebsocketService } from '../../services/websocket.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Trip } from '../../interfaces/trip.interface';
 import Swal from 'sweetalert2';
@@ -37,24 +35,14 @@ export class RequestTripComponent implements OnInit {
   @ViewChild('findDriver')
   public findDriver!: SwalComponent;
 
-  @ViewChild('driverFound')
-  public driverFound!: SwalComponent;
-
   constructor(
     private readonly fb: FormBuilder,
     private readonly tripService: TripService,
     private readonly pointService: PointService,
-    private readonly websocketService: WebsocketService,
-    private readonly router: Router,
-    private readonly paymentService: paymentsService,
-    private readonly receiptService: receiptService
-  ) {}
+    private readonly paymentService: paymentsService
+  ) { }
 
   ngOnInit(): void {
-    this.getAllPaymentMehtod();
-    this.websocketService.notifications.subscribe((data) => {
-      this.driverFound.fire();
-    });
     this.requestTripForm = this.fb.group({
       origin: ['', Validators.required],
       destination: ['', Validators.required],
@@ -91,11 +79,12 @@ export class RequestTripComponent implements OnInit {
   }
 
   onAcceptTrip() {
+    this.getAllPaymentMehtod()
     const { origin, destination } = this.requestTripForm.value;
     this.tripService.acceptTrip(origin, destination).subscribe({
       next: (response) => {
         this.tripId = response._id;
-        this.selectPaymentMethod();
+        this.selectPaymentMethod()
       },
       error: (err) => {
         console.error(err);
@@ -103,13 +92,8 @@ export class RequestTripComponent implements OnInit {
     });
   }
 
-  redirectToTrip() {
-    this.router.navigate([
-      '/dashboard/trips/',
-      this.currentTrip?._id,
-      'detail',
-    ]);
-  }
+
+  //RECEIPT, TRIP
 
   onCancelFind() {
     this.tripService.cancelTrip(this.currentTrip?._id!).subscribe({
@@ -174,8 +158,7 @@ export class RequestTripComponent implements OnInit {
 
     if (paymentMethod) {
       this.value = paymentMethod;
-      //this.findDriver.fire();
-      this.payTrip()
+      this.findDriver.fire()
     }
   }
 
