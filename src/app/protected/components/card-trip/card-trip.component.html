@@ -61,16 +61,18 @@
       </div>
     </div>
 
-    <div *ngIf="getTripStatus() === 'ASSIGNED' || getTripStatus() === 'PENDING'"
+    <div 
       class="bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-end items-baseline">
       <div class="md:border-l-2 mx-6 md:border-dotted w-full flex justify-between py-4 mr-6 flex-wrap">
         <p class="tracking-wider font-bolder cursor-pointer italic" (click)="redirectToTrip()">Trip details</p>
-        <button
+        <div *ngIf="roleName !== 'Administrator' && (getTripStatus() === 'PENDING' || getTripStatus() === 'ASSIGNED' )">
+          <button
           class="w-32 h-11 rounded flex border-solid border text-white bg-red-500 mx-2 justify-center place-items-center"
           (click)="cancelTrip()"
           *appRole="deleteTrip">
           Cancel
         </button>
+        </div>
       </div>
     </div>
   </div>

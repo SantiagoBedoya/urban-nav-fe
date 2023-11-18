@@ -8,6 +8,7 @@
       <span class="mx-2" routerLink="home">Home</span>
     </a>
     <a
+      *ngIf="roleName !== 'Administrator'"
       class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
       routerLink="/dashboard/trips"
     >
@@ -15,6 +16,7 @@
       <span class="mx-2">travel history</span>
     </a>
     <a
+      *ngIf="roleName !== 'Administrator'"
       class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
       routerLink="/dashboard/see-comments"
     >
@@ -58,8 +60,16 @@
       class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
       routerLink="./vehicles"
     >
-    <i class="bi bi-car-front-fill text-lg"></i>
+      <i class="bi bi-car-front-fill text-lg"></i>
       <span class="mx-2">Vehicles</span>
+    </a>
+    <a
+      *ngIf="roleName === 'Administrator'"
+      class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
+      routerLink="./users-trips"
+    >
+      <i class="bi bi-car-front-fill text-lg"></i>
+      <span class="mx-2">Users trips</span>
     </a>
   </nav>
 </div>
