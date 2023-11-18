@@ -38,7 +38,6 @@ export class UserTripsComponent {
   getTrips() {
     this.tripsService.trips().subscribe({
       next: (data) => {
-        console.log(data);
         this.trips = data.filter((trip) => trip.status !== 'PENDING');
       },
     });
