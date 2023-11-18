@@ -10,6 +10,7 @@ import { UserSelectors } from 'src/app/state';
 import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { take } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -41,7 +42,7 @@ export class HomeComponent implements OnInit {
     private store: Store,
     private readonly router: Router,
     private tripService: TripService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.store
@@ -84,7 +85,6 @@ export class HomeComponent implements OnInit {
 
           this.websocketService.startedTrip.subscribe((data: any) => {
             this.newStatusTrip.title = data.message;
-            this.trip!.status = data.newStatus;
             this.newStatusTrip.fire();
           });
 
@@ -107,9 +107,6 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/dashboard/trips/', this.id, 'detail']);
   }
 
-  redirectToPayment() {
-  }
-
   onAcceptTrip() {
     this.websocketService.emit('accept-trip', { tripId: this.id });
     setTimeout(() => {
@@ -123,9 +120,9 @@ export class HomeComponent implements OnInit {
 
   updateTrip(newStatus: string) {
     this.tripService.modifyTripStatus(this.trip!._id, newStatus).subscribe({
-      error: err => {
-        console.error(err)
-      }
+      error: (err) => {
+        console.error(err);
+      },
     });
     if (newStatus === 'FINISHED') {
       this.trip = null;
@@ -136,5 +133,33 @@ export class HomeComponent implements OnInit {
 
   removeTrip() {
     this.trip = null;
+  }
+
+  receipt() {
+    this.tripService.receipt(this.trip!._id).subscribe({
+      next: () => {
+        console.log('recibo enviado');
+      },
+      error: (error) => console.error('Error!', error),
+    });
+  }
+
+  payTrip() {
+    Swal.fire({
+      title: 'Thank you for traveling with UrbanNav!',
+      html: `Please make the payment with the following method ${sessionStorage.getItem(
+        'method'
+      )}.`,
+      confirmButtonText: 'Pay',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('transaction completed!', '', 'success');
+        this.receipt();
+      }
+    });
+  }
+
+  startedTrip() {
+    this.trip!.status = 'ACTIVE';
   }
 }

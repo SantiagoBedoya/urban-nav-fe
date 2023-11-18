@@ -25,7 +25,6 @@ export class RequestTripComponent implements OnInit {
   hasMasterCard: boolean = false;
   hasPaypal: boolean = false;
   payMehthods: PaymentMethod[] = [];
-  value: string = '';
   price: number = 0;
   tripId: string = '';
 
@@ -157,43 +156,11 @@ export class RequestTripComponent implements OnInit {
     });
 
     if (paymentMethod) {
-      this.value = paymentMethod;
+      sessionStorage.setItem('method', paymentMethod);
       this.findDriver.fire()
     }
   }
 
-  payTrip() {
-    Swal.fire({
-      title: 'Thank you for traveling with UrbanNav!',
-      html: `Please make the payment with the following method ${this.value}.`,
-      confirmButtonText: 'Pay',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire('Saved!', '', 'success');
-        this.receipt()
-        // const paymentMethod = this.payMehthods.find(
-        //   (method) => method.type && method.type === this.value
-        // );
-        // const clientId = sessionStorage.getItem('user_id')!;
-        // const infoReceipt: Receipt = {
-        //   tripId: this.tripId,
-        //   clientId: clientId,
-        //   paymentMethodId: paymentMethod?._id!,
-        //   price: this.price,
-        // };
 
-        // this.receiptService.createReceipt(infoReceipt);
-      }
-    });
-  }
 
-  
-  receipt() {
-    this.tripService.receipt(this.tripId).subscribe({
-      next: () => {
-        console.log("recibo enviado")
-      },
-      error: (error) => console.error('Error!', error),
-    });
-  }
 }

@@ -11,7 +11,7 @@ export class WebsocketService extends Socket {
   newTrip = this.fromEvent('newTrip')
   finishedTrip = this.fromEvent('finishedTrip')
   driverFounded = this.fromEvent('driverFounded')
-  notifications: any;
+  // notifications: any;
 
   constructor() {
     super({
