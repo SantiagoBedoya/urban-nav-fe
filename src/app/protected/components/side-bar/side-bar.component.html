@@ -53,5 +53,13 @@
       <i class="bi bi-people-fill text-lg"></i>
       <span class="mx-2">Reports</span>
     </a>
+    <a
+      *ngIf="roleName === 'Administrator'"
+      class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
+      routerLink="./vehicles"
+    >
+    <i class="bi bi-car-front-fill text-lg"></i>
+      <span class="mx-2">Vehicles</span>
+    </a>
   </nav>
 </div>
