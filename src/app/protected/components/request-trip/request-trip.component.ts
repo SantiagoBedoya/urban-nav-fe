@@ -7,7 +7,6 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Trip } from '../../interfaces/trip.interface';
 import Swal from 'sweetalert2';
 import { paymentsService } from '../../services/payments.service';
-import { receiptService } from '../../services/receipt.service';
 import { Receipt } from '../../interfaces/receipt.interface';
 import { PaymentMethod } from '../../interfaces/payments.interface';
 
@@ -126,16 +125,16 @@ export class RequestTripComponent implements OnInit {
   async selectPaymentMethod() {
 
     const inputOptions: { [key: string]: string | undefined } = {};
-    inputOptions['pay Cash'] =
+    inputOptions['payCash'] =
       'pay cash <img src="https://i.pinimg.com/originals/b6/c4/4e/b6c44eaddce7d97c44b43b368a00a0b1.png" class="h-8 ml-3 ">';
 
     if (this.hasVisa) {
-      inputOptions['Visa'] =
+      inputOptions['visa'] =
         'Visa <img src="https://tentulogo.com/wp-content/uploads/2018/01/visa-logo.jpg" class="h-8 ml-3 rounded-lg">';
     }
     if (this.hasMasterCard) {
-      inputOptions['Master Card'] =
-        'MasterCard <img src="https://dbdzm869oupei.cloudfront.net/img/sticker/preview/6574.png" class="h-8 ml-3 rounded-lg">';
+      inputOptions['mastercard'] =
+        'Master Card <img src="https://dbdzm869oupei.cloudfront.net/img/sticker/preview/6574.png" class="h-8 ml-3 rounded-lg">';
     }
     if (this.hasPaypal) {
       inputOptions['paypal'] =
@@ -157,6 +156,14 @@ export class RequestTripComponent implements OnInit {
 
     if (paymentMethod) {
       sessionStorage.setItem('method', paymentMethod);
+      this.payMehthods.forEach(p => {
+        console.log("tipo", p.type, paymentMethod)
+        console.log(p.type === paymentMethod)
+        if(p.type === paymentMethod){
+          console.log("si entra")
+          sessionStorage.setItem('idMehtod', p._id)
+        }
+      })
       this.findDriver.fire()
     }
   }

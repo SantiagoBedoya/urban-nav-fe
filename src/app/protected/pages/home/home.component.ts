@@ -136,7 +136,9 @@ export class HomeComponent implements OnInit {
   }
 
   receipt() {
-    this.tripService.receipt(this.trip!._id).subscribe({
+    const idmethod = sessionStorage.getItem('idMehtod')!
+    console.log(idmethod)
+    this.tripService.receipt(this.trip!._id, idmethod ).subscribe({
       next: () => {
         console.log('recibo enviado');
       },

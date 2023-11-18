@@ -89,4 +89,17 @@ export class vehicleService {
     };
     return this.httpClient.get<Vehicle>(`${this.uri}/${vehicleId}`, headers);
   }
+
+  getAllVehicles() {
+    const token = sessionStorage.getItem('access_token');
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${token}`),
+    };
+
+    return this.httpClient.get<Vehicle[]>(`${this.uri}`, headers);
+  }
 }

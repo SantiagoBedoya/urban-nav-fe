@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { paymentsService } from '../../services/payments.service';
 import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-payments',

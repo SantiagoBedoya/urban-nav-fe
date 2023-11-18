@@ -35,6 +35,8 @@ import { UsersComponent } from './pages/users/users.component';
 import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { VehiclesComponent } from './pages/vehicles/vehicles.component';
+import { VehicleCardComponent } from './components/vehicle-card/vehicle-card.component';
 import { PaymentsComponent } from './components/payments/payments.component';
 
 @NgModule({
@@ -65,7 +67,6 @@ import { PaymentsComponent } from './components/payments/payments.component';
     TripDetailComponent,
     TripCommentCardComponent,
     DriverUbicationComponent,
-    PaymentsComponent,
     PointsComponent,
     CreatePointComponent,
     EditPointComponent,
@@ -73,6 +74,9 @@ import { PaymentsComponent } from './components/payments/payments.component';
     UserDetailComponent,
     LoaderComponent,
     ReportsComponent,
+    VehiclesComponent,
+    VehicleCardComponent,
+    PaymentsComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpHeaders } from '@angular/common/http';
 import { UserDataInterface } from 'src/app/auth/interfaces/user-data.interface';
 import { Store } from '@ngrx/store';
 import { UserActions, UserSelectors } from 'src/app/state';
@@ -34,7 +33,7 @@ export class UserService {
   }
 
   setProfileData(token: string) {
-    this.getUserProfile(token).subscribe((res) => {
+    this.getUserProfile(token).subscribe((res: any) => {
       sessionStorage.setItem('user_data', JSON.stringify(res));
       const newData = { ...res };
       const permissions = res.role!.permissions;
@@ -47,7 +46,6 @@ export class UserService {
   }
 
   updateUserContacts(newContact: contact) {
-    const userId = sessionStorage.getItem('user_id')!;
     const token = sessionStorage.getItem('access_token');
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
@@ -75,14 +73,14 @@ export class UserService {
             headers: headers,
           })
           .subscribe({
-            next: (data) => {
+            next: () => {
               this.store.dispatch(
                 UserActions.addContact({ contact: newContact })
               );
               const token = sessionStorage.getItem('access_token')!;
               this.setProfileData(token);
             },
-            error: (error) => {
+            error: (error: any) => {
               console.error('There was an error!', error);
             },
           });
@@ -108,14 +106,14 @@ export class UserService {
         this.httpClient
           .patch<any>(`${this.uri}/contacts`, body, { headers })
           .subscribe({
-            next: (data) => {
+            next: () => {
               this.store.dispatch(
                 UserActions.deleteContact({ index: contactIndex })
               );
               const token = sessionStorage.getItem('access_token')!;
               this.setProfileData(token);
             },
-            error: (error) => {
+            error: (error: any) => {
               console.error('There was an error!', error);
             },
           });
@@ -153,14 +151,14 @@ export class UserService {
             headers: headers,
           })
           .subscribe({
-            next: (data) => {
+            next: () => {
               this.store.dispatch(
                 UserActions.setContacts({ contacts: newUserContacts })
               );
               const token = sessionStorage.getItem('access_token')!;
               this.setProfileData(token);
             },
-            error: (error) => {
+            error: (error: any) => {
               console.error('There was an error!', error);
             },
           });
@@ -185,7 +183,7 @@ export class UserService {
           const token = sessionStorage.getItem('access_token')!;
           this.setProfileData(token);
         },
-        error: (error) => console.error('There was an error!', error),
+        error: (error: any) => console.error('There was an error!', error),
       });
   }
 
