@@ -1,24 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UserSelectors } from 'src/app/state';
 import { Permissions } from 'src/app/auth/permissions/permission.enum';
 import { permissions } from 'src/app/state/user/user.selectors';
 import { paymentsService } from 'src/app/protected/services/payments.service';
+import { PaymentMethod } from 'src/app/protected/interfaces/payments.interface';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent {
-  hasVisa: boolean = false;
-  hasMasterCard: boolean = false;
-  hasPaypal: boolean = false;
+export class ProfileComponent implements OnInit {
+  payMehthods: PaymentMethod[] = [];
+  roleName: string = '';
+
   constructor(
     private store: Store,
     private readonly paymentService: paymentsService
   ) {}
+
+  ngOnInit(): void {
+    this.getAllPaymentMehtod()
+    this.store.select(UserSelectors.roleName).subscribe((roleName) => {
+      this.roleName = roleName;
+    });
+  }
 
   rolName: boolean = sessionStorage.getItem('role_name') === 'Client';
 
@@ -35,10 +43,7 @@ export class ProfileComponent {
   getAllPaymentMehtod() {
     this.paymentService.getPaymentMethod().subscribe({
       next: (response) => {
-        const paymentArray = Object.values(response);
-        this.hasVisa = this.hasPaymentType(paymentArray, 'visa');
-        this.hasMasterCard = this.hasPaymentType(paymentArray, 'mastercard');
-        this.hasPaypal = this.hasPaymentType(paymentArray, 'paypal');
+        this.payMehthods = Object.values(response);
       },
       error: (error) => {
         console.error('Error:', error);
@@ -46,8 +51,4 @@ export class ProfileComponent {
     });
   }
 
-  hasPaymentType(paymentArray: any[], type: string): boolean {
-    return paymentArray.some((payment: any) => payment.type === type);
-  }
-  
 }

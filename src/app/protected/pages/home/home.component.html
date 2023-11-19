@@ -105,3 +105,10 @@
   [showCancelButton]="false"
   (confirm)="redirectToTrip()"
 ></swal>
+<swal>
+  #payTrip
+  title="Thank you for traveling with UrbanNav!"
+  confirmButtonText="Pay"
+  [showConfirmButton]="true",
+  (confirm)="confirmPay()"
+</swal>

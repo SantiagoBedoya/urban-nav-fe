@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { take } from 'rxjs';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -41,7 +42,8 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private store: Store,
     private readonly router: Router,
-    private tripService: TripService
+    private tripService: TripService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -135,12 +137,13 @@ export class HomeComponent implements OnInit {
     this.trip = null;
   }
 
-  receipt() {
-    const idmethod = sessionStorage.getItem('idMehtod')!
-    console.log(idmethod)
-    this.tripService.receipt(this.trip!._id, idmethod ).subscribe({
+  receipt(idmethod: string) {
+    this.tripService.receipt(this.trip!._id, idmethod).subscribe({
       next: () => {
-        console.log('recibo enviado');
+        this.toastr.success('Receipt sent', '', {
+          positionClass: 'toast-bottom-center',
+          toastClass: 'ngx-toastr toast-custom',
+        });
       },
       error: (error) => console.error('Error!', error),
     });
@@ -148,16 +151,15 @@ export class HomeComponent implements OnInit {
 
   payTrip() {
     Swal.fire({
-      title: 'Thank you for traveling with UrbanNav!',
-      html: `Please make the payment with the following method ${sessionStorage.getItem(
-        'method'
-      )}.`,
+      title: 'Please make the payment',
+      html: `Thank you for traveling with UrbanNav!`,
       confirmButtonText: 'Pay',
     }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire('transaction completed!', '', 'success');
-        this.receipt();
-      }
+      let method = sessionStorage.getItem('idMethod')!;
+      result.isConfirmed && method !== 'payCash'
+        ? Swal.fire('Transaction completed!', '', 'success')
+        : Swal.fire('Payment made!', '', 'success');
+      this.receipt(method);
     });
   }
 

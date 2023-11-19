@@ -121,7 +121,6 @@ export class UserService {
   }
 
   updateContact(updatedContact: contact, index: number) {
-    const userId = sessionStorage.getItem('user_id')!;
     const token = sessionStorage.getItem('access_token');
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')

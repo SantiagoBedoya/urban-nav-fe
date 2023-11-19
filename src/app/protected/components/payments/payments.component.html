@@ -1,92 +1,56 @@
-<button type="button" (click)="toggleModal()"
-   class="text-white bg-custom-black font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2">
-   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
-      viewBox="0 0 16 16">
-      <path fill-rule="evenodd"
-         d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-   </svg>
-</button>
-
-<div *ngIf="showModal"
-   class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
-   <div class="relative w-5/12 my-6 mx-auto max-w-6xl">
-      <!--content-->
-      <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-         <!--header-->
-         <div class="flex items-center justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-            <h3 class="text-3xl text-[#203B52] font-bold">
-               Secure payment info
-            </h3>
-            <button
-               class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-               type="button" (click)="toggleModal()">
-
-               <i class="bi bi-x-circle text-3xl text-red-500"></i>
-            </button>
+<div class="flex items-center justify-center min-h-[600px]">
+   <form class="mt-5 bg-white max-w-xl m-4 p-10  rounded-3xl shadow-xl" [formGroup]="paymentsForm" (ngSubmit)="addPaymentsForm()">
+      <div class="flex  py-5 pl-5 overflow-hidden">
+         <div class="px-2">
+            <label for="visa" class="flex items-center cursor-pointer">
+               <input type="radio" class="form-radio h-5 w-5 text-indigo-500" formControlName="type"
+                  value="visa" checked>
+               <img src="https://tentulogo.com/wp-content/uploads/2018/01/visa-logo.jpg"
+                  class="h-8 ml-3 rounded-lg">
+            </label>
          </div>
-         <div class="w-full flex justify-center relative p-6 flex-auto">
-            <form class="mt-5 bg-white" [formGroup]="paymentsForm" (ngSubmit)="addPaymentsForm()">
-               <div class="flex  py-5 pl-5 overflow-hidden">
-                  <div class="px-2">
-                     <label for="visa" class="flex items-center cursor-pointer">
-                        <input type="radio" class="form-radio h-5 w-5 text-indigo-500" formControlName="type"
-                           value="visa" checked>
-                        <img src="https://tentulogo.com/wp-content/uploads/2018/01/visa-logo.jpg"
-                           class="h-8 ml-3 rounded-lg">
-                     </label>
-                  </div>
-                  <div class="px-2">
-                     <label for="mastercard" class="flex items-center cursor-pointer">
-                        <input type="radio" class="form-radio h-5 w-5 text-indigo-500" formControlName="type"
-                           value="mastercard">
-                        <img src="https://dbdzm869oupei.cloudfront.net/img/sticker/preview/6574.png"
-                           class="h-8 ml-3 rounded-lg">
-                     </label>
-                  </div>
-                  <div class="px-2">
-                     <label for="paypal" class="flex items-center cursor-pointer">
-                        <input type="radio" class="form-radio h-5 w-5 text-indigo-500" formControlName="type"
-                           value="paypal">
-                        <img src="https://www.sketchappsources.com/resources/source-image/PayPalCard.png"
-                           class="h-8 ml-3">
-                     </label>
-                  </div>
-               </div>
-               <div class="px-5 pb-5">
-                  <input placeholder="Name on card" formControlName="name" name="name"
-                     class=" text-black w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-custom-black">
-                  <input placeholder="Card number" formControlName="cardNumber" name="cardNumber"
-                     class=" text-black w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-custom-black">
-                  <div class="flex">
-                     <div class="flex-grow w-1/4 pr-2">
-                        <input placeholder="Security code" formControlName="cardCVV" name="cardCVV"
-                           class=" text-black w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-custom-black">
-                     </div>
-                     <div class="flex-grow"><input type="date" formControlName="expiryDate" name="expiryDate"
-                           class=" text-black w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-custom-black">
-                     </div>
-                  </div>
-
-                  <div class="flex flex-row-reverse p-3">
-                     <div class="flex-initial pl-3">
-                        <button type="submit"
-                           class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-custom-black rounded-md hover:bg-gray-800  focus:outline-none focus:bg-gray-900  transition duration-300 transform active:scale-95 ease-in-out">
-                           <i class="bi bi-download text-lg"></i>
-                           <span class="pl-2 mx-1">Save</span>
-                        </button>
-                     </div>
-                     <button type="button" 
-                     class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-custom-black rounded-md hover:bg-gray-800  focus:outline-none focus:bg-gray-900  transition duration-300 transform active:scale-95 ease-in-out">
-                     <i class="bi bi-download text-lg"></i>
-                     <span class="pl-2 mx-1">choose</span>
-                  </button>
-                  </div>
-               </div>
-
-            </form>
+         <div class="px-2">
+            <label for="mastercard" class="flex items-center cursor-pointer">
+               <input type="radio" class="form-radio h-5 w-5 text-indigo-500" formControlName="type"
+                  value="mastercard">
+               <img src="https://dbdzm869oupei.cloudfront.net/img/sticker/preview/6574.png"
+                  class="h-8 ml-3 rounded-lg">
+            </label>
          </div>
-         <i class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b"></i>
+         <div class="px-2">
+            <label for="paypal" class="flex items-center cursor-pointer">
+               <input type="radio" class="form-radio h-5 w-5 text-indigo-500" formControlName="type"
+                  value="paypal">
+               <img src="https://www.sketchappsources.com/resources/source-image/PayPalCard.png"
+                  class="h-8 ml-3">
+            </label>
+         </div>
       </div>
-   </div>
+      <div class="px-5 pb-5">
+         <input placeholder="Name on card" formControlName="name" name="name"
+            class=" text-black w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-custom-black">
+         <input placeholder="Card number" formControlName="cardNumber" name="cardNumber"
+            class=" text-black w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-custom-black">
+         <div class="flex">
+            <div class="flex-grow w-1/4 pr-2">
+               <input placeholder="Security code" formControlName="cardCVV" name="cardCVV"
+                  class=" text-black w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-custom-black">
+            </div>
+            <div class="flex-grow w-1/4 pr-2"><input type="date" formControlName="expiryDate" name="expiryDate"
+                  class=" text-black w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-custom-black">
+            </div>
+         </div>
+
+         <div class="flex flex-row-reverse p-3">
+            <div class="flex-initial pl-3">
+               <button type="submit"
+                  class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-custom-black rounded-md hover:bg-gray-800  focus:outline-none focus:bg-gray-900  transition duration-300 transform active:scale-95 ease-in-out">
+                  <i class="bi bi-download text-lg"></i>
+                  <span class="pl-2 mx-1">Save</span>
+               </button>
+            </div>
+         </div>
+      </div>
+
+   </form>
 </div>
-<div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>

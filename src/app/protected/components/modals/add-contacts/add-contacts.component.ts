@@ -41,11 +41,7 @@ export class AddContactsComponent implements OnInit {
 
   addContact() {
     if (this.addContactForm.valid) {
-      const fullPhoneNumber = '+57' + this.addContactForm.value.phone;
-      this.userService.updateUserContacts({
-        ...this.addContactForm.value,
-        phone: fullPhoneNumber,
-      });
+      this.userService.updateUserContacts(this.addContactForm.value);
       this.addContactForm.reset();
       this.toastr.success('Contacts successfully saved!', '', {
         positionClass: 'toast-bottom-center',

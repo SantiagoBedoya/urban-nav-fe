@@ -60,6 +60,7 @@ export class DriverUbicationComponent {
     if (this.ubicationForm.value) {
       const point = this.ubicationForm.value;
       this.driverUbicationService.addUbication(point.point);
+      this.ubicationForm.reset()
       this.toastr.success("Ubication added", '', {
         positionClass: 'toast-bottom-center',
         toastClass: 'ngx-toastr toast-custom',

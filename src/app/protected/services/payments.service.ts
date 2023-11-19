@@ -41,4 +41,19 @@ export class paymentsService {
       },
     });
   }
+
+  deletePaymentMethod(id: string) {
+    return this.httpClient
+      .delete<PaymentMethod>(`${this.uri}/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+        },
+      })
+      .subscribe({
+        next: (data) => {},
+        error: (error) => {
+          console.error('There was an error!', error);
+        },
+      });
+  }
 }
