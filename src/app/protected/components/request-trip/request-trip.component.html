@@ -54,7 +54,7 @@
     title=""
     html=""
     [showCancelButton]="true"
-    (confirm)="onAcceptTrip()"
+    (confirm)="selectPaymentMethod()"
   ></swal>
 
   <swal
@@ -67,4 +67,5 @@
     [showCancelButton]="true"
     (dismiss)="onCancelFind()"
   ></swal>
+
 </div>

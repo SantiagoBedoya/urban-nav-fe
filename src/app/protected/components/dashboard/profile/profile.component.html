@@ -91,6 +91,24 @@
       </div>
     </div>
 
+    <div class="flex-1 bg-white rounded-lg shadow-xl p-8" *ngIf="roleName === 'Client'">
+      <div class="flex flex-row justify-between">
+        <h4 class="text-xl text-gray-900 font-bold">Payment methods</h4>
+      </div>
+      <ul class="mt-2 text-gray-700" *ngFor="let p of payMehthods">
+        <li class="flex border-y py-2 ">
+          <span class="font-bold w-24">{{p.type}}</span>
+          <div class="flex flex-col">
+            <span class="text-[#1E293B]capitalize "><strong>Name:</strong> {{p.name}}</span>
+          <span class="text-gray-700 capitalize"><strong>Number:</strong> {{p.cardNumber}}</span>
+          <span class="text-gray-700 capitalize"><strong>CVV:</strong> {{p.cardCVV}}</span>
+          <span class="text-gray-700 capitalize"><strong>Expiry date:</strong> {{p.expiryDate}}</span>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+
     <app-vehicle *appRole="vehiclePermission"></app-vehicle>
   </div>
   <app-contacts *appRole="contactsPermission"></app-contacts>

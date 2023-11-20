@@ -37,6 +37,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { VehiclesComponent } from './pages/vehicles/vehicles.component';
 import { VehicleCardComponent } from './components/vehicle-card/vehicle-card.component';
+import { PaymentsComponent } from './components/payments/payments.component';
 import { UserTripsComponent } from './pages/user-trips/user-trips.component';
 
 @NgModule({
@@ -77,6 +78,7 @@ import { UserTripsComponent } from './pages/user-trips/user-trips.component';
     VehiclesComponent,
     VehicleCardComponent,
     UserTripsComponent,
+    PaymentsComponent,
   ],
   imports: [
     CommonModule,

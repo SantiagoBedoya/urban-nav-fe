@@ -3,7 +3,7 @@ import { Point } from '../../interfaces/point.interface';
 import { PointService } from '../../services/point.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DriverUbicationService } from '../../services/driver-ubication.service';
-import { DriverUbication } from '../../interfaces/driverUbication.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-driver-ubication',
@@ -25,7 +25,8 @@ export class DriverUbicationComponent {
   constructor(
     private readonly fb: FormBuilder,
     private readonly pointService: PointService,
-    private readonly driverUbicationService: DriverUbicationService
+    private readonly driverUbicationService: DriverUbicationService,
+    private readonly toastr: ToastrService
   ) {}
 
   getPoint() {
@@ -59,6 +60,11 @@ export class DriverUbicationComponent {
     if (this.ubicationForm.value) {
       const point = this.ubicationForm.value;
       this.driverUbicationService.addUbication(point.point);
+      this.ubicationForm.reset()
+      this.toastr.success("Ubication added", '', {
+        positionClass: 'toast-bottom-center',
+        toastClass: 'ngx-toastr toast-custom',
+      });
     }
   }
 }
