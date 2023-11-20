@@ -38,6 +38,7 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { VehiclesComponent } from './pages/vehicles/vehicles.component';
 import { VehicleCardComponent } from './components/vehicle-card/vehicle-card.component';
 import { PaymentsComponent } from './components/payments/payments.component';
+import { UserTripsComponent } from './pages/user-trips/user-trips.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { PaymentsComponent } from './components/payments/payments.component';
     ReportsComponent,
     VehiclesComponent,
     VehicleCardComponent,
-    PaymentsComponent
+    UserTripsComponent,
+    PaymentsComponent,
   ],
   imports: [
     CommonModule,

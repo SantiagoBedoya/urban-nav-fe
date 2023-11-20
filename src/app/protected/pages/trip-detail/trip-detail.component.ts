@@ -7,6 +7,8 @@ import { TripService } from '../../services/trip.service';
 import { TripComment } from '../../interfaces/trip-comment.interface';
 import { TripCommentService } from '../../services/trip-comment.service';
 import { RatingsService } from '../../services/trip.rating.service';
+import { Store } from '@ngrx/store';
+import { UserSelectors } from 'src/app/state';
 
 @Component({
   selector: 'app-trip-detail',
@@ -18,6 +20,7 @@ export class TripDetailComponent implements OnInit {
   tripCommentForm: FormGroup = new FormGroup({});
   comments: TripComment[] = [];
   userRating: number = 1;
+  roleName: string = '';
 
   @ViewChild('swalDriverComments')
   public swalDriverComments!: SwalComponent;
@@ -27,10 +30,14 @@ export class TripDetailComponent implements OnInit {
     private tripCommentService: TripCommentService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private ratingsService: RatingsService
+    private ratingsService: RatingsService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
+    this.store.select(UserSelectors.roleName).subscribe((roleName) => {
+      this.roleName = roleName;
+    });
     this.tripCommentForm = this.fb.group({
       comment: ['', [Validators.required]],
     });

@@ -22,12 +22,23 @@ export class PaymentsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllPaymentMehtod();
     this.paymentsForm = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]], 
       type: ['visa', Validators.required],
-      cardNumber: ['', Validators.required],
-      cardCVV: ['', Validators.required],
-      expiryDate: ['', Validators.required],
+      cardNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), Validators.pattern(/^[0-9\s]+$/)]],
+      cardCVV: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3), Validators.pattern(/^[0-3\s]+$/)]],
+      expiryDate: ['', [Validators.required, this.validateExpiryDate]]
     });
+  }
+
+  validateExpiryDate(date: any): { [key: string]: boolean } | null {
+    const currentDate = new Date();
+    const inputDate = new Date(date.value);
+
+    if (inputDate <= currentDate) {
+      return { 'invalidExpiryDate': true };
+    }
+
+    return null;
   }
 
   addPaymentsForm() {

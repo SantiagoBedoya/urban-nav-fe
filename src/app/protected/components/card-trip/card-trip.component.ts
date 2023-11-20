@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Permissions } from 'src/app/auth/permissions/permission.enum';
 import Swal from 'sweetalert2';
 import { TripCommentService } from '../../services/trip-comment.service';
+import { Store } from '@ngrx/store';
+import { UserSelectors } from 'src/app/state';
 
 @Component({
   selector: 'app-card-trip',
@@ -21,15 +23,20 @@ export class CardTripComponent implements OnInit {
   driver: any = {};
   vehicle: any = {};
   deleteTrip: number = Permissions.DeleteTrip;
+  roleName: string = ''
 
   constructor(
     private userService: UserService,
     private tripService: TripService,
     private readonly router: Router,
     private tripCommentService: TripCommentService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
+    this.store.select(UserSelectors.roleName).subscribe((roleName) => {
+      this.roleName = roleName;
+    });
     this.getDriver();
     this.getPassenger();
     this.getvehicleInfo();

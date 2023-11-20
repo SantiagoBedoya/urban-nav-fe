@@ -14,6 +14,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { VehiclesComponent } from './pages/vehicles/vehicles.component';
+import { UserTripsComponent } from './pages/user-trips/user-trips.component';
 import { PaymentsComponent } from './components/payments/payments.component';
 
 const routes: Routes = [
@@ -72,6 +73,10 @@ const routes: Routes = [
       {
         path: 'vehicles',
         component: VehiclesComponent,
+      },
+      {
+        path: 'users-trips',
+        component: UserTripsComponent
       },
       {
         path: 'paymentMethods',
