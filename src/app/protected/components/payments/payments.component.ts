@@ -22,10 +22,10 @@ export class PaymentsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllPaymentMehtod();
     this.paymentsForm = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]], 
+      name: ['', [Validators.required]], 
       type: ['visa', Validators.required],
-      cardNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), Validators.pattern(/^[0-9\s]+$/)]],
-      cardCVV: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3), Validators.pattern(/^[0-3\s]+$/)]],
+      cardNumber: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(16)]],
+      cardCVV: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
       expiryDate: ['', [Validators.required, this.validateExpiryDate]]
     });
   }

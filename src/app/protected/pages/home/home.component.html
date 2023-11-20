@@ -1,7 +1,7 @@
 <div *ngIf="trip; else noTrip">
   <app-card-trip [trip]="trip" (onRemoveTrip)="removeTrip()"></app-card-trip>
 
-  <div *ngIf="roleName === 'Driver'; else traveler">
+  <div *ngIf="(roleName$ | async) === 'Driver'; else traveler">
     <div
       *ngIf="trip.status === 'ACTIVE'"
       class="fixed bottom-0 right-0 p-4 flex justify-center items-center"
@@ -37,7 +37,7 @@
 <ng-template #noTrip>
   <div
     class="grid h-full w-full place-items-center"
-    *ngIf="roleName === 'Driver'; else reqTrip"
+    *ngIf="(roleName$ | async) === 'Driver'"
   >
     <div
       class="bg-gray-200 w-1/2 px-16 md:px-0 flex items-center justify-center"
@@ -59,9 +59,9 @@
       </div>
     </div>
   </div>
-  <ng-template #reqTrip>
+  <div *ngIf="(roleName$ | async) === 'Client'">
     <app-request-trip></app-request-trip>
-  </ng-template>
+  </div>
 </ng-template>
 <div>
   <app-rate-modal *ngIf="trip?.status === 'FINISHED'"></app-rate-modal>
@@ -105,10 +105,3 @@
   [showCancelButton]="false"
   (confirm)="redirectToTrip()"
 ></swal>
-<swal>
-  #payTrip
-  title="Thank you for traveling with UrbanNav!"
-  confirmButtonText="Pay"
-  [showConfirmButton]="true",
-  (confirm)="confirmPay()"
-</swal>
