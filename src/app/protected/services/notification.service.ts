@@ -7,11 +7,12 @@ import { Notification } from '../interfaces/notification.interface';
   providedIn: 'root',
 })
 export class NotificationService {
-  private uri = environment.baseURL + '/notifications';
+  private uri = environment.baseURL + '/notifications/to-me';
   constructor(private httpClient: HttpClient) {}
 
   getAll() {
     console.log(this.uri);
+    console.log(sessionStorage.getItem('user_id'));
     const token = sessionStorage.getItem('access_token');
 
     const options = {

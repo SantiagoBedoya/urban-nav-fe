@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Trip } from '../interfaces/trip.interface';
 import { RequestTrip } from '../interfaces/request-trip.interface';
+import { map } from 'rxjs/operators';
+import { addDays, isAfter } from 'date-fns';
 
 @Injectable({
   providedIn: 'root',
@@ -74,5 +76,17 @@ export class TripService {
         Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
       },
     })
+  }
+
+  getTripsForLast7Days() {
+    return this.trips().pipe(
+      map((allTrips) => {
+        const today = new Date();
+        const sevenDaysAgo = addDays(today, -7);
+        return allTrips.filter((trip) =>
+          isAfter(new Date(trip.startDate  ?? ''), sevenDaysAgo)
+        );
+      })
+    );
   }
 }
