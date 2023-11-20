@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   trip: Trip | null = null;
   id: string = '';
   acceptedStates: string[] = ['ACTIVE', 'PENDING', 'ASSIGNED'];
+  setLoading: boolean = true;
 
   @ViewChild('newTrip')
   public newTrip!: SwalComponent;
@@ -101,6 +102,8 @@ export class HomeComponent implements OnInit {
         this.trip =
           data.find((trip) => this.acceptedStates.includes(trip.status)) ??
           null;
+
+          this.setLoading = false;
       },
     });
   }
