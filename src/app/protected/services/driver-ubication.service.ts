@@ -25,8 +25,6 @@ export class DriverUbicationService {
   }
 
   addUbication(point: string) {
-    console.log(point);
-    console.log({ point: [point] });
     return this.httpClient
       .post<any>(
         this.uri,

@@ -85,6 +85,7 @@
   [allowEnterKey]="true"
   [showCancelButton]="false"
   [confirmButtonText]=""
+  (confirm)="startedTrip()"
 >
 </swal>
 <swal
@@ -93,7 +94,7 @@
   icon="info"
   [allowEnterKey]="true"
   [showCancelButton]="false"
-  (confirm)="redirectToPayment()"
+  (confirm)="payTrip()"
 >
 </swal>
 <swal
@@ -104,3 +105,10 @@
   [showCancelButton]="false"
   (confirm)="redirectToTrip()"
 ></swal>
+<swal>
+  #payTrip
+  title="Thank you for traveling with UrbanNav!"
+  confirmButtonText="Pay"
+  [showConfirmButton]="true",
+  (confirm)="confirmPay()"
+</swal>

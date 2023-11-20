@@ -46,7 +46,6 @@ export class UserService {
   }
 
   updateUserContacts(newContact: contact) {
-    const userId = sessionStorage.getItem('user_id')!;
     const token = sessionStorage.getItem('access_token');
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
@@ -70,7 +69,7 @@ export class UserService {
           items: items,
         };
         this.httpClient
-          .patch<contact>(`${this.uri}/${userId}/contacts`, body, {
+          .patch<contact>(`${this.uri}/contacts`, body, {
             headers: headers,
           })
           .subscribe({
@@ -105,7 +104,7 @@ export class UserService {
           items: items,
         };
         this.httpClient
-          .patch<any>(`${this.uri}/${userId}/contacts`, body, { headers })
+          .patch<any>(`${this.uri}/contacts`, body, { headers })
           .subscribe({
             next: () => {
               this.store.dispatch(
@@ -122,7 +121,6 @@ export class UserService {
   }
 
   updateContact(updatedContact: contact, index: number) {
-    const userId = sessionStorage.getItem('user_id')!;
     const token = sessionStorage.getItem('access_token');
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
@@ -148,7 +146,7 @@ export class UserService {
           items: items,
         };
         this.httpClient
-          .patch<contact>(`${this.uri}/${userId}/contacts`, body, {
+          .patch<contact>(`${this.uri}/contacts`, body, {
             headers: headers,
           })
           .subscribe({

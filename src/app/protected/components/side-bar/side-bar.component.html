@@ -1,75 +1,66 @@
 <div class="p-2 h-full md:w-60 flex flex-col md:flex hidden bg-[#1E293B]">
   <nav>
-    <a
-      class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
-      routerLink="/"
-    >
+    <a class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
+      routerLink="/">
       <i class="bi bi-house-door-fill text-lg"></i>
       <span class="mx-2" routerLink="home">Home</span>
     </a>
-    <a
-      *ngIf="roleName !== 'Administrator'"
+    <a *ngIf="roleName !== 'Administrator'"
       class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
-      routerLink="/dashboard/trips"
-    >
+      routerLink="/dashboard/trips">
       <i class="bi bi-calendar-check-fill"></i>
       <span class="mx-2">travel history</span>
     </a>
-    <a
-      *ngIf="roleName !== 'Administrator'"
+    <a *ngIf="roleName !== 'Administrator'"
       class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
-      routerLink="/dashboard/see-comments"
-    >
+      routerLink="/dashboard/see-comments">
       <i class="bi bi-chat-square-text-fill"></i>
       <span class="mx-2">my comments</span>
     </a>
-    <a
-      *ngIf="roleName === 'Driver'"
+    <a *ngIf="roleName === 'Driver'"
       class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
-      routerLink="/dashboard/driver-ubications"
-    >
+      routerLink="/dashboard/driver-ubications">
       <i class="bi bi-geo-alt-fill text-lg"></i>
       <span class="mx-2">Add Ubications</span>
     </a>
-    <a
-      *ngIf="roleName === 'Administrator'"
+    <a *ngIf="roleName === 'Administrator'"
       class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
-      routerLink="./points"
-    >
+      routerLink="./points">
       <i class="bi bi-geo-alt-fill text-lg"></i>
       <span class="mx-2">Points</span>
     </a>
-    <a
-      *ngIf="roleName === 'Administrator'"
+    <a *ngIf="roleName === 'Administrator'"
       class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
-      routerLink="./users"
-    >
+      routerLink="./users">
       <i class="bi bi-people-fill text-lg"></i>
       <span class="mx-2">Users</span>
     </a>
-    <a
-      *ngIf="roleName === 'Administrator'"
+    <a *ngIf="roleName === 'Administrator'"
       class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
-      routerLink="./reports"
-    >
+      routerLink="./reports">
       <i class="bi bi-people-fill text-lg"></i>
       <span class="mx-2">Reports</span>
     </a>
-    <a
-      *ngIf="roleName === 'Administrator'"
+    <a *ngIf="roleName === 'Administrator'"
       class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
-      routerLink="./vehicles"
-    >
+      routerLink="./vehicles">
       <i class="bi bi-car-front-fill text-lg"></i>
       <span class="mx-2">Vehicles</span>
     </a>
-    <a
-      *ngIf="roleName === 'Administrator'"
+    <a *ngIf="roleName === 'Administrator'"
       class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B] hover:text-white font-semibold"
-      routerLink="./users-trips"
-    >
+      routerLink="./users-trips">
       <i class="bi bi-car-front-fill text-lg"></i>
       <span class="mx-2">Users trips</span>
+    </a>
+    <a
+      *ngIf="roleName === 'Client'"
+      class="flex items-center text-white py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-[#1E293B]
+      hover:text-white font-semibold"
+      routerLink="./paymentMethods"
+      >
+      <i class="bi bi-credit-card-fill text-lg"></i>
+      <span class="mx-2">payment method</span>
     </a>
   </nav>
 </div>

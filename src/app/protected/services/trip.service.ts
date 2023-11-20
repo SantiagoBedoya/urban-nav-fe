@@ -75,4 +75,13 @@ export class TripService {
       },
     })
   }
+
+  receipt(tripId: string, paymentMethodId: string | null) {
+    const token = sessionStorage.getItem('access_token');
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient.get<any>(`${this.uri}/${tripId}/${paymentMethodId}/payTrip`, { headers });
+  }
+
 }

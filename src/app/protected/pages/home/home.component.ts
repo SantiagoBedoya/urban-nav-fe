@@ -10,6 +10,8 @@ import { UserSelectors } from 'src/app/state';
 import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { take } from 'rxjs';
+import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -40,8 +42,9 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private store: Store,
     private readonly router: Router,
-    private tripService: TripService
-  ) { }
+    private tripService: TripService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.store
@@ -84,7 +87,6 @@ export class HomeComponent implements OnInit {
 
           this.websocketService.startedTrip.subscribe((data: any) => {
             this.newStatusTrip.title = data.message;
-            this.trip!.status = data.newStatus;
             this.newStatusTrip.fire();
           });
 
@@ -107,9 +109,6 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/dashboard/trips/', this.id, 'detail']);
   }
 
-  redirectToPayment() {
-  }
-
   onAcceptTrip() {
     this.websocketService.emit('accept-trip', { tripId: this.id });
     setTimeout(() => {
@@ -123,9 +122,9 @@ export class HomeComponent implements OnInit {
 
   updateTrip(newStatus: string) {
     this.tripService.modifyTripStatus(this.trip!._id, newStatus).subscribe({
-      error: err => {
-        console.error(err)
-      }
+      error: (err) => {
+        console.error(err);
+      },
     });
     if (newStatus === 'FINISHED') {
       this.trip = null;
@@ -136,5 +135,35 @@ export class HomeComponent implements OnInit {
 
   removeTrip() {
     this.trip = null;
+  }
+
+  receipt(idmethod: string) {
+    this.tripService.receipt(this.trip!._id, idmethod).subscribe({
+      next: () => {
+        this.toastr.success('Receipt sent', '', {
+          positionClass: 'toast-bottom-center',
+          toastClass: 'ngx-toastr toast-custom',
+        });
+      },
+      error: (error) => console.error('Error!', error),
+    });
+  }
+
+  payTrip() {
+    Swal.fire({
+      title: 'Please make the payment',
+      html: `Thank you for traveling with UrbanNav!`,
+      confirmButtonText: 'Pay',
+    }).then((result) => {
+      let method = sessionStorage.getItem('idMethod')!;
+      result.isConfirmed && method !== 'payCash'
+        ? Swal.fire('Transaction completed!', '', 'success')
+        : Swal.fire('Payment made!', '', 'success');
+      this.receipt(method);
+    });
+  }
+
+  startedTrip() {
+    this.trip!.status = 'ACTIVE';
   }
 }
