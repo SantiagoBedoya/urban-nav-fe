@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { UserSelectors } from 'src/app/state';
 import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { NotificationService } from '../../services/notification.service';
@@ -21,9 +21,9 @@ import { NotificationService } from '../../services/notification.service';
 export class HomeComponent implements OnInit {
   createTrip: number = Permissions.CreateTrip;
   trip: Trip | null = null;
-  roleName: string = '';
   id: string = '';
   acceptedStates: string[] = ['ACTIVE', 'PENDING', 'ASSIGNED'];
+  setLoading: boolean = true;
 
   @ViewChild('newTrip')
   public newTrip!: SwalComponent;
@@ -48,12 +48,13 @@ export class HomeComponent implements OnInit {
     private notificationService: NotificationService
   ) {}
 
+  roleName$: Observable<string> = this.store.select(UserSelectors.roleName);
+  
   ngOnInit(): void {
     this.store
       .select(UserSelectors.roleName)
       .pipe(take(1))
       .subscribe((roleName) => {
-        this.roleName = roleName;
         if (roleName === 'Driver') {
           this.websocketService.newTrip.subscribe((data: any) => {
             this.id = data.tripId;
@@ -118,6 +119,8 @@ export class HomeComponent implements OnInit {
         this.trip =
           data.find((trip) => this.acceptedStates.includes(trip.status)) ??
           null;
+
+          this.setLoading = false;
       },
     });
   }
@@ -189,6 +192,8 @@ export class HomeComponent implements OnInit {
           positionClass: 'toast-bottom-center',
           toastClass: 'ngx-toastr toast-custom',
         });
+
+        this.trip = null;
       },
       error: (error) => console.error('Error!', error),
     });

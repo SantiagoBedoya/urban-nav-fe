@@ -1,114 +1,67 @@
-<div *ngIf="trip; else noTrip">
-  <app-card-trip [trip]="trip" (onRemoveTrip)="removeTrip()"></app-card-trip>
-
-  <div *ngIf="roleName === 'Driver'; else traveler">
-    <div
-      *ngIf="trip.status === 'ACTIVE'"
-      class="fixed bottom-0 right-0 p-4 flex justify-center items-center"
-    >
-      <div
-        (click)="updateTrip('FINISHED')"
-        class="h-16 w-16 bg-red-500 shadow-md text-white flex justify-center items-center rounded-full hover:rotate-180 transition hover:bg-green-900 cursor-pointer"
-      >
-        Finish
-      </div>
-    </div>
-    ´
-
-    <div
-      *ngIf="trip.status === 'ASSIGNED'"
-      class="fixed bottom-0 right-0 p-4 flex justify-center items-center"
-    >
-      <div
-        (click)="updateTrip('ACTIVE')"
-        class="h-16 w-16 bg-red-500 shadow-md text-white flex justify-center items-center rounded-full hover:rotate-180 transition hover:bg-green-900 cursor-pointer"
-      >
-        Start
-      </div>
-    </div>
-    ´
-  </div>
-  <ng-template #traveler>
-    <app-panic *ngIf="trip.status === 'ACTIVE'" [activeTripId]="trip._id">
-    </app-panic>
-  </ng-template>
+<div *ngIf="setLoading; else validate" class="flex justify-center items-center h-[91vh] w-full">
+  <app-loader></app-loader>
 </div>
 
-<ng-template #noTrip>
-  <div
-    class="grid h-full w-full place-items-center"
-    *ngIf="roleName === 'Driver'; else reqTrip"
-  >
-    <div
-      class="bg-gray-200 w-1/2 px-16 md:px-0 flex items-center justify-center"
-    >
-      <div
-        class="bg-white border border-gray-200 flex flex-col items-center justify-center px-4 md:px-8 lg:px-24 py-8 rounded-lg shadow-2xl"
-      >
-        <i class="bi bi-car-front-fill text-4xl"></i>
-        <p
-          class="text-2xl md:text-3xl lg:text-5xl font-bold tracking-wider text-gray-500 mt-4"
-        >
-          No trips
-        </p>
-        <p class="text-gray-500 mt-4 pb-4 border-b-2 text-center">
-          At this moment, there are no passengers available to request a
-          service. Don't worry, stay on line and you will be ready to serve
-          passengers as soon as there is a request, thank you!
-        </p>
+
+<ng-template #validate>
+  <div *ngIf="trip; else noTrip">
+    <app-card-trip [trip]="trip" (onRemoveTrip)="removeTrip()"></app-card-trip>
+
+    <div *ngIf="(roleName$ | async) === 'Driver'; else traveler">
+      <div *ngIf="trip.status === 'ACTIVE'" class="fixed bottom-0 right-0 p-4 flex justify-center items-center">
+        <div (click)="updateTrip('FINISHED')"
+          class="h-16 w-16 bg-red-500 shadow-md text-white flex justify-center items-center rounded-full hover:rotate-180 transition hover:bg-green-900 cursor-pointer">
+          Finish
+        </div>
+      </div>
+      ´
+
+      <div *ngIf="trip.status === 'ASSIGNED'" class="fixed bottom-0 right-0 p-4 flex justify-center items-center">
+        <div (click)="updateTrip('ACTIVE')"
+          class="h-16 w-16 bg-red-500 shadow-md text-white flex justify-center items-center rounded-full hover:rotate-180 transition hover:bg-green-900 cursor-pointer">
+          Start
+        </div>
+      </div>
+      ´
+    </div>
+    <ng-template #traveler>
+      <app-panic *ngIf="trip.status === 'ACTIVE'" [activeTripId]="trip._id">
+      </app-panic>
+    </ng-template>
+  </div>
+
+  <ng-template #noTrip>
+    <div class="grid h-full w-full place-items-center" *ngIf="(roleName$ | async) === 'Driver'">
+      <div class="bg-gray-200 w-1/2 px-16 md:px-0 flex items-center justify-center">
+        <div
+          class="bg-white border border-gray-200 flex flex-col items-center justify-center px-4 md:px-8 lg:px-24 py-8 rounded-lg shadow-2xl">
+          <i class="bi bi-car-front-fill text-4xl"></i>
+          <p class="text-2xl md:text-3xl lg:text-5xl font-bold tracking-wider text-gray-500 mt-4">
+            No trips
+          </p>
+          <p class="text-gray-500 mt-4 pb-4 border-b-2 text-center">
+            At this moment, there are no passengers available to request a
+            service. Don't worry, stay on line and you will be ready to serve
+            passengers as soon as there is a request, thank you!
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-  <ng-template #reqTrip>
-    <app-request-trip></app-request-trip>
+    <div *ngIf="(roleName$ | async) === 'Client'">
+      <app-request-trip></app-request-trip>
+    </div>
   </ng-template>
+  <div>
+    <app-rate-modal *ngIf="trip?.status === 'FINISHED'"></app-rate-modal>
+  </div>
 </ng-template>
-<div>
-  <app-rate-modal *ngIf="trip?.status === 'FINISHED'"></app-rate-modal>
-</div>
-<swal
-  #newTrip
-  title=""
-  icon="info"
-  [allowOutsideClick]="false"
-  [allowEscapeKey]="false"
-  [allowEnterKey]="true"
-  [showCancelButton]="true"
-  [confirmButtonText]=""
-  html=""
-  (confirm)="onAcceptTrip()"
-></swal>
-<swal
-  #newStatusTrip
-  title=""
-  icon="info"
-  [allowEnterKey]="true"
-  [showCancelButton]="false"
-  [confirmButtonText]=""
-  (confirm)="startedTrip()"
->
+
+<swal #newTrip title="" icon="info" [allowOutsideClick]="false" [allowEscapeKey]="false" [allowEnterKey]="true"
+  [showCancelButton]="true" [confirmButtonText]="" html="" (confirm)="onAcceptTrip()"></swal>
+<swal #newStatusTrip title="" icon="info" [allowEnterKey]="true" [showCancelButton]="false" [confirmButtonText]=""
+  (confirm)="startedTrip()">
 </swal>
-<swal
-  #finishedTrip
-  title=""
-  icon="info"
-  [allowEnterKey]="true"
-  [showCancelButton]="false"
-  (confirm)="payTrip()"
->
+<swal #finishedTrip title="" icon="info" [allowEnterKey]="true" [showCancelButton]="false" (confirm)="payTrip()">
 </swal>
-<swal
-  #driverFound
-  title="We found your driver"
-  icon="success"
-  [showConfirmButton]="true"
-  [showCancelButton]="false"
-  (confirm)="redirectToTrip()"
-></swal>
-<swal>
-  #payTrip
-  title="Thank you for traveling with UrbanNav!"
-  confirmButtonText="Pay"
-  [showConfirmButton]="true",
-  (confirm)="confirmPay()"
-</swal>
+<swal #driverFound title="We found your driver" icon="success" [showConfirmButton]="true" [showCancelButton]="false"
+  (confirm)="redirectToTrip()"></swal>
