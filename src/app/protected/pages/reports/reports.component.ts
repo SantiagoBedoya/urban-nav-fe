@@ -16,6 +16,8 @@ export class ReportsComponent implements OnInit {
   tripChart: any;
   tripChart7Days: any;
   driverUbication: any;
+  vehicleChart: any;
+  paymentChart: any;
 
   constructor(
     private userService: UserService,
@@ -67,7 +69,6 @@ export class ReportsComponent implements OnInit {
         );
       },
     });
-    // Obtener solo los viajes de los últimos 7 días
     this.tripService.getTripsForLast7Days().subscribe({
       next: (response) => {
         const nActive = response.filter(
@@ -129,15 +130,22 @@ export class ReportsComponent implements OnInit {
     this.driverUbicationService.getUbicationsByDriver().subscribe({
       next: (response) => {
         console.log(response);
-        const nPoint = response.filter(
+        const nDowntown = response.filter(
           (ubication) => (ubication.pointId === '6531e67cb4e64327cdca2a6d')
         ).length;
-        const nDrivers = response.filter(
-          (ubication) => (ubication.pointId === 'Driver')
+        const nRichman = response.filter(
+          (ubication) => (ubication.pointId === '6531e644b4e64327cdca2a64')
         ).length;
-        console.log(nPoint);
-        console.log("si sirvio");
-        this.createUbicationChart(nPoint, nDrivers);
+        const nCommerce = response.filter(
+          (ubication) => (ubication.pointId === '6531e684b4e64327cdca2a6e')
+        ).length;
+        const nRodeo = response.filter(
+          (ubication) => (ubication.pointId === '6531e63eb4e64327cdca2a63')
+        ).length;
+        const nlitlemexico = response.filter(
+          (ubication) => (ubication.pointId === '6531e689b4e64327cdca2a6f')
+        ).length;     
+        this.createUbicationChart(nDowntown, nRichman, nCommerce, nRodeo, nlitlemexico);
       },
     });
   }
@@ -238,7 +246,7 @@ export class ReportsComponent implements OnInit {
   }
 
   createPaymentChart(nVisa: number, nMastercard: number, nPaypal: number) {
-    this.userChart = new Chart('PaymentChart', {
+    this.paymentChart = new Chart('PaymentChart', {
       type: 'pie',
       data: {
         labels: ['Visa', 'Mastercard', 'Paypal'],
@@ -256,7 +264,7 @@ export class ReportsComponent implements OnInit {
   }
 
   createVehicleChart(nChevrolet: number, nToyota: number, nNissan: number) {
-    this.userChart = new Chart('VehicleChart', {
+    this.vehicleChart = new Chart('VehicleChart', {
       type: 'doughnut',
       data: {
         labels: ['Chevrolet', 'Toyota', 'Nissan'],
@@ -273,16 +281,15 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-
-  createUbicationChart(nPoint: number, nDrivers: number) {
+  createUbicationChart(nDowntown: number, nRichman: number, nCommerce:number, nRodeo:number, nlitlemexico:number ) {
     this.driverUbication = new Chart('UbicationChart', {
       type: 'pie',
       data: {
-        labels: ['Point', 'Driver'],
+        labels: ['Downton', 'Richman', 'Commerce', 'Rodeo', 'Little Mexico'],
         datasets: [
           {
-            data: [nPoint, nDrivers],
-            backgroundColor: ['blue', 'red'],
+            data: [nDowntown, nRichman, nCommerce, nRodeo, nlitlemexico],
+            backgroundColor: ['blue', 'red', 'green', 'yellow', 'brown'],
           },
         ],
       },
