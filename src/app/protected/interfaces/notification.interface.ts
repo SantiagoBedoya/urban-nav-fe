@@ -5,4 +5,5 @@ export interface Notification {
   link: string;
   status: string;
   date: string;
+  userId: string;
 }

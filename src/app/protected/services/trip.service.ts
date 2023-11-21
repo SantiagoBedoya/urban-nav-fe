@@ -82,13 +82,20 @@ export class TripService {
     return this.trips().pipe(
       map((allTrips) => {
         const today = new Date();
-        const sevenDaysAgo = addDays(today, -7);
+        console.log(today);
+        const sevenDaysAgo = addDays(today, -7).toISOString();
+        console.log(sevenDaysAgo);
+        const fechaActual = new Date(sevenDaysAgo);
+        console.log("soy "+fechaActual);
+// Formatear la fecha en el formato deseado
+        console.log(allTrips);
         return allTrips.filter((trip) =>
-          isAfter(new Date(trip.startDate  ?? ''), sevenDaysAgo)
+          isAfter(new Date(trip.startDate!), fechaActual)
         );
       })
     );
   }
+
   receipt(tripId: string, paymentMethodId: string | null) {
     const token = sessionStorage.getItem('access_token');
     const headers = new HttpHeaders()

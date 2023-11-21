@@ -56,4 +56,12 @@ export class paymentsService {
         },
       });
   }
+
+  getPayments() {
+    return this.httpClient.get<PaymentMethod[]>(this.uri, {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+      },
+    });
+  }
 }
