@@ -12,6 +12,7 @@ import { OnInit } from '@angular/core';
 import { Observable, take } from 'rxjs';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -43,7 +44,8 @@ export class HomeComponent implements OnInit {
     private store: Store,
     private readonly router: Router,
     private tripService: TripService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private notificationService: NotificationService
   ) {}
 
   roleName$: Observable<string> = this.store.select(UserSelectors.roleName);
@@ -71,6 +73,21 @@ export class HomeComponent implements OnInit {
                </div>
                `;
                 this.newTrip.fire();
+                const title = data.message;
+                const description = "It seems that " + userData.firstName +" wants to travel with you, what do you say you accept the trip?";
+                console.log(description)
+                const user = sessionStorage.getItem('user_id');
+                const link = "/dashboard/trips/" + this.id + "/detail";
+                this.notificationService
+                .createWithlink(title, description, user!, link)
+                .subscribe({
+                  next: (response) => {
+                    console.log(response);
+                  },
+                  error: (err) => {
+                    console.error(err);
+                  },
+                });
               },
             });
           });
@@ -110,6 +127,21 @@ export class HomeComponent implements OnInit {
 
   redirectToTrip() {
     this.router.navigate(['/dashboard/trips/', this.id, 'detail']);
+    console.log("si creo la notificacion");
+    const title = "Trip accepted!!";
+    const description = "Your trip has been accepted by the driver";
+    const user = sessionStorage.getItem('user_id');
+    const link = "/dashboard/trips/" + this.id + "/detail";
+    this.notificationService
+    .createWithlink(title, description, user!, link)
+    .subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   onAcceptTrip() {
@@ -117,6 +149,19 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.router.navigate(['/dashboard/trips/', this.id, 'detail']);
     }, 500);
+    const title = "Trip started!!!";
+    const description = "The trip has started, have a good trip.";
+    const user = sessionStorage.getItem('user_id');
+    this.notificationService
+    .create(title, description, user!)
+    .subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   getTravelerInfo(userId: string) {
@@ -170,5 +215,20 @@ export class HomeComponent implements OnInit {
 
   startedTrip() {
     this.trip!.status = 'ACTIVE';
+      var notificacion = sessionStorage.setItem('notificacion', "0");
+      const title = "Trip accepted";
+      const description = "Your trip has been accepted by the driver";
+      const user = sessionStorage.getItem('user_id');
+      notificacion = sessionStorage.setItem('notificacion', "1");
+      this.notificationService
+        .create(title, description, user!)
+        .subscribe({
+          next: (response) => {
+            console.log(response);
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
   }
 }

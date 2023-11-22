@@ -7,7 +7,7 @@ export const userStateFeatureKey = 'userState';
 const userProfile = JSON.parse(sessionStorage.getItem('user_data')!);
 const driverVehicle = JSON.parse(sessionStorage.getItem('driver_vehicle')!);
 const testImgUrl =
-  'https://www.joseivanaguilar.com/wp-content/uploads/2021/03/mujer.jpg';
+  'https://cdn-icons-png.flaticon.com/256/6522/6522516.png';
 
 export interface UserState {
   _id: string;

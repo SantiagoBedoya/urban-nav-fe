@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UserSelectors } from 'src/app/state';
 import { Permissions } from 'src/app/auth/permissions/permission.enum';
-import { permissions } from 'src/app/state/user/user.selectors';
 import { paymentsService } from 'src/app/protected/services/payments.service';
 import { PaymentMethod } from 'src/app/protected/interfaces/payments.interface';
 
@@ -22,13 +21,16 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllPaymentMehtod()
     this.store.select(UserSelectors.roleName).subscribe((roleName) => {
       this.roleName = roleName;
+
+      if(roleName === 'Client') {
+        this.getAllPaymentMethod();
+      }
     });
   }
 
-  rolName: boolean = sessionStorage.getItem('role_name') === 'Client';
+  roleName$: Observable<string> = this.store.select(UserSelectors.roleName);
 
   contactsPermission: number = Permissions.UseContacts;
   vehiclePermission: number = Permissions.ListVehicle;
@@ -40,7 +42,7 @@ export class ProfileComponent implements OnInit {
   email$: Observable<string> = this.store.select(UserSelectors.email);
   photo$: Observable<string> = this.store.select(UserSelectors.photo);
 
-  getAllPaymentMehtod() {
+  getAllPaymentMethod() {
     this.paymentService.getPaymentMethod().subscribe({
       next: (response) => {
         this.payMehthods = Object.values(response);

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { TripCommentService } from '../../services/trip-comment.service';
 import { Store } from '@ngrx/store';
 import { UserSelectors } from 'src/app/state';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-card-trip',
@@ -30,7 +31,8 @@ export class CardTripComponent implements OnInit {
     private tripService: TripService,
     private readonly router: Router,
     private tripCommentService: TripCommentService,
-    private store: Store
+    private store: Store,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -127,6 +129,20 @@ export class CardTripComponent implements OnInit {
             console.error(err)
           }
         });
+
+        const title = "Trip cancelled!!";
+        const description = "The trip has been cancelled, we hope to see you soon";
+        const user = sessionStorage.getItem('user_id');
+        this.notificationService
+        .create(title, description, user!)
+        .subscribe({
+          next: (response) => {
+            console.log(response);
+          },
+          error: (err) => {
+           console.error(err);
+        },
+    });
 
         this.onRemoveTrip.emit()
       });
